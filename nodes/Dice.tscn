@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://kipaawxbpyvv"]
+
+[ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="1_xk0hr"]
+[ext_resource type="Script" uid="uid://b34bvctlvf82p" path="res://nodes/Dice.gd" id="1_yqq3n"]
+
+[node name="Dice" type="Control"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 30.0
+offset_bottom = 25.0
+script = ExtResource("1_yqq3n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20871, 0.20871, 0.20871, 1)
+
+[node name="Border" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="cr1" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.996078, 0, 0.321569, 1)
+
+[node name="cr2" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.996078, 0, 0.321569, 1)
+
+[node name="cr3" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0.996078, 0, 0.321569, 1)
+
+[node name="cr4" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.996078, 0, 0.321569, 1)
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.996567, 0, 0.322431, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_xk0hr")
+theme_override_font_sizes/font_size = 35
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

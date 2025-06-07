@@ -1,0 +1,131 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpe1pmn3001p7"]
+
+[ext_resource type="Texture2D" uid="uid://dheuoqw5j2ruu" path="res://assets/goblin.png" id="1_orfhs"]
+[ext_resource type="Script" uid="uid://by2ccbmqar3m6" path="res://nodes/DefianceCard.gd" id="1_p37rd"]
+[ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_024wa"]
+[ext_resource type="PackedScene" uid="uid://cfgcbrxc0337s" path="res://nodes/ReqLine.tscn" id="3_024wa"]
+[ext_resource type="PackedScene" uid="uid://dmnn1l13dfn5l" path="res://nodes/AbilityLine.tscn" id="4_bx7io"]
+
+[node name="DefianceCard" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 150.0
+script = ExtResource("1_p37rd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.216987, 0.234177, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_orfhs")
+expand_mode = 1
+
+[node name="Border" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="cr1" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[node name="cr2" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[node name="cr3" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[node name="cr4" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -34.0
+offset_bottom = 36.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_024wa")
+theme_override_font_sizes/font_size = 22
+text = "GOBLIN"
+vertical_alignment = 1
+
+[node name="Requisites" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_top = 8.0
+offset_bottom = 91.0
+grow_horizontal = 0
+
+[node name="ReqLine1" parent="Requisites" instance=ExtResource("3_024wa")]
+layout_mode = 2
+
+[node name="ReqLine2" parent="Requisites" instance=ExtResource("3_024wa")]
+layout_mode = 2
+
+[node name="ReqLine3" parent="Requisites" instance=ExtResource("3_024wa")]
+layout_mode = 2
+
+[node name="Abilities" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 148.0
+offset_bottom = 273.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="AbilityLine1" parent="Abilities" instance=ExtResource("4_bx7io")]
+layout_mode = 2
+
+[node name="AbilityLine2" parent="Abilities" instance=ExtResource("4_bx7io")]
+layout_mode = 2
+
+[node name="AbilityLine3" parent="Abilities" instance=ExtResource("4_bx7io")]
+layout_mode = 2
