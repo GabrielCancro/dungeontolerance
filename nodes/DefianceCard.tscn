@@ -13,15 +13,6 @@ offset_right = 150.0
 offset_bottom = 150.0
 script = ExtResource("1_p37rd")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.216987, 0.234177, 1)
-
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -78,6 +69,29 @@ grow_horizontal = 0
 grow_vertical = 2
 color = Color(0.201527, 0.201527, 0.201527, 1)
 
+[node name="BGColor" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+color = Color(0.989797, 1, 0.604981, 1)
+
+[node name="BGColor2" type="ColorRect" parent="BGColor"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -10.0
+offset_right = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.989797, 1, 0.604981, 1)
+
 [node name="Name" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
@@ -103,13 +117,13 @@ offset_top = 8.0
 offset_bottom = 91.0
 grow_horizontal = 0
 
-[node name="ReqLine1" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLineF" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
-[node name="ReqLine2" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLineD" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
-[node name="ReqLine3" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLineS" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
 [node name="Abilities" type="VBoxContainer" parent="."]
@@ -129,3 +143,12 @@ layout_mode = 2
 
 [node name="AbilityLine3" parent="Abilities" instance=ExtResource("4_bx7io")]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

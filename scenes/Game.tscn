@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=10 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
+[ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
 [ext_resource type="PackedScene" uid="uid://dpe1pmn3001p7" path="res://nodes/DefianceCard.tscn" id="2_78awf"]
 [ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_s0nni"]
 [ext_resource type="PackedScene" uid="uid://kipaawxbpyvv" path="res://nodes/Dice.tscn" id="3_s0nni"]
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_g4kob")
 
 [node name="CLBG" type="CanvasLayer" parent="."]
 layer = -1
@@ -265,3 +267,11 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture = ExtResource("6_g4kob")
 expand_mode = 1
+
+[node name="BtnAddDice" type="Button" parent="."]
+layout_mode = 0
+offset_left = 381.0
+offset_top = 603.0
+offset_right = 510.0
+offset_bottom = 641.0
+text = "ADD RND DICE"
