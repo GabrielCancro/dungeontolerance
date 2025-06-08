@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=11 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dimpxbwpop3dg" path="res://assets/abilities/ab_shield.png" id="6_g4kob"]
 [ext_resource type="Texture2D" uid="uid://c3do82b6a4b5m" path="res://assets/abilities/ab_concentration.png" id="7_qy1jj"]
 [ext_resource type="FontFile" uid="uid://djrh33maalos0" path="res://assets/font/Rowdy-Regular.ttf" id="8_3xj3m"]
+[ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -75,27 +76,6 @@ offset_left = 754.0
 offset_top = 23.0
 offset_right = 904.0
 offset_bottom = 173.0
-
-[node name="Dices" type="Control" parent="."]
-anchors_preset = 0
-
-[node name="Dice" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 508.0
-offset_top = 522.0
-offset_right = 558.0
-offset_bottom = 572.0
-
-[node name="Dice2" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 475.0
-offset_top = 424.0
-offset_right = 525.0
-offset_bottom = 474.0
-
-[node name="Dice3" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 385.0
-offset_top = 438.0
-offset_right = 435.0
-offset_bottom = 488.0
 
 [node name="Abilities" type="Control" parent="."]
 anchors_preset = 0
@@ -190,6 +170,12 @@ offset_bottom = 208.0
 texture = ExtResource("7_qy1jj")
 expand_mode = 1
 
+[node name="PartyAbility" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 231.0
+offset_top = 367.0
+offset_right = 291.0
+offset_bottom = 427.0
+
 [node name="TextBox" type="ColorRect" parent="."]
 layout_mode = 1
 offset_left = 1.0
@@ -275,3 +261,49 @@ offset_top = 603.0
 offset_right = 510.0
 offset_bottom = 641.0
 text = "ADD RND DICE"
+
+[node name="Dices" type="CanvasLayer" parent="."]
+
+[node name="Dice" parent="Dices" instance=ExtResource("3_s0nni")]
+offset_left = 508.0
+offset_top = 522.0
+offset_right = 558.0
+offset_bottom = 572.0
+
+[node name="Dice2" parent="Dices" instance=ExtResource("3_s0nni")]
+offset_left = 475.0
+offset_top = 424.0
+offset_right = 525.0
+offset_bottom = 474.0
+
+[node name="Dice3" parent="Dices" instance=ExtResource("3_s0nni")]
+offset_left = 385.0
+offset_top = 438.0
+offset_right = 435.0
+offset_bottom = 488.0
+
+[node name="Hint" type="CanvasLayer" parent="."]
+
+[node name="HintPanel" type="ColorRect" parent="Hint"]
+offset_right = 324.0
+offset_bottom = 151.0
+mouse_filter = 2
+color = Color(0.0994934, 0.158719, 0.0926439, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hint/HintPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

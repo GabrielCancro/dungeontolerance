@@ -1,12 +1,10 @@
 extends Control
 
-var req = {"F":10,"D":2,"S":2}
+var req = {}
 
 func _ready() -> void:
 	randomize()
-	req["F"] = randi()%10
-	req["D"] = randi()%10
-	req["S"] = randi()%10
+	for k in DiceManager.COLORS.keys(): req[k] = randi()%10
 	update_ui()
 	$Button.connect("mouse_entered",_on_hover.bind(true))
 	$Button.connect("mouse_exited",_on_hover.bind(false))
@@ -17,8 +15,9 @@ func _on_hover(val):
 	$BGColor.visible = val
 
 func update_ui():
-	for k in ["F","D","S"]:
-		var ReqLine = get_node("Requisites/ReqLine"+k)
+	for i in DiceManager.COLORS.keys().size():
+		var k = DiceManager.COLORS.keys()[i]
+		var ReqLine = get_node("Requisites").get_child(i)
 		ReqLine.visible = (k in req.keys()) && req[k]>0
 		if ReqLine.visible:
 			ReqLine.get_node("Value").text = str(req[k])

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://by2ccbmqar3m6" path="res://nodes/DefianceCard.gd" id="1_p37rd"]
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_024wa"]
 [ext_resource type="PackedScene" uid="uid://cfgcbrxc0337s" path="res://nodes/ReqLine.tscn" id="3_024wa"]
-[ext_resource type="PackedScene" uid="uid://dmnn1l13dfn5l" path="res://nodes/AbilityLine.tscn" id="4_bx7io"]
+[ext_resource type="PackedScene" uid="uid://dmnn1l13dfn5l" path="res://nodes/DefianceAbilityLine.tscn" id="4_bx7io"]
 
 [node name="DefianceCard" type="Control"]
 layout_mode = 3
@@ -117,13 +117,13 @@ offset_top = 8.0
 offset_bottom = 91.0
 grow_horizontal = 0
 
-[node name="ReqLineF" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLine1" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
-[node name="ReqLineD" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLine2" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
-[node name="ReqLineS" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLine3" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
 [node name="Abilities" type="VBoxContainer" parent="."]

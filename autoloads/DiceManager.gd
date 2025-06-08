@@ -3,7 +3,7 @@ extends Node
 var current_dice_drag = null
 var safe_pos_dice_drag = Vector2()
 
-var COLORS = {"F":"ff0055","D":"0fe559","S":"e69aff"}
+var COLORS = {"S":"ff0055","D":"0fe559","I":"e69aff"}
 
 func set_dice_drag(node):
 	if current_dice_drag:

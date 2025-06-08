@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=3 uid="uid://lwpk86seugi6"]
+
+[ext_resource type="Script" uid="uid://co6quf7ws11gf" path="res://nodes/PartyAbility.gd" id="1_ilocx"]
+[ext_resource type="Texture2D" uid="uid://b4l4ffgp7b2c5" path="res://assets/abilities/ab_arrow.png" id="2_htrjk"]
+
+[node name="PartyAbility" type="Control"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 60.0
+offset_bottom = 60.0
+pivot_offset = Vector2(25, 25)
+script = ExtResource("1_ilocx")
+
+[node name="BGColor" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_htrjk")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20871, 0.20871, 0.20871, 1)
+
+[node name="Border" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="cr1" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.215925, 0.226833, 0.215925, 1)
+
+[node name="cr2" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.215925, 0.226833, 0.215925, 1)
+
+[node name="cr3" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0.215925, 0.226833, 0.215925, 1)
+
+[node name="cr4" type="ColorRect" parent="Border"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.215925, 0.226833, 0.215925, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

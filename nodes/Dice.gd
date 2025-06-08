@@ -16,7 +16,7 @@ func _on_hover(val):
 	$BGColor.visible = val
 	
 func set_random_type():
-	var elem = ["F","D","S"]
+	var elem = DiceManager.COLORS.keys()
 	elem.shuffle()
 	type = elem[0]
 	update()
@@ -41,3 +41,7 @@ func consume_dice():
 	if DiceManager.get_dice_drag() == self:
 		DiceManager.set_dice_drag(null)
 	queue_free()
+
+func set_value(val):
+	value = val
+	update()
