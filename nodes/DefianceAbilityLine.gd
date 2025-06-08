@@ -1,5 +1,7 @@
 extends Control
 
+var ab_name
+
 func _ready() -> void:
 	$Button.connect("mouse_entered",_on_hover.bind(true))
 	$Button.connect("mouse_exited",_on_hover.bind(false))
@@ -9,5 +11,9 @@ func _ready() -> void:
 func _on_hover(val):
 	$BGColor.visible = val
 	$BGColor2.visible = val
-	if val: HintManager.set_text("Esta es una habilidad muy importante para tu [color=red]GRUPO!")
+	if val: HintManager.set_text(Lang.get_text("def_ab_"+ab_name))
 	else: HintManager.set_text()
+
+func set_data(data):
+	ab_name = data
+	$Value.text = Lang.get_text("def_ab_"+ab_name+"_name")

@@ -21,6 +21,7 @@ DiceManager="*res://autoloads/DiceManager.gd"
 PartyManager="*res://autoloads/PartyManager.gd"
 HintManager="*res://autoloads/HintManager.gd"
 Lang="*res://autoloads/Lang.gd"
+DefianceManager="*res://autoloads/DefianceManager.gd"
 
 [display]
 

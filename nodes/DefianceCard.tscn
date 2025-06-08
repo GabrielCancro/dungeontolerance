@@ -144,6 +144,12 @@ layout_mode = 2
 [node name="AbilityLine3" parent="Abilities" instance=ExtResource("4_bx7io")]
 layout_mode = 2
 
+[node name="AbilityLine4" parent="Abilities" instance=ExtResource("4_bx7io")]
+layout_mode = 2
+
+[node name="AbilityLine5" parent="Abilities" instance=ExtResource("4_bx7io")]
+layout_mode = 2
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 15

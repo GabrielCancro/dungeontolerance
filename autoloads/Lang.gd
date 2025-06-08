@@ -2,7 +2,9 @@ extends Node
 
 var current_lang = "es"
 var TEXTS = {
-	"ab_streng_es":"@CTFUERZA BRUTA:@C/\n Aumenta en un punto un dado de @CSFuerza@C/",
+	"ab_streng_es":"@CTFUERZA BRUTA@C/\n Aumenta en un punto un dado de @CSFuerza@C/",
+	"def_ab_counterattack_name_es":"CONTRATAQUE",
+	"def_ab_counterattack_es":"@CTCONTRATAQUE@C/\n Cada vez que colocas un dado en esta carta hay 50% de que recibas -1pv.",
 }
 
 var REPLACES = {
