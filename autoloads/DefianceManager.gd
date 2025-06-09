@@ -3,11 +3,10 @@ extends Node
 # triggercodes: on_apply_dice
 var ALL_DEFIANCES = []
 const DEFIANCES = {
-	"goblin":{"req":{"S":2,"D":5}, "abs":["counterattack"]},
+	"goblin":{"req":{"S":2,"D":5}, "abs":[{"name":"counterattack","level":2},{"name":"activation","level":2,"count":0}] },
 }
-
 const ABILITIES = {
-	"counterattack":{"trigger": "on_apply_dice"},
+	"counterattack":{},
 }
 
 func get_random_defiance():
@@ -19,8 +18,8 @@ func get_random_defiance():
 
 func launch_on_apply_dice(def_card):
 	for ab in def_card["abs"]:
-		if has_method("on_apply_dice_"+ab): 
-			call("on_apply_dice_"+ab,def_card)
+		if has_method("on_apply_dice_"+ab.name): 
+			call("on_apply_dice_"+ab.name, ab, def_card)
 
-func on_apply_dice_counterattack(def_card):
-	print("EJECUCCION CONTRATAQUE! ",def_card)
+func on_apply_dice_counterattack(ab_data, def_card):
+	print("EJECUCCION CONTRATAQUE! ",ab_data.name)

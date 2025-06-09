@@ -10,6 +10,6 @@ func ab_streng():
 	print("dice",dice)
 	if !dice: return
 	print("TYPE"+dice.type)
-	if dice.type != "F": return
+	if dice.type != "S": return
 	print("ab_streng TRUE")
 	dice.set_value(dice.value + 1)
