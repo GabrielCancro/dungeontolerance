@@ -22,6 +22,8 @@ PartyManager="*res://autoloads/PartyManager.gd"
 HintManager="*res://autoloads/HintManager.gd"
 Lang="*res://autoloads/Lang.gd"
 DefianceManager="*res://autoloads/DefianceManager.gd"
+GameManager="*res://autoloads/GameManager.gd"
+Effector="*res://autoloads/Effector.gd"
 
 [display]
 

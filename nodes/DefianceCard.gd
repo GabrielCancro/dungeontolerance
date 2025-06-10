@@ -39,11 +39,12 @@ func _on_click():
 	if !dice: return
 	var k = dice.type
 	if dice && k in req.keys() && req[k]>0: 
+		await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
 		req[dice.type] = max(0,req[dice.type]-dice.value)
 		update_ui() 
 		dice.consume_dice()
 		if !check_dead():
-			DefianceManager.launch_on_apply_dice(def_data)
+			await DefianceManager.launch_trigger("on_apply_dice", def_data)
 		
 
 func check_dead():
