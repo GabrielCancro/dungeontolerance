@@ -9,9 +9,6 @@ const ABILITIES = {
 	"counterattack":{},
 }
 
-func timeout(val):
-	return get_tree().create_timer(val).timeout
-
 func get_random_defiance():
 	randomize()
 	var k = DEFIANCES.keys()[randi()%DEFIANCES.keys().size()]
@@ -31,30 +28,43 @@ func get_def_ability_data(ab_code,ab_level):
 func launch_all_triggers(launcher):
 	for def in ALL_DEFIANCES: 
 		await launch_trigger(launcher,def)
-	await timeout(.2)
+	await GameManager.timeout(.2)
 
 func launch_trigger(launcher, def_card):
 	# on_apply_dice on_pre_appliy_dice
 	for ab in def_card["abs"]:
 		if has_method(ab.name+"_"+launcher): 
-			Effector.shake(ab.node)
+			if has_method("condition_"+ab.name+"_"+launcher): 
+				if !call("condition_"+ab.name+"_"+launcher, ab, def_card): continue
+			if launcher=="on_apply_dice": await GameManager.timeout(1)
 			await call(ab.name+"_"+launcher, ab, def_card)
-			await timeout(.5)
 
 func counterattack_on_apply_dice(ab_data, def_card):
-	await timeout(.5)
-	print("EJECUCCION CONTRATAQUE! ",ab_data.name)
+	Effector.shake(ab_data.node)
+	await GameManager.timeout(1)
+	Effector.float_text("COUNTERATTACK",def_card.node.position,"NORMAL")
+	await GameManager.timeout(.7)
+	PartyManager.apply_damage(2)
+	await GameManager.timeout(.5)
 
-func shield_on_pre_apply_dice(ab_data, def_card):
+func condition_shield_on_pre_apply_dice(ab_data, def_card): 
 	var dice = DiceManager.get_dice_drag() 
-	if dice.type != "S": return
-	await timeout(1)
-	for i in range(ab_data.count):
-		dice.value -= 1
-		ab_data.count -= 1
+	return (dice && dice.type == "S")
+	
+func shield_on_pre_apply_dice(ab_data, def_card):
+	Effector.shake(ab_data.node)
+	await GameManager.timeout(1)
+	var dice = DiceManager.get_dice_drag() 
+	var amount = min(ab_data.count, dice.value)
+	dice.value -= amount
+	ab_data.count -= amount
+	dice.update()
 	def_card.node.update_abs()
-	print("EJECUCCION SHIELD! ",ab_data.level)
+	await GameManager.timeout(1)
 
 func shield_on_start_turn(ab_data, def_card):
+	if ab_data.count<ab_data.max_count: 
+		Effector.shake(ab_data.node)
+		await GameManager.timeout(.2)
 	ab_data.count = ab_data.max_count
 	def_card.node.update_abs()

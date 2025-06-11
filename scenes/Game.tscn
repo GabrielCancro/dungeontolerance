@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c3do82b6a4b5m" path="res://assets/abilities/ab_concentration.png" id="7_qy1jj"]
 [ext_resource type="FontFile" uid="uid://djrh33maalos0" path="res://assets/font/Rowdy-Regular.ttf" id="8_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
+[ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="10_3xj3m"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -33,7 +34,7 @@ grow_vertical = 2
 texture = ExtResource("1_cpr0p")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="CLBG"]
+[node name="ImageParty" type="TextureRect" parent="CLBG"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -256,19 +257,29 @@ expand_mode = 1
 
 [node name="BtnAddDice" type="Button" parent="."]
 layout_mode = 0
-offset_left = 381.0
-offset_top = 603.0
-offset_right = 510.0
-offset_bottom = 641.0
+offset_left = 383.0
+offset_top = 556.0
+offset_right = 512.0
+offset_bottom = 594.0
+theme = ExtResource("10_3xj3m")
 text = "ADD RND DICE"
+
+[node name="BtnEndTurn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 603.0
+offset_right = 512.0
+offset_bottom = 641.0
+theme = ExtResource("10_3xj3m")
+text = "END TURN"
 
 [node name="Dices" type="CanvasLayer" parent="."]
 
 [node name="Dice" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 508.0
-offset_top = 522.0
-offset_right = 558.0
-offset_bottom = 572.0
+offset_left = 542.0
+offset_top = 496.0
+offset_right = 592.0
+offset_bottom = 546.0
 
 [node name="Dice2" parent="Dices" instance=ExtResource("3_s0nni")]
 offset_left = 475.0
@@ -307,3 +318,5 @@ text = "aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red]
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CLUI" type="CanvasLayer" parent="."]

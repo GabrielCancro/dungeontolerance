@@ -25,6 +25,13 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			set_dice_drag(null)
 
+func clear_dices():
+	var DicesNode = get_node("/root/Game/Dices")
+	set_dice_drag(null)
+	for dice in DicesNode.get_children():
+		Effector.fade_down_and_free(dice)
+		await GameManager.timeout(.1)
+
 func add_random_dice():
 	var DicesNode = get_node("/root/Game/Dices")
 	var dice = preload("res://nodes/Dice.tscn").instantiate()
