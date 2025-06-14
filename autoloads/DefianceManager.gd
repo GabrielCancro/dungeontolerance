@@ -40,11 +40,12 @@ func launch_trigger(launcher, def_card):
 			await call(ab.name+"_"+launcher, ab, def_card)
 
 func counterattack_on_apply_dice(ab_data, def_card):
-	Effector.shake(ab_data.node)
-	await GameManager.timeout(1)
-	Effector.float_text("COUNTERATTACK",def_card.node.position,"NORMAL")
+	ab_data.node.resalt()
 	await GameManager.timeout(.7)
-	PartyManager.apply_damage(2)
+	#Effector.float_text("COUNTERATTACK",def_card.node.position,"NORMAL")
+	#await GameManager.timeout(.4)
+	randomize()
+	PartyManager.apply_damage(randi_range(0,ab_data.level))
 	await GameManager.timeout(.5)
 
 func condition_shield_on_pre_apply_dice(ab_data, def_card): 
@@ -52,11 +53,11 @@ func condition_shield_on_pre_apply_dice(ab_data, def_card):
 	return (dice && dice.type == "S")
 	
 func shield_on_pre_apply_dice(ab_data, def_card):
-	Effector.shake(ab_data.node)
+	ab_data.node.resalt()
 	await GameManager.timeout(1)
 	var dice = DiceManager.get_dice_drag() 
 	var amount = min(ab_data.count, dice.value)
-	dice.value -= amount
+	dice.set_value(dice.value-amount)
 	ab_data.count -= amount
 	dice.update()
 	def_card.node.update_abs()
@@ -64,7 +65,7 @@ func shield_on_pre_apply_dice(ab_data, def_card):
 
 func shield_on_start_turn(ab_data, def_card):
 	if ab_data.count<ab_data.max_count: 
-		Effector.shake(ab_data.node)
+		ab_data.node.resalt()
 		await GameManager.timeout(.2)
 	ab_data.count = ab_data.max_count
 	def_card.node.update_abs()

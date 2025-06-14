@@ -41,13 +41,16 @@ func _on_click():
 	if dice && k in req.keys() && req[k]>0: 
 		await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
 		var dam = min(req[dice.type],dice.value)
-		req[dice.type] -= dam
+		dec_req(dice.type,dam)
 		update_ui() 
 		dice.consume_dice()
-		Effector.float_text("-"+str(dam),position+Vector2(50,-10),DiceManager.COLORS[dice.type])
 		if !check_dead():
 			await DefianceManager.launch_trigger("on_apply_dice", def_data)
-		
+
+func dec_req(type,val):
+	req[type] -= val
+	Effector.damage(self)
+	Effector.float_text("-"+str(val),position+Vector2(50,-10),DiceManager.COLORS[type])
 
 func check_dead():
 	for k in req.keys():

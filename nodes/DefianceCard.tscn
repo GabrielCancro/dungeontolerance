@@ -117,13 +117,13 @@ offset_top = 8.0
 offset_bottom = 91.0
 grow_horizontal = 0
 
-[node name="ReqLine1" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLineS" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
-[node name="ReqLine2" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLineD" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
-[node name="ReqLine3" parent="Requisites" instance=ExtResource("3_024wa")]
+[node name="ReqLineI" parent="Requisites" instance=ExtResource("3_024wa")]
 layout_mode = 2
 
 [node name="Abilities" type="VBoxContainer" parent="."]

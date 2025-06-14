@@ -1,0 +1,10 @@
+ENEMIGOS:
+-contrataque: cuando colocas dado recibes daño
+-agresivo: al final del turno causa daño
+-escudo: protege del daño y se recupera en cada turno
+-temporizador: cada turno aumenta y al completar desata efectos
+-efecto danio: causa danio
+-efecto paralisis: quita tres de tus dados
+
+HABILIDADES
+-

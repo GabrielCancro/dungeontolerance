@@ -23,3 +23,6 @@ func set_data(data):
 	$Value.text = Lang.get_text("def_ab_"+ab_data.name+"_name")
 	if "count" in ab_data: $Value.text += " "+str(ab_data.count)+"/"+str(ab_data.max_count)
 	else: $Value.text += " "+str(ab_data.level)
+
+func resalt():
+	Effector.boom_big(self)

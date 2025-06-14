@@ -38,10 +38,11 @@ func update():
 	$Value.text = str(value)
 
 func consume_dice():
+	await Effector.fade_down_and_free(self)
 	if DiceManager.get_dice_drag() == self:
 		DiceManager.set_dice_drag(null)
-	queue_free()
 
 func set_value(val):
 	value = val
+	Effector.boom(self)
 	update()

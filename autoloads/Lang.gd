@@ -6,7 +6,7 @@ var text_vars = []
 var TEXTS = {
 	"ab_streng_es":"_@CT_FUERZA BRUTA_@C/_\n Aumenta en un punto un dado de _@CS_Fuerza_@C/_",
 	"def_ab_counterattack_name_es":"CONTRATAQUE",
-	"def_ab_counterattack_es":"_@CT_CONTRATAQUE_@C/_\n Cada vez que colocas un dado en esta carta hay 50% de que recibas -#0pv.",
+	"def_ab_counterattack_es":"_@CT_CONTRATAQUE_@C/_\n Cada vez que colocas un dado en esta carta recibes entre 0 y #0 de golpe",
 	"def_ab_activation_name_es":"ACTIVACION",
 	"def_ab_activation_es":"_@CT_ACTIVACION_@C/_\n Este temporizador avanza cada turno, al completarse se desencadenan sus efectos.",
 	"def_ab_shield_name_es":"ESCUDO",

@@ -1,0 +1,66 @@
+extends Control
+
+var gems = {"S":[],"D":[],"I":[],"OFF":[]}
+
+func _ready() -> void:
+	$Button.connect("button_down",on_click)
+	order_points()
+	off_all()
+	inc_gems("S",2)
+	inc_gems("D",1)
+	inc_gems("I",1)
+	inc_gems("I",5)
+
+func _process(delta: float) -> void:
+	$ball.rotation_degrees += delta*30
+	$Points.rotation_degrees -= delta*20
+
+func order_points():
+	var amount:float = $Points.get_child_count()
+	const dist = 35
+	for p in $Points.get_children():
+		var i:float = p.get_index()
+		p.position = Vector2(cos(i/amount*2*PI)*dist,sin(i/amount*2*PI)*dist)
+		p.position -= p.size/2
+
+func off_all():
+	gems = {"S":[],"D":[],"I":[],"OFF":$Points.get_children()}
+	
+func update_colors():
+	for g in gems["S"]: g.modulate = DiceManager.COLORS.S
+	for g in gems["D"]: g.modulate = DiceManager.COLORS.D
+	for g in gems["I"]: g.modulate = DiceManager.COLORS.I
+	for g in gems["OFF"]: g.modulate = Color(.3,.3,.3,1)
+
+func inc_gems(type,val):
+	if gems["OFF"].size()<val: return false
+	randomize()
+	gems["OFF"].shuffle()
+	for i in val: 
+		var _gem = gems["OFF"].pop_back()
+		Effector.appear_less($ball)
+		Effector.boom_big(_gem)
+		gems[type].append(_gem)
+		
+	update_colors()
+	return true
+
+func dec_gems(type,val):
+	if gems[type].size()<val: return false
+	randomize()
+	gems[type].shuffle()
+	for i in val: gems["OFF"].append(gems[type].pop_back())
+	update_colors()
+	return true
+
+func has_gems(type,val=1):
+	var result = (gems[type].size()>=val)
+	if !result: Effector.shake(self)
+	return result
+
+func on_click():
+	for k in ["S","D","I","OFF"]: print(k,gems[k].size())
+	var dice = DiceManager.get_dice_drag()
+	if !dice: return
+	var result = inc_gems(dice.type,1)
+	if result: dice.consume_dice()

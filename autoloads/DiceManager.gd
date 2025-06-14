@@ -26,15 +26,13 @@ func _input(event: InputEvent) -> void:
 			set_dice_drag(null)
 
 func clear_dices():
-	var DicesNode = get_node("/root/Game/Dices")
 	set_dice_drag(null)
-	for dice in DicesNode.get_children():
+	for dice in GameManager.DICES_REF.get_children():
 		Effector.fade_down_and_free(dice)
 		await GameManager.timeout(.1)
 
 func add_random_dice():
-	var DicesNode = get_node("/root/Game/Dices")
 	var dice = preload("res://nodes/Dice.tscn").instantiate()
-	DicesNode.add_child(dice)
+	GameManager.DICES_REF.add_child(dice)
 	dice.position = Vector2(randi_range(420,580),randi_range(400,520))
 	print("ADD DICE!")
