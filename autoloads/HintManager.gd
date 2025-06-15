@@ -5,6 +5,7 @@ var BBLabel:RichTextLabel
 
 func init(_hint_panel):
 	HintPanel = _hint_panel
+	HintPanel.visible = false
 	BBLabel = HintPanel.get_node("RichTextLabel")
 
 func set_text(_text=null):

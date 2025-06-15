@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
-[ext_resource type="PackedScene" uid="uid://dpe1pmn3001p7" path="res://nodes/DefianceCard.tscn" id="2_78awf"]
 [ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_s0nni"]
-[ext_resource type="PackedScene" uid="uid://kipaawxbpyvv" path="res://nodes/Dice.tscn" id="3_s0nni"]
 [ext_resource type="Texture2D" uid="uid://b4l4ffgp7b2c5" path="res://assets/abilities/ab_arrow.png" id="5_400sg"]
 [ext_resource type="Texture2D" uid="uid://dimpxbwpop3dg" path="res://assets/abilities/ab_shield.png" id="6_g4kob"]
 [ext_resource type="Texture2D" uid="uid://c3do82b6a4b5m" path="res://assets/abilities/ab_concentration.png" id="7_qy1jj"]
@@ -49,36 +47,6 @@ expand_mode = 1
 
 [node name="Defiances" type="Control" parent="."]
 anchors_preset = 0
-
-[node name="DefianceCard" parent="Defiances" instance=ExtResource("2_78awf")]
-offset_left = 975.0
-offset_top = 46.0
-offset_right = 1125.0
-offset_bottom = 196.0
-
-[node name="DefianceCard2" parent="Defiances" instance=ExtResource("2_78awf")]
-offset_left = 947.0
-offset_top = 313.0
-offset_right = 1097.0
-offset_bottom = 463.0
-
-[node name="DefianceCard3" parent="Defiances" instance=ExtResource("2_78awf")]
-offset_left = 733.0
-offset_top = 344.0
-offset_right = 883.0
-offset_bottom = 494.0
-
-[node name="DefianceCard4" parent="Defiances" instance=ExtResource("2_78awf")]
-offset_left = 535.0
-offset_top = 110.0
-offset_right = 685.0
-offset_bottom = 260.0
-
-[node name="DefianceCard5" parent="Defiances" instance=ExtResource("2_78awf")]
-offset_left = 754.0
-offset_top = 23.0
-offset_right = 904.0
-offset_bottom = 173.0
 
 [node name="Abilities" type="Control" parent="."]
 anchors_preset = 0
@@ -277,24 +245,6 @@ text = "END TURN"
 
 [node name="Dices" type="CanvasLayer" parent="."]
 
-[node name="Dice" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 542.0
-offset_top = 496.0
-offset_right = 592.0
-offset_bottom = 546.0
-
-[node name="Dice2" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 475.0
-offset_top = 424.0
-offset_right = 525.0
-offset_bottom = 474.0
-
-[node name="Dice3" parent="Dices" instance=ExtResource("3_s0nni")]
-offset_left = 385.0
-offset_top = 438.0
-offset_right = 435.0
-offset_bottom = 488.0
-
 [node name="Hint" type="CanvasLayer" parent="."]
 
 [node name="HintPanel" type="ColorRect" parent="Hint"]
@@ -332,3 +282,40 @@ offset_bottom = 592.0
 
 [node name="TargetChosser" parent="CLUI" instance=ExtResource("13_2rd6h")]
 visible = false
+
+[node name="InputBlocker" type="Control" parent="CLUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CLUI/InputBlocker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="C1" type="ColorRect" parent="CLUI/InputBlocker"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 2
+color = Color(0.572549, 0.572549, 0.572549, 0.560784)
+
+[node name="C2" type="ColorRect" parent="CLUI/InputBlocker"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.572549, 0.572549, 0.572549, 0.560784)

@@ -1,6 +1,6 @@
 extends Control
 
-var type = "F"
+var type = "-"
 var value = 0
 
 func _ready() -> void:
@@ -8,8 +8,7 @@ func _ready() -> void:
 	$Button.connect("mouse_exited",_on_hover.bind(false))
 	$Button.connect("button_down",DiceManager.set_dice_drag.bind(self))
 	$Button.focus_mode = FOCUS_NONE
-	randomize()
-	set_random_type()
+	if type=="-": set_random_type()
 	roll()
 
 func _on_hover(val):
@@ -45,4 +44,8 @@ func consume_dice():
 func set_value(val):
 	value = val
 	Effector.boom(self)
+	update()
+
+func set_type(val):
+	type = val
 	update()

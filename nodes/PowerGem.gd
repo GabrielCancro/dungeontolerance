@@ -1,15 +1,11 @@
 extends Control
 
-var gems = {"S":[],"D":[],"I":[],"OFF":[]}
+var gems = {"S":[],"D":[],"M":[],"OFF":[]}
 
 func _ready() -> void:
 	$Button.connect("button_down",on_click)
 	order_points()
 	off_all()
-	inc_gems("S",2)
-	inc_gems("D",1)
-	inc_gems("I",1)
-	inc_gems("I",5)
 
 func _process(delta: float) -> void:
 	$ball.rotation_degrees += delta*30
@@ -24,12 +20,12 @@ func order_points():
 		p.position -= p.size/2
 
 func off_all():
-	gems = {"S":[],"D":[],"I":[],"OFF":$Points.get_children()}
+	gems = {"S":[],"D":[],"M":[],"OFF":$Points.get_children()}
 	
 func update_colors():
 	for g in gems["S"]: g.modulate = DiceManager.COLORS.S
 	for g in gems["D"]: g.modulate = DiceManager.COLORS.D
-	for g in gems["I"]: g.modulate = DiceManager.COLORS.I
+	for g in gems["M"]: g.modulate = DiceManager.COLORS.I
 	for g in gems["OFF"]: g.modulate = Color(.3,.3,.3,1)
 
 func inc_gems(type,val):
@@ -59,7 +55,7 @@ func has_gems(type,val=1):
 	return result
 
 func on_click():
-	for k in ["S","D","I","OFF"]: print(k,gems[k].size())
+	for k in ["S","D","M","OFF"]: print(k,gems[k].size())
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
 	var result = inc_gems(dice.type,1)

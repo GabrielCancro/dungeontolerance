@@ -4,10 +4,6 @@ var def_data = {}
 var req
 
 func _ready() -> void:
-	randomize()
-	def_data = DefianceManager.get_random_defiance()
-	req = def_data.req
-	def_data["node"] = self
 	update_ui()
 	update_abs()
 	$Button.connect("mouse_entered",_on_hover.bind(true))
@@ -15,6 +11,13 @@ func _ready() -> void:
 	$Button.connect("button_down",_on_click)
 	$Button.focus_mode = FOCUS_NONE
 	DefianceManager.ALL_DEFIANCES.append(def_data)
+
+func set_data(_data):
+	def_data = _data
+	req = def_data.req
+	def_data["node"] = self
+	$TextureRect.texture = load("res://assets/defiances/"+def_data.name+".png")
+	$Name.text = Lang.get_text("def_"+def_data.name+"_name")
 
 func _on_hover(val):
 	$BGColor.visible = val
@@ -51,6 +54,13 @@ func dec_req(type,val):
 	req[type] -= val
 	Effector.damage(self)
 	Effector.float_text("-"+str(val),position+Vector2(50,-10),DiceManager.COLORS[type])
+	update_ui()
+
+func add_req(type,val):
+	if !type in req: req[type] = 0
+	req[type] += val
+	Effector.float_text("+"+str(val),position+Vector2(50,-10),DiceManager.COLORS[type])
+	update_ui()
 
 func check_dead():
 	for k in req.keys():

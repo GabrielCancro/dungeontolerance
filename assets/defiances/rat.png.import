@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dheuoqw5j2ruu"
-path="res://.godot/imported/goblin.png-61d54b8a74eb2a340d8f75faefb5f8d8.ctex"
+uid="uid://ohoovi0oxjoq"
+path="res://.godot/imported/rat.png-d350494ef1559aea9bdfea4560b9a235.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/goblin.png"
-dest_files=["res://.godot/imported/goblin.png-61d54b8a74eb2a340d8f75faefb5f8d8.ctex"]
+source_file="res://assets/defiances/rat.png"
+dest_files=["res://.godot/imported/rat.png-d350494ef1559aea9bdfea4560b9a235.ctex"]
 
 [params]
 

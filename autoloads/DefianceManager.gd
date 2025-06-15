@@ -1,23 +1,34 @@
 extends Node
 
 # triggercodes: on_apply_dice
+var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice"]
 var ALL_DEFIANCES = []
 const DEFIANCES = {
 	"goblin":{"req":{"S":2,"D":5}, "abs":[] },
+	"rat":{"req":{"S":7,"D":4}, "abs":[ "shield*2","aggressive*2" ] },
+	"bat":{"req":{"D":10}, "abs":[ "drainer*1","aggressive*2" ] },
 }
-const ABILITIES = {
-	"counterattack":{},
-}
+
+func get_defiance_data(def_code,level=1):
+	var data = DEFIANCES[def_code].duplicate(true)
+	for r in data.req.keys(): 
+		#value +- 20%
+		data.req[r] = randi_range(data.req[r]*0.8,data.req[r]*1.2)
+	data["name"] = def_code
+	
+	#GET ABILITIES DATA
+	var abs_array = data.abs.duplicate()
+	data.abs.clear()
+	for a in abs_array:
+		var spl = a.split("*") #ab_name*level
+		data["abs"].append( get_def_ability_data(spl[0],spl[1]) )
+
+	return data
 
 func get_random_defiance():
 	randomize()
 	var k = DEFIANCES.keys()[randi()%DEFIANCES.keys().size()]
-	var data = DEFIANCES[k].duplicate(true)
-	for r in DiceManager.COLORS.keys(): data.req[r] = randi()%10
-	data["abs"].append( get_def_ability_data("counterattack",2) )
-	data["abs"].append( get_def_ability_data("activation",2) )
-	data["abs"].append( get_def_ability_data("shield",2) )
-	return data
+	return get_defiance_data(k)
 
 func get_def_ability_data(ab_code,ab_level):
 	var ab_data = {"name":ab_code, "level":ab_level}
@@ -25,7 +36,7 @@ func get_def_ability_data(ab_code,ab_level):
 	if ab_code=="shield": ab_data.merge({"count":ab_level,"max_count":ab_level})
 	return ab_data
 
-func launch_all_triggers(launcher):
+func launch_trigger_to_all_defiances(launcher):
 	for def in ALL_DEFIANCES: 
 		await launch_trigger(launcher,def)
 	await GameManager.timeout(.2)
@@ -45,7 +56,7 @@ func counterattack_on_apply_dice(ab_data, def_card):
 	#Effector.float_text("COUNTERATTACK",def_card.node.position,"NORMAL")
 	#await GameManager.timeout(.4)
 	randomize()
-	PartyManager.apply_damage(randi_range(0,ab_data.level))
+	await PartyManager.apply_damage(randi_range(0,ab_data.level),def_card.node)
 	await GameManager.timeout(.5)
 
 func condition_shield_on_pre_apply_dice(ab_data, def_card): 
@@ -69,3 +80,16 @@ func shield_on_start_turn(ab_data, def_card):
 		await GameManager.timeout(.2)
 	ab_data.count = ab_data.max_count
 	def_card.node.update_abs()
+
+func aggressive_on_end_turn(ab_data, def_card):
+	ab_data.node.resalt()
+	await GameManager.timeout(.5)
+	await PartyManager.apply_damage(ab_data.level,def_card)
+	await GameManager.timeout(.5)
+
+func drainer_on_end_defiance_attack(ab_data, def_card):
+	await GameManager.timeout(.7)
+	ab_data.node.resalt()
+	await GameManager.timeout(.5)
+	def_card.node.add_req("S",1)
+	await GameManager.timeout(.5)

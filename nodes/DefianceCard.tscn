@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dpe1pmn3001p7"]
 
-[ext_resource type="Texture2D" uid="uid://dheuoqw5j2ruu" path="res://assets/goblin.png" id="1_orfhs"]
+[ext_resource type="Texture2D" path="res://assets/goblin.png" id="1_orfhs"]
 [ext_resource type="Script" uid="uid://by2ccbmqar3m6" path="res://nodes/DefianceCard.gd" id="1_p37rd"]
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_024wa"]
 [ext_resource type="PackedScene" uid="uid://cfgcbrxc0337s" path="res://nodes/ReqLine.tscn" id="3_024wa"]
@@ -96,15 +96,16 @@ color = Color(0.989797, 1, 0.604981, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 10.0
-offset_top = 8.0
-offset_right = -34.0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = -35.0
 offset_bottom = 36.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_024wa")
-theme_override_font_sizes/font_size = 22
-text = "GOBLIN"
+theme_override_font_sizes/font_size = 19
+text = "Rata Gigante"
 vertical_alignment = 1
 
 [node name="Requisites" type="VBoxContainer" parent="."]

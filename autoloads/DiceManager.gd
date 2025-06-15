@@ -3,7 +3,7 @@ extends Node
 var current_dice_drag = null
 var safe_pos_dice_drag = Vector2()
 
-var COLORS = {"S":"ff0055","D":"0fe559","I":"e69aff"}
+var COLORS = {"S":"ff0055","D":"0fe559","M":"e69aff"}
 
 func set_dice_drag(node):
 	if current_dice_drag:
@@ -36,3 +36,9 @@ func add_random_dice():
 	GameManager.DICES_REF.add_child(dice)
 	dice.position = Vector2(randi_range(420,580),randi_range(400,520))
 	print("ADD DICE!")
+
+func add_dice(type):
+	var dice = preload("res://nodes/Dice.tscn").instantiate()
+	dice.set_type(type)
+	GameManager.DICES_REF.add_child(dice)
+	dice.position = Vector2(randi_range(420,580),randi_range(400,520))
