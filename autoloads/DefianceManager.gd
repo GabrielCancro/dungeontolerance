@@ -36,9 +36,7 @@ func get_def_ability_data(ab_code,ab_level):
 
 func launch_trigger_to_all_defiances(launcher):
 	for def in ALL_DEFIANCES: 
-		def.node.ligth(true)
 		await launch_trigger(launcher,def)
-		def.node.ligth(false)
 	await GameManager.timeout(.2)
 
 func launch_trigger(launcher, def_card):
@@ -48,7 +46,9 @@ func launch_trigger(launcher, def_card):
 			if has_method("condition_"+ab.name+"_"+launcher): 
 				if !call("condition_"+ab.name+"_"+launcher, ab, def_card): continue
 			if launcher=="on_apply_dice": await GameManager.timeout(1)
+			def_card.node.ligth(true)
 			await call(ab.name+"_"+launcher, ab, def_card)
+			def_card.node.ligth(false)
 	await GameManager.timeout(0.1)
 
 func counterattack_on_apply_dice(ab_data, def_card):

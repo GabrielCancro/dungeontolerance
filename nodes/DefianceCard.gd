@@ -38,11 +38,14 @@ func update_ui():
 func _on_click():
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
-	var dam = dice.value
-	if dice.type in def_data.stats.keys(): dam -= def_data.stats[dice.type]
-	if dam<=0: return
+	if dice.type in def_data.stats.keys(): 
+		Effector.boom_big($Stats.get_node(dice.type))
+		GameManager.block_input(.7)
+		if dice.value-def_data.stats[dice.type]<=0: return
+		dice.set_value(dice.value-def_data.stats[dice.type])
+		await GameManager.timeout(.7)
 	await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
-	await damage_defiance(dam)
+	await damage_defiance(dice.value)
 	dice.consume_dice()
 	if is_dead: await DefianceManager.launch_trigger("on_dead_defiance", def_data)
 	else: await DefianceManager.launch_trigger("on_apply_dice", def_data)
@@ -62,10 +65,11 @@ func add_stats(type,val):
 func heal_defiance(val):
 	def_data.hp += val
 	Effector.boom_big($HP)
-	Effector.float_text("+"+str(val),position+Vector2(50,-10),"ff0000")
+	Effector.float_text("+"+str(val)+"HP",position+Vector2(50,-10),"ff0000")
 	update_ui()
 
 func damage_defiance(dam):
+	if dam<=0: return
 	def_data.hp -= dam
 	update_ui()
 	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
