@@ -19,12 +19,13 @@ var TEXTS = {
 	"def_ab_shield_name_es":"ESCUDO",
 	"def_ab_shield_es":"Reduce hasta #2 puntos el valor de cualquier dado de @STR colocado en esta carta. Se restablece al inicio de cada turno.",
 	"def_ab_drainer_name_es":"DRENADOR",
-	"def_ab_drainer_es":"Cada vez que te ataque con exito, gana #0 de @STR.",
+	"def_ab_drainer_es":"Cada vez que te ataque con exito, recupera +#0@HP.",
 
 }
 
 var REPLACES = {
 	"@STR_es" = "[color="+DiceManager.COLORS["S"]+"]Fuerza[/color]",
+	"@HP" = "[color=f0f0f0]HP[/color]",
 }
 
 func set_text_vars(vars):

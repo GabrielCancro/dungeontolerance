@@ -4,16 +4,14 @@ extends Node
 var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice"]
 var ALL_DEFIANCES = []
 const DEFIANCES = {
-	"goblin":{"req":{"S":2,"D":5}, "abs":[] },
-	"rat":{"req":{"S":7,"D":4}, "abs":[ "shield*2","aggressive*2" ] },
-	"bat":{"req":{"D":10}, "abs":[ "drainer*1","aggressive*2" ] },
+	"goblin":{  "hp":10, "stats":{"S":2,"D":5,"M":3}, "abs":[] },
+	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "abs":[ "shield*2","aggressive*2" ] },
+	"bat":{     "hp":5 , "stats":{"S":3,"D":1,"M":3}, "abs":[ "drainer*1","aggressive*2" ] },
 }
 
 func get_defiance_data(def_code,level=1):
 	var data = DEFIANCES[def_code].duplicate(true)
-	for r in data.req.keys(): 
-		#value +- 20%
-		data.req[r] = randi_range(data.req[r]*0.8,data.req[r]*1.2)
+	data.hp = randi_range(data.hp*0.8,data.hp*1.2)
 	data["name"] = def_code
 	
 	#GET ABILITIES DATA
@@ -21,7 +19,7 @@ func get_defiance_data(def_code,level=1):
 	data.abs.clear()
 	for a in abs_array:
 		var spl = a.split("*") #ab_name*level
-		data["abs"].append( get_def_ability_data(spl[0],spl[1]) )
+		data["abs"].append( get_def_ability_data(spl[0],int(spl[1])) )
 
 	return data
 
@@ -38,7 +36,9 @@ func get_def_ability_data(ab_code,ab_level):
 
 func launch_trigger_to_all_defiances(launcher):
 	for def in ALL_DEFIANCES: 
+		def.node.ligth(true)
 		await launch_trigger(launcher,def)
+		def.node.ligth(false)
 	await GameManager.timeout(.2)
 
 func launch_trigger(launcher, def_card):
@@ -49,6 +49,7 @@ func launch_trigger(launcher, def_card):
 				if !call("condition_"+ab.name+"_"+launcher, ab, def_card): continue
 			if launcher=="on_apply_dice": await GameManager.timeout(1)
 			await call(ab.name+"_"+launcher, ab, def_card)
+	await GameManager.timeout(0.1)
 
 func counterattack_on_apply_dice(ab_data, def_card):
 	ab_data.node.resalt()
@@ -91,5 +92,5 @@ func drainer_on_end_defiance_attack(ab_data, def_card):
 	await GameManager.timeout(.7)
 	ab_data.node.resalt()
 	await GameManager.timeout(.5)
-	def_card.node.add_req("S",1)
+	def_card.node.heal_defiance(1)
 	await GameManager.timeout(.5)

@@ -25,7 +25,7 @@ func off_all():
 func update_colors():
 	for g in gems["S"]: g.modulate = DiceManager.COLORS.S
 	for g in gems["D"]: g.modulate = DiceManager.COLORS.D
-	for g in gems["M"]: g.modulate = DiceManager.COLORS.I
+	for g in gems["M"]: g.modulate = DiceManager.COLORS.M
 	for g in gems["OFF"]: g.modulate = Color(.3,.3,.3,1)
 
 func inc_gems(type,val):

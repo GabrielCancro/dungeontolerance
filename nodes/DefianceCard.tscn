@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dpe1pmn3001p7"]
 
-[ext_resource type="Texture2D" path="res://assets/goblin.png" id="1_orfhs"]
+[ext_resource type="Texture2D" uid="uid://dheuoqw5j2ruu" path="res://assets/defiances/goblin.png" id="1_orfhs"]
 [ext_resource type="Script" uid="uid://by2ccbmqar3m6" path="res://nodes/DefianceCard.gd" id="1_p37rd"]
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_024wa"]
-[ext_resource type="PackedScene" uid="uid://cfgcbrxc0337s" path="res://nodes/ReqLine.tscn" id="3_024wa"]
 [ext_resource type="PackedScene" uid="uid://dmnn1l13dfn5l" path="res://nodes/DefianceAbilityLine.tscn" id="4_bx7io"]
+[ext_resource type="Texture2D" uid="uid://dfaxham82elcm" path="res://assets/heart.png" id="5_p37rd"]
 
 [node name="DefianceCard" type="Control"]
 layout_mode = 3
@@ -12,6 +12,19 @@ anchors_preset = 0
 offset_right = 150.0
 offset_bottom = 150.0
 script = ExtResource("1_p37rd")
+
+[node name="Light" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -5.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.596078)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -108,25 +121,6 @@ theme_override_font_sizes/font_size = 19
 text = "Rata Gigante"
 vertical_alignment = 1
 
-[node name="Requisites" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -33.0
-offset_top = 8.0
-offset_bottom = 91.0
-grow_horizontal = 0
-
-[node name="ReqLineS" parent="Requisites" instance=ExtResource("3_024wa")]
-layout_mode = 2
-
-[node name="ReqLineD" parent="Requisites" instance=ExtResource("3_024wa")]
-layout_mode = 2
-
-[node name="ReqLineI" parent="Requisites" instance=ExtResource("3_024wa")]
-layout_mode = 2
-
 [node name="Abilities" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
@@ -150,6 +144,122 @@ layout_mode = 2
 
 [node name="AbilityLine5" parent="Abilities" instance=ExtResource("4_bx7io")]
 layout_mode = 2
+
+[node name="HP" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -39.0
+offset_top = 1.0
+offset_right = -2.0
+offset_bottom = 38.0
+grow_horizontal = 0
+color = Color(0.360784, 0, 0, 0)
+
+[node name="Heart" type="TextureRect" parent="HP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_p37rd")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="HP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.929715, 0.929715, 0.929715, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_024wa")
+theme_override_font_sizes/font_size = 24
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = 69.0
+offset_right = -2.0
+offset_bottom = 146.0
+grow_horizontal = 0
+color = Color(0.129558, 0.129558, 0.129558, 1)
+
+[node name="S" type="Label" parent="Stats"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -37.5
+offset_right = 7.5
+offset_bottom = -10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.996567, 0, 0.322431, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_024wa")
+theme_override_font_sizes/font_size = 18
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="D" type="Label" parent="Stats"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -13.5
+offset_right = 7.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.996567, 0, 0.322431, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_024wa")
+theme_override_font_sizes/font_size = 18
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="M" type="Label" parent="Stats"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = 10.5
+offset_right = 7.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.996567, 0, 0.322431, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_024wa")
+theme_override_font_sizes/font_size = 18
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

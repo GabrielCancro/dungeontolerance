@@ -1,7 +1,6 @@
 extends Control
 
 var def_data = {}
-var req
 
 func _ready() -> void:
 	update_ui()
@@ -14,7 +13,6 @@ func _ready() -> void:
 
 func set_data(_data):
 	def_data = _data
-	req = def_data.req
 	def_data["node"] = self
 	$TextureRect.texture = load("res://assets/defiances/"+def_data.name+".png")
 	$Name.text = Lang.get_text("def_"+def_data.name+"_name")
@@ -29,41 +27,57 @@ func update_abs():
 		$Abilities.get_child(i).visible = true
 
 func update_ui():
-	for i in DiceManager.COLORS.keys().size():
-		var k = DiceManager.COLORS.keys()[i]
-		var ReqLine = get_node("Requisites").get_child(i)
-		ReqLine.visible = (k in req.keys()) && req[k]>0
-		if ReqLine.visible:
-			ReqLine.get_node("Value").text = str(req[k])
-			ReqLine.get_node("Value").add_theme_color_override("font_color",DiceManager.COLORS[k])
+	$HP/Value.text = str(def_data.hp)
+	for statLine in $Stats.get_children():
+		var k = statLine.get_name()
+		statLine.visible = (k in def_data.stats.keys()) && def_data.stats[k]>0
+		if statLine.visible:
+			statLine.text = str(def_data.stats[k])
+			statLine.add_theme_color_override("font_color",DiceManager.COLORS[k])
 
 func _on_click():
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
-	var k = dice.type
-	if dice && k in req.keys() && req[k]>0: 
-		await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
-		var dam = min(req[dice.type],dice.value)
-		dec_req(dice.type,dam)
-		update_ui() 
-		dice.consume_dice()
-		if !check_dead():
-			await DefianceManager.launch_trigger("on_apply_dice", def_data)
+	var dam = dice.value
+	if dice.type in def_data.stats.keys(): dam -= def_data.stats[dice.type]
+	if dam<=0: return
+	await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
+	await damage_defiance(dam)
+	dice.consume_dice()
+	if is_dead: await DefianceManager.launch_trigger("on_dead_defiance", def_data)
+	else: await DefianceManager.launch_trigger("on_apply_dice", def_data)
 
-func dec_req(type,val):
-	req[type] -= val
+func dec_stats(type,val):
+	def_data.stats[type] -= val
 	Effector.damage(self)
 	Effector.float_text("-"+str(val),position+Vector2(50,-10),DiceManager.COLORS[type])
 	update_ui()
 
-func add_req(type,val):
-	if !type in req: req[type] = 0
-	req[type] += val
+func add_stats(type,val):
+	if !type in def_data.stats: def_data.stats[type] = 0
+	def_data.stats[type] += val
 	Effector.float_text("+"+str(val),position+Vector2(50,-10),DiceManager.COLORS[type])
 	update_ui()
 
-func check_dead():
-	for k in req.keys():
-		if req[k]>0: return false
-	queue_free()
+func heal_defiance(val):
+	def_data.hp += val
+	Effector.boom_big($HP)
+	Effector.float_text("+"+str(val),position+Vector2(50,-10),"ff0000")
+	update_ui()
+
+func damage_defiance(dam):
+	def_data.hp -= dam
+	update_ui()
+	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
+	Effector.boom_big($HP)
+	if def_data.hp <= 0: 
+		await Effector.fade_down_and_free(self)
+		DefianceManager.ALL_DEFIANCES.erase(def_data)
+	else: Effector.damage(self)
 	return true
+
+func is_dead(): 
+	return (def_data.hp > 0)
+
+func ligth(val):
+	$Light.visible = val
