@@ -1,6 +1,7 @@
 extends Node
 
 var STATS = {"S":2,"D":1,"M":1}
+var ABILITIES = ["streng"]
 
 func _on_click_party_ability(ab_data):
 	DiceManager.set_dice_drag(null)
@@ -15,7 +16,7 @@ func ab_streng(ab_data):
 	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
 	if !dice: return
 	#EFFECT
-	Effector.float_text("CHOSSED!",dice.position+dice.size/2+Vector2(0,-20))
+	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-20))
 	GameManager.POWERGEM_REF.dec_gems("S",1)
 	ab_data.node.resalt()
 	dice.set_value(dice.value + 1)
@@ -33,3 +34,10 @@ func roll_party_dices():
 			DiceManager.add_dice(k)
 			await GameManager.timeout(.2)
 	await GameManager.timeout(.7)
+
+func update_abilities_ui():
+	for pa in GameManager.PARTY_ABILITIES_REF.get_children(): 
+		pa.visible = false
+	for i in ABILITIES.size():
+		GameManager.PARTY_ABILITIES_REF.get_child(i).set_ability(ABILITIES[i])
+		GameManager.PARTY_ABILITIES_REF.get_child(i).visible = true

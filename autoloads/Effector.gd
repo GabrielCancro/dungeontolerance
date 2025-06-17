@@ -54,10 +54,10 @@ func damage(node):
 func appear_less(node):
 	node.modulate.a = .5
 	var tw = create_tween()
-	tw.tween_property(node,"modulate:a",1,.4).set_ease(Tween.EASE_OUT)
+	tw.tween_property(node,"modulate:a",1,.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tw.play()
 
 func move_to(node,pos):
 	var tw = create_tween()
-	tw.tween_property(node,"position",pos,.5).set_ease(Tween.EASE_OUT)
+	tw.tween_property(node,"position",pos,.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tw.play()

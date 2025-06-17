@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=11 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
 [ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_s0nni"]
-[ext_resource type="Texture2D" uid="uid://b4l4ffgp7b2c5" path="res://assets/abilities/ab_arrow.png" id="5_400sg"]
 [ext_resource type="Texture2D" uid="uid://dimpxbwpop3dg" path="res://assets/abilities/ab_shield.png" id="6_g4kob"]
-[ext_resource type="Texture2D" uid="uid://c3do82b6a4b5m" path="res://assets/abilities/ab_concentration.png" id="7_qy1jj"]
 [ext_resource type="FontFile" uid="uid://djrh33maalos0" path="res://assets/font/Rowdy-Regular.ttf" id="8_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="10_3xj3m"]
+[ext_resource type="PackedScene" uid="uid://clf3wf8j0jaqv" path="res://nodes/Tutorial.tscn" id="12_2rd6h"]
 [ext_resource type="PackedScene" uid="uid://oc1ia3anhg10" path="res://nodes/PowerGem.tscn" id="12_mcffj"]
 [ext_resource type="PackedScene" uid="uid://c4tbv7x06y4rc" path="res://nodes/TargetChosser.tscn" id="13_2rd6h"]
 
@@ -48,106 +47,60 @@ expand_mode = 1
 [node name="Defiances" type="Control" parent="."]
 anchors_preset = 0
 
+[node name="Dices" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 379.0
+offset_right = 627.0
+offset_bottom = 533.0
+color = Color(0.172549, 0.172549, 0.172549, 0.392157)
+
 [node name="Abilities" type="Control" parent="."]
 anchors_preset = 0
 
-[node name="Ab1" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 22.0
-offset_top = 396.0
-offset_right = 82.0
-offset_bottom = 456.0
-texture = ExtResource("5_400sg")
-expand_mode = 1
+[node name="PartyAbility1" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 23.0
+offset_top = 397.0
+offset_right = 83.0
+offset_bottom = 457.0
 
-[node name="Ab2" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 31.0
-offset_top = 318.0
-offset_right = 91.0
-offset_bottom = 378.0
-texture = ExtResource("6_g4kob")
-expand_mode = 1
+[node name="PartyAbility2" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 82.0
+offset_top = 322.0
+offset_right = 142.0
+offset_bottom = 382.0
 
-[node name="Ab3" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 117.0
-offset_top = 297.0
-offset_right = 177.0
-offset_bottom = 357.0
-texture = ExtResource("7_qy1jj")
-expand_mode = 1
+[node name="PartyAbility3" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 156.0
+offset_top = 292.0
+offset_right = 216.0
+offset_bottom = 352.0
 
-[node name="Ab4" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 11.0
-offset_top = 247.0
-offset_right = 71.0
-offset_bottom = 307.0
-texture = ExtResource("5_400sg")
-expand_mode = 1
+[node name="PartyAbility4" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 6.0
+offset_top = 310.0
+offset_right = 66.0
+offset_bottom = 370.0
 
-[node name="Ab5" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 104.0
-offset_top = 216.0
-offset_right = 164.0
-offset_bottom = 276.0
-texture = ExtResource("6_g4kob")
-expand_mode = 1
+[node name="PartyAbility5" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 86.0
+offset_top = 241.0
+offset_right = 146.0
+offset_bottom = 301.0
 
-[node name="Ab6" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 198.0
-offset_top = 214.0
-offset_right = 258.0
-offset_bottom = 274.0
-texture = ExtResource("7_qy1jj")
-expand_mode = 1
+[node name="PartyAbility6" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 168.0
+offset_top = 219.0
+offset_right = 228.0
+offset_bottom = 279.0
 
-[node name="Ab7" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 210.0
-offset_top = 288.0
-offset_right = 270.0
-offset_bottom = 348.0
-texture = ExtResource("5_400sg")
-expand_mode = 1
+[node name="PartyAbility7" parent="Abilities" instance=ExtResource("9_qy1jj")]
+offset_left = 9.0
+offset_top = 218.0
+offset_right = 69.0
+offset_bottom = 278.0
 
-[node name="Ab8" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 24.0
-offset_top = 169.0
-offset_right = 84.0
-offset_bottom = 229.0
-texture = ExtResource("6_g4kob")
-expand_mode = 1
-
-[node name="Ab9" type="TextureRect" parent="Abilities"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 0
-offset_left = 123.0
-offset_top = 148.0
-offset_right = 183.0
-offset_bottom = 208.0
-texture = ExtResource("7_qy1jj")
-expand_mode = 1
-
-[node name="PartyAbility" parent="Abilities" instance=ExtResource("9_qy1jj")]
-offset_left = 231.0
-offset_top = 367.0
-offset_right = 291.0
-offset_bottom = 427.0
-
-[node name="TextBox" type="ColorRect" parent="."]
+[node name="PartyStats" type="ColorRect" parent="."]
 layout_mode = 1
 offset_left = 1.0
 offset_top = 591.0
@@ -155,7 +108,7 @@ offset_right = 374.0
 offset_bottom = 649.0
 color = Color(0.201527, 0.201527, 0.201527, 1)
 
-[node name="Value" type="Label" parent="TextBox"]
+[node name="Value" type="Label" parent="PartyStats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -243,8 +196,6 @@ offset_bottom = 641.0
 theme = ExtResource("10_3xj3m")
 text = "END TURN"
 
-[node name="Dices" type="CanvasLayer" parent="."]
-
 [node name="Hint" type="CanvasLayer" parent="."]
 
 [node name="HintPanel" type="ColorRect" parent="Hint"]
@@ -274,13 +225,16 @@ vertical_alignment = 1
 
 [node name="CLUI" type="CanvasLayer" parent="."]
 
-[node name="PowerGem" parent="CLUI" instance=ExtResource("12_mcffj")]
-offset_left = 386.0
-offset_top = 592.0
-offset_right = 386.0
-offset_bottom = 592.0
-
 [node name="TargetChosser" parent="CLUI" instance=ExtResource("13_2rd6h")]
+visible = false
+
+[node name="PowerGem" parent="CLUI" instance=ExtResource("12_mcffj")]
+offset_left = 350.0
+offset_top = 538.0
+offset_right = 434.0
+offset_bottom = 619.0
+
+[node name="Tutorial" parent="CLUI" instance=ExtResource("12_2rd6h")]
 visible = false
 
 [node name="InputBlocker" type="Control" parent="CLUI"]

@@ -6,6 +6,7 @@ var DEFIANCES_REF
 var DICES_REF
 var POWERGEM_REF
 var INPUT_BLOCKER_REF
+var PARTY_ABILITIES_REF
 
 var block_input_time = 0
 
@@ -27,6 +28,7 @@ func on_end_turn():
 	await timeout(1.0)
 	
 func timeout(val):
+	GameManager.block_input(val+0.2)
 	await get_tree().create_timer(val).timeout
 
 func show_target_chosser(target_type,condition_tags):

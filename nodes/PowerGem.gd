@@ -3,6 +3,7 @@ extends Control
 var gems = {"S":[],"D":[],"M":[],"OFF":[]}
 
 func _ready() -> void:
+	visible = false
 	$Button.connect("button_down",on_click)
 	order_points()
 	off_all()
@@ -51,7 +52,9 @@ func dec_gems(type,val):
 
 func has_gems(type,val=1):
 	var result = (gems[type].size()>=val)
-	if !result: Effector.shake(self)
+	if !result: 
+		Effector.shake(self)
+		GameManager.timeout(.7)
 	return result
 
 func on_click():
@@ -60,3 +63,8 @@ func on_click():
 	if !dice: return
 	var result = inc_gems(dice.type,1)
 	if result: dice.consume_dice()
+
+func show_powergem():
+	modulate.a = 0
+	visible = true
+	await Effector.appear_less(self)

@@ -10,6 +10,14 @@ func _ready() -> void:
 	$Button.focus_mode = FOCUS_NONE
 	if type=="-": set_random_type()
 	roll()
+	print(position)
+
+func _process(delta: float) -> void:
+	for d in GameManager.DICES_REF.get_children():
+		if d == self: continue
+		if d == DiceManager.get_dice_drag(): continue
+		if position.distance_to(d.position)<size.x:
+			position -= position.direction_to(d.position)
 
 func _on_hover(val):
 	$BGColor.visible = val

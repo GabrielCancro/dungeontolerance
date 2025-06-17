@@ -5,7 +5,7 @@ var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_d
 var ALL_DEFIANCES = []
 const DEFIANCES = {
 	"goblin":{  "hp":10, "stats":{"S":2,"D":5,"M":3}, "abs":[] },
-	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "abs":[ "shield*2","aggressive*2" ] },
+	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "abs":[ "aggressive*2" ] }, #"shield*2",
 	"bat":{     "hp":5 , "stats":{"S":3,"D":1,"M":3}, "abs":[ "drainer*1","aggressive*2" ] },
 }
 

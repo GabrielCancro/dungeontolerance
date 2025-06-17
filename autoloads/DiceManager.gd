@@ -18,7 +18,7 @@ func get_dice_drag():
 
 func _process(delta: float) -> void:
 	if current_dice_drag:
-		current_dice_drag.position = get_viewport().get_mouse_position() + Vector2(10,15)
+		current_dice_drag.position = get_viewport().get_mouse_position() + Vector2(10,15) - GameManager.DICES_REF.position
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -32,13 +32,12 @@ func clear_dices():
 		await GameManager.timeout(.1)
 
 func add_random_dice():
+	add_dice(["S","D","M"][randi()%3])
 	var dice = preload("res://nodes/Dice.tscn").instantiate()
-	GameManager.DICES_REF.add_child(dice)
-	dice.position = Vector2(randi_range(420,580),randi_range(400,520))
-	print("ADD DICE!")
 
 func add_dice(type):
 	var dice = preload("res://nodes/Dice.tscn").instantiate()
 	dice.set_type(type)
+	var size = GameManager.DICES_REF.size - dice.size
+	dice.position = Vector2(randf()*size.x,randf()*size.y)
 	GameManager.DICES_REF.add_child(dice)
-	dice.position = Vector2(randi_range(420,580),randi_range(400,520))

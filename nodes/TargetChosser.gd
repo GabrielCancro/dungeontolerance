@@ -30,7 +30,7 @@ func show_target_chosser(target_type,condition_tags):
 		print("node ",index,": ",node.name)
 		var hitter = $Hitters.get_child(index)
 		hitter.size = node.size
-		hitter.position = node.position
+		hitter.global_position = node.global_position
 		hitter.visible = true
 	visible = true
 

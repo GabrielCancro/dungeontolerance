@@ -2,7 +2,6 @@ extends Node
 
 func build_level():
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
-	await GameManager.timeout(2)
 	_add_defiance("bat")
 	_add_defiance("rat")
 

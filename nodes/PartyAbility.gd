@@ -9,9 +9,12 @@ func _ready() -> void:
 	$Button.connect("button_down",PartyManager._on_click_party_ability.bind(ab_data))
 	$Button.focus_mode = FOCUS_NONE
 
+func set_ability(_name):
+	ab_data["name"] = _name
+
 func _on_hover(val):
 	$BGColor.visible = val
-	if val: HintManager.set_text(Lang.get_text("ab_streng"))
+	if val: HintManager.set_text(Lang.get_text("ab_"+ab_data.name))
 	else: HintManager.set_text()
 
 func resalt():

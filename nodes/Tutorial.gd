@@ -1,0 +1,36 @@
+extends Control
+
+signal on_close
+
+func _ready() -> void:
+	$HintPanel/Button.connect("button_down",_on_click)
+
+func show_tuto(code):
+	$HintPanel/RichTextLabel.text = Lang.get_text("tuto_"+code)
+	$HintPanel.size.y = 20 + $HintPanel/RichTextLabel.get_content_height()
+	var node = get_node("/root/Game/CLBG/ImageParty")
+	if code == "welcome": node = get_node("/root/Game/CLBG/ImageParty")
+	if code == "party": node = get_node("/root/Game/PartyStats")
+	if code == "dices": node = get_node("/root/Game/Dices")
+	if code == "rat1": node = DefianceManager.ALL_DEFIANCES[0].node
+	if code == "rat2": node = DefianceManager.ALL_DEFIANCES[0].node.get_node("Stats")
+	if code == "rat3": node = DefianceManager.ALL_DEFIANCES[0].node.get_node("Abilities")
+	if code == "rat4": node = DefianceManager.ALL_DEFIANCES[0].node
+	if code == "good_work": get_node("/root/Game/Dices")
+	if code == "ability1": node = GameManager.PARTY_ABILITIES_REF.get_child(0)
+	if code == "power1": node = get_node("/root/Game/CLBG/ImageParty")
+	if code == "power2": node = GameManager.POWERGEM_REF
+	if code == "end": node = get_node("/root/Game/Dices")
+
+	$Cutter.fit_node(node)
+	var hint_pos = node.global_position + Vector2(node.size.x/2-$HintPanel.size.x/2,-$HintPanel.size.y-30)
+	if hint_pos.x < 10: hint_pos.x = 10
+	if hint_pos.y < 100: hint_pos.y = node.global_position.y+250
+	Effector.move_to($HintPanel,hint_pos)
+	Effector.appear_less($HintPanel)
+	visible = true
+	await on_close
+
+func _on_click():
+	visible = false
+	emit_signal("on_close")

@@ -1,6 +1,7 @@
 extends Control
 
 var def_data = {}
+signal on_destroy
 
 func _ready() -> void:
 	update_ui()
@@ -75,8 +76,10 @@ func damage_defiance(dam):
 	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
 	Effector.boom_big($HP)
 	if def_data.hp <= 0: 
+		await GameManager.timeout(1)
 		await Effector.fade_down_and_free(self)
 		DefianceManager.ALL_DEFIANCES.erase(def_data)
+		emit_signal("on_destroy")
 	else: Effector.damage(self)
 	return true
 

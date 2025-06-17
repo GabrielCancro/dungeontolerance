@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://clf3wf8j0jaqv"]
+
+[ext_resource type="Script" uid="uid://bk822t4suic77" path="res://nodes/Tutorial.gd" id="1_f1pal"]
+[ext_resource type="PackedScene" uid="uid://5is5ecq42vb4" path="res://nodes/Cutter.tscn" id="2_bxtx4"]
+[ext_resource type="Texture2D" uid="uid://ca1expkm3ij8y" path="res://assets/tutor.png" id="3_40bav"]
+[ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="4_eswx1"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f1pal")
+
+[node name="Cutter" parent="." instance=ExtResource("2_bxtx4")]
+layout_mode = 1
+
+[node name="HintPanel" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 325.0
+offset_bottom = 151.0
+mouse_filter = 2
+color = Color(0.0994934, 0.158719, 0.0926439, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HintPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TutorImg" type="TextureRect" parent="HintPanel"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = -133.0
+offset_right = 192.0
+offset_bottom = 34.0
+texture = ExtResource("3_40bav")
+
+[node name="Button" type="Button" parent="HintPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -190.0
+offset_right = 106.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_eswx1")
+text = "OK"
