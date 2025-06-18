@@ -1,9 +1,18 @@
 extends Node
 
-func build_level():
+var dungeon = 1
+var room = 0
+var max_rooms = 5
+
+func next_level():
+	room += 1
+	update_ui()
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
-	_add_defiance("bat")
-	_add_defiance("rat")
+	randomize()
+	for i in room+1:
+		var k = DefianceManager.DEFIANCES.keys().duplicate()
+		k.shuffle()
+		_add_defiance(k[0])
 
 func _add_defiance(def_type):
 	var node = preload("res://nodes/DefianceCard.tscn").instantiate()
@@ -26,3 +35,7 @@ func _move_def(node,pox,posy):
 	Effector.move_to(node, Vector2(pox,posy))
 	Effector.appear_less(node)
 	await GameManager.timeout(.3)
+
+func update_ui():
+	Lang.set_text_vars([dungeon,room,max_rooms])
+	get_node("/root/Game/DungeonInfo/Label").text = Lang.get_text("info_dungeon_level")

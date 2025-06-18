@@ -1,6 +1,7 @@
 extends Node
 
 var STATS = {"S":2,"D":1,"M":1}
+var DATA = {"HP":20,"HPM":20}
 var ABILITIES = ["streng"]
 
 func _on_click_party_ability(ab_data):
@@ -22,9 +23,9 @@ func ab_streng(ab_data):
 	dice.set_value(dice.value + 1)
 
 func apply_damage(val,def_data):
-	Effector.float_text("-"+str(val)+"HP",Vector2(300,420),"DAMAGE")
-	var img = get_node("/root/Game/CLBG/ImageParty")
-	Effector.damage(img)
+	DATA.HP = max(0,DATA.HP-val)
+	Effector.float_text("-"+str(val)+"HP",Vector2(320,400),"DAMAGE")
+	GameManager.PARTY_REF.damage_fx()
 	await DefianceManager.launch_trigger("on_end_defiance_attack",def_data)
 
 func roll_party_dices():

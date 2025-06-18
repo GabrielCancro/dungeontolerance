@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmnn1l13dfn5l"]
 
 [ext_resource type="Script" uid="uid://dpekl5cicd30l" path="res://nodes/DefianceAbilityLine.gd" id="1_gnmdo"]
-[ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_da00w"]
+
+[sub_resource type="SystemFont" id="SystemFont_dt214"]
 
 [node name="DefianceAbilityLine" type="Control"]
 custom_minimum_size = Vector2(0, 25)
@@ -45,7 +46,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.851769, 0.851769, 0.851769, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("2_da00w")
+theme_override_fonts/font = SubResource("SystemFont_dt214")
+theme_override_font_sizes/font_size = 14
 text = "HABILIDAD X"
 horizontal_alignment = 1
 vertical_alignment = 1

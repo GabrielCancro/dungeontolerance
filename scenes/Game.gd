@@ -1,6 +1,6 @@
 extends Control
 
-const play_tutorial = true
+const play_tutorial = false
 
 func _ready() -> void:
 	HintManager.init($Hint/HintPanel)
@@ -10,8 +10,9 @@ func _ready() -> void:
 	GameManager.TARGET_CHOSSER_REF = $CLUI/TargetChosser
 	GameManager.DEFIANCES_REF = $Defiances
 	GameManager.DICES_REF = $Dices
-	GameManager.POWERGEM_REF = $CLUI/PowerGem
+	GameManager.POWERGEM_REF = $PowerGem
 	GameManager.INPUT_BLOCKER_REF = $CLUI/InputBlocker
+	GameManager.PARTY_REF = $Party
 	GameManager.PARTY_ABILITIES_REF = $Abilities
 	PartyManager.update_abilities_ui()
 	if play_tutorial: tuto_sequence()
@@ -50,6 +51,6 @@ func start_sequence():
 	await GameManager.timeout(1)
 	await GameManager.POWERGEM_REF.show_powergem()
 	await GameManager.timeout(1)
-	await LevelManager.build_level()
+	await LevelManager.next_level()
 	await GameManager.timeout(2)
 	await PartyManager.roll_party_dices()

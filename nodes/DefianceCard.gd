@@ -48,7 +48,7 @@ func _on_click():
 	await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
 	await damage_defiance(dice.value)
 	dice.consume_dice()
-	if is_dead: await DefianceManager.launch_trigger("on_dead_defiance", def_data)
+	if is_dead(): await DefianceManager.launch_trigger("on_dead_defiance", def_data)
 	else: await DefianceManager.launch_trigger("on_apply_dice", def_data)
 
 func dec_stats(type,val):
@@ -79,12 +79,14 @@ func damage_defiance(dam):
 		await GameManager.timeout(1)
 		await Effector.fade_down_and_free(self)
 		DefianceManager.ALL_DEFIANCES.erase(def_data)
+		await GameManager.timeout(.2)
 		emit_signal("on_destroy")
 	else: Effector.damage(self)
 	return true
 
 func is_dead(): 
-	return (def_data.hp > 0)
+	if (def_data.hp <= 0): return true
+	else: return false
 
 func ligth(val):
 	$Light.visible = val

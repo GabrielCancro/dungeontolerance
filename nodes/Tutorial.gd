@@ -8,19 +8,19 @@ func _ready() -> void:
 func show_tuto(code):
 	$HintPanel/RichTextLabel.text = Lang.get_text("tuto_"+code)
 	$HintPanel.size.y = 20 + $HintPanel/RichTextLabel.get_content_height()
-	var node = get_node("/root/Game/CLBG/ImageParty")
-	if code == "welcome": node = get_node("/root/Game/CLBG/ImageParty")
-	if code == "party": node = get_node("/root/Game/PartyStats")
-	if code == "dices": node = get_node("/root/Game/Dices")
+	var node = GameManager.PARTY_REF
+	if code == "welcome": node = GameManager.PARTY_REF
+	if code == "party": node = GameManager.PARTY_REF.get_node("Stats")
+	if code == "dices": node = GameManager.DICES_REF
 	if code == "rat1": node = DefianceManager.ALL_DEFIANCES[0].node
 	if code == "rat2": node = DefianceManager.ALL_DEFIANCES[0].node.get_node("Stats")
 	if code == "rat3": node = DefianceManager.ALL_DEFIANCES[0].node.get_node("Abilities")
 	if code == "rat4": node = DefianceManager.ALL_DEFIANCES[0].node
-	if code == "good_work": get_node("/root/Game/Dices")
+	if code == "good_work": GameManager.DICES_REF
 	if code == "ability1": node = GameManager.PARTY_ABILITIES_REF.get_child(0)
-	if code == "power1": node = get_node("/root/Game/CLBG/ImageParty")
+	if code == "power1": node = GameManager.PARTY_REF
 	if code == "power2": node = GameManager.POWERGEM_REF
-	if code == "end": node = get_node("/root/Game/Dices")
+	if code == "end": node = GameManager.PARTY_REF.get_node("HP")
 
 	$Cutter.fit_node(node)
 	var hint_pos = node.global_position + Vector2(node.size.x/2-$HintPanel.size.x/2,-$HintPanel.size.y-30)

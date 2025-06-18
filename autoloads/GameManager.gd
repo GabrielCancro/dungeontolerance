@@ -7,6 +7,7 @@ var DICES_REF
 var POWERGEM_REF
 var INPUT_BLOCKER_REF
 var PARTY_ABILITIES_REF
+var PARTY_REF
 
 var block_input_time = 0
 
@@ -23,9 +24,12 @@ func on_end_turn():
 	await timeout(1)
 	await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
 	await timeout(1)
+	if DefianceManager.DEFIANCES.size()<=0: 
+		await LevelManager.next_level()
+		await timeout(.5)
 	await PartyManager.roll_party_dices()
 	await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
-	await timeout(1.0)
+	await timeout(.3)
 	
 func timeout(val):
 	GameManager.block_input(val+0.2)

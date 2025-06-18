@@ -7,7 +7,7 @@ var COLORS = {"S":"ff0055","D":"0fe559","M":"e69aff"}
 
 func set_dice_drag(node):
 	if current_dice_drag:
-		current_dice_drag.position = safe_pos_dice_drag
+		Effector.move_to(current_dice_drag,safe_pos_dice_drag)
 		current_dice_drag = null
 	if node:
 		current_dice_drag = node
@@ -17,8 +17,10 @@ func get_dice_drag():
 	return current_dice_drag
 
 func _process(delta: float) -> void:
+	if GameManager.INPUT_BLOCKER_REF.visible: return
 	if current_dice_drag:
 		current_dice_drag.position = get_viewport().get_mouse_position() + Vector2(10,15) - GameManager.DICES_REF.position
+		if current_dice_drag.global_position.x < 220: set_dice_drag(null)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

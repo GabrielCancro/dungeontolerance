@@ -14,7 +14,7 @@ func set_ability(_name):
 
 func _on_hover(val):
 	$BGColor.visible = val
-	if val: HintManager.set_text(Lang.get_text("ab_"+ab_data.name))
+	if val: HintManager.set_text(Lang.get_text("ab_"+ab_data.name+"_name",["TITLE"])+"\n"+Lang.get_text("ab_"+ab_data.name))
 	else: HintManager.set_text()
 
 func resalt():

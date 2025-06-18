@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://br312qnlppkft"]
+
+[ext_resource type="Script" uid="uid://dcfo6dwsa62qo" path="res://scenes/Party.gd" id="1_gcnip"]
+[ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_b61ui"]
+[ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="3_gcnip"]
+
+[sub_resource type="SystemFont" id="SystemFont_gcnip"]
+
+[node name="Party" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -302.0
+offset_right = 377.0
+grow_vertical = 0
+script = ExtResource("1_gcnip")
+
+[node name="HP" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 238.0
+offset_top = 15.0
+offset_right = 303.0
+offset_bottom = 72.0
+color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[node name="HP" type="Label" parent="HP"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -32.5
+offset_right = 14.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_gcnip")
+theme_override_font_sizes/font_size = 30
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPVALUE" type="Label" parent="HP"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = 0.5
+offset_right = 30.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_gcnip")
+theme_override_font_sizes/font_size = 20
+text = "20/20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Retraits" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b61ui")
+expand_mode = 1
+
+[node name="Stats" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 29.0
+offset_top = 257.0
+offset_right = 352.0
+offset_bottom = 293.0
+color = Color(0.103744, 0.103744, 0.103744, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_gcnip")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "FUERZA:1   DESTREZA:2   MAGIA:4  "
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

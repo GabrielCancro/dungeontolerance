@@ -4,7 +4,7 @@ extends Node
 var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice"]
 var ALL_DEFIANCES = []
 const DEFIANCES = {
-	"goblin":{  "hp":10, "stats":{"S":2,"D":5,"M":3}, "abs":[] },
+	"goblin":{  "hp":8, "stats":{"S":2,"D":3,"M":1}, "abs":["aggressive*2","counterattack*1"] },
 	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "abs":[ "aggressive*2" ] }, #"shield*2",
 	"bat":{     "hp":5 , "stats":{"S":3,"D":1,"M":3}, "abs":[ "drainer*1","aggressive*2" ] },
 }
@@ -40,6 +40,7 @@ func launch_trigger_to_all_defiances(launcher):
 	await GameManager.timeout(.2)
 
 func launch_trigger(launcher, def_card):
+	print("LAUNCHING TRIGGER ",launcher)
 	# on_apply_dice on_pre_appliy_dice
 	for ab in def_card["abs"]:
 		if has_method(ab.name+"_"+launcher): 
@@ -57,7 +58,7 @@ func counterattack_on_apply_dice(ab_data, def_card):
 	#Effector.float_text("COUNTERATTACK",def_card.node.position,"NORMAL")
 	#await GameManager.timeout(.4)
 	randomize()
-	await PartyManager.apply_damage(randi_range(0,ab_data.level),def_card.node)
+	await PartyManager.apply_damage(randi_range(0,ab_data.level),def_card)
 	await GameManager.timeout(.5)
 
 func condition_shield_on_pre_apply_dice(ab_data, def_card): 
