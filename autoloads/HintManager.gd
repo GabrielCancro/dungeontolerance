@@ -16,6 +16,7 @@ func set_text(_text=null):
 	HintPanel.size.y = 20 + BBLabel.get_content_height()
 
 func _process(delta: float) -> void:
+	if !is_instance_valid(HintPanel): return
 	var offset = Vector2(20,20)
 	if DiceManager.get_dice_drag(): offset =Vector2(60,60)
 	HintPanel.position = get_viewport().get_mouse_position() + offset

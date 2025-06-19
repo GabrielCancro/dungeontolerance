@@ -12,6 +12,7 @@ var PARTY_REF
 var block_input_time = 0
 
 func _process(delta: float) -> void:
+	if !is_instance_valid(INPUT_BLOCKER_REF): return
 	if block_input_time>0: 
 		block_input_time-=delta
 	else: 
@@ -42,3 +43,6 @@ func block_input(time):
 	if block_input_time<time: block_input_time += time
 	INPUT_BLOCKER_REF.visible = true
 	set_process(true)
+
+func change_scene(scene_name):
+	get_tree().change_scene_to_file("res://scenes/"+scene_name+".tscn")

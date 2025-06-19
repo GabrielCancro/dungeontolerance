@@ -17,6 +17,7 @@ func get_dice_drag():
 	return current_dice_drag
 
 func _process(delta: float) -> void:
+	if !GameManager.INPUT_BLOCKER_REF: return
 	if GameManager.INPUT_BLOCKER_REF.visible: return
 	if current_dice_drag:
 		current_dice_drag.position = get_viewport().get_mouse_position() + Vector2(10,15) - GameManager.DICES_REF.position

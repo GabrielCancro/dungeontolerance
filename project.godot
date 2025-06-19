@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dungeon Tolerance"
-run/main_scene="uid://da3o35be5tlls"
+run/main_scene="uid://y3btgh7d4io1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
