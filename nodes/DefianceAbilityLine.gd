@@ -12,6 +12,7 @@ func _on_hover(val):
 	$BGColor.visible = val
 	$BGColor2.visible = val
 	if "count" in ab_data: Lang.set_text_vars([ab_data.level,ab_data.count,ab_data.max_count,])
+	elif "min" in ab_data: Lang.set_text_vars([ab_data.level,ab_data.min,ab_data.max,])
 	else: Lang.set_text_vars([ab_data.level])
 	if val: HintManager.set_text(Lang.get_text("def_ab_"+ab_data.name+"_name",["TITLE","UPPER"])+"\n"+Lang.get_text("def_ab_"+ab_data.name))
 	else: HintManager.set_text()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcfo6dwsa62qo" path="res://nodes/Party.gd" id="1_gcnip"]
 [ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_b61ui"]
-[ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="3_gcnip"]
+[ext_resource type="PackedScene" uid="uid://buqvfadnya6qe" path="res://nodes/HP_UI.tscn" id="2_gcnip"]
 
 [sub_resource type="SystemFont" id="SystemFont_gcnip"]
 subpixel_positioning = 0
@@ -17,56 +17,6 @@ offset_right = 377.0
 grow_vertical = 0
 script = ExtResource("1_gcnip")
 
-[node name="HP" type="ColorRect" parent="."]
-layout_mode = 1
-offset_left = 238.0
-offset_top = 15.0
-offset_right = 303.0
-offset_bottom = 72.0
-color = Color(0.201527, 0.201527, 0.201527, 1)
-
-[node name="HP" type="Label" parent="HP"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -14.5
-offset_top = -32.5
-offset_right = 14.5
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("3_gcnip")
-theme_override_font_sizes/font_size = 30
-text = "HP"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HPVALUE" type="Label" parent="HP"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = 0.5
-offset_right = 30.5
-offset_bottom = 30.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("3_gcnip")
-theme_override_font_sizes/font_size = 20
-text = "20/20"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Retraits" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -76,6 +26,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_b61ui")
 expand_mode = 1
+
+[node name="HP_UI" parent="." instance=ExtResource("2_gcnip")]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 0.0
+offset_right = 302.0
+offset_bottom = 57.0
 
 [node name="Stats" type="ColorRect" parent="."]
 layout_mode = 1

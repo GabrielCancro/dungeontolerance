@@ -15,7 +15,7 @@ func _ready() -> void:
 	GameManager.PARTY_ABILITIES_REF = $Abilities
 	PartyManager.update_abilities_ui()
 	LevelManager.init_dungeon()
-	if LevelManager.dungeon==0: tuto_sequence()
+	if LevelManager.level==0: tuto_sequence()
 	else: start_sequence()
 
 func tuto_sequence():

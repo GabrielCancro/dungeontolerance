@@ -12,9 +12,9 @@ var TEXTS = {
 	"def_goblin_name_es":"Trasgo",
 	
 	"def_ab_aggressive_name_es":"AGRESIVO",
-	"def_ab_aggressive_es":"Te atacara al finalizar el turno causando -#0HP.",
+	"def_ab_aggressive_es":"Te atacara al finalizar el turno causando entre -#1HP y -#2HP.",
 	"def_ab_counterattack_name_es":"CONTRATAQUE",
-	"def_ab_counterattack_es":"Cada vez que colocas un dado en esta carta recibes entre 0 y #0 de golpe",
+	"def_ab_counterattack_es":"Cada vez que colocas un dado en esta carta recibes entre -#1HP y -#2HP",
 	"def_ab_activation_name_es":"ACTIVACION",
 	"def_ab_activation_es":"Este temporizador avanza cada turno, al completarse se desencadenan sus efectos.",
 	"def_ab_shield_name_es":"ESCUDO",

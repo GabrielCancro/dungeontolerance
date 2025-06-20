@@ -4,12 +4,18 @@ var gems = {"S":[],"D":[],"M":[],"OFF":[]}
 
 func _ready() -> void:
 	visible = false
+	$Button.connect("mouse_entered",_on_hover.bind(true))
+	$Button.connect("mouse_exited",_on_hover.bind(false))
 	$Button.connect("button_down",on_click)
 	order_points()
 	off_all()
 
+func _on_hover(val):
+	$BGColor.visible = val
+
 func _process(delta: float) -> void:
 	$ball.rotation_degrees += delta*30
+	$BGColor.rotation = $ball.rotation
 	$Points.rotation_degrees -= delta*20
 
 func order_points():

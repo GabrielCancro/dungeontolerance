@@ -28,6 +28,11 @@ func apply_damage(val,def_data):
 	GameManager.PARTY_REF.damage_fx()
 	await DefianceManager.launch_trigger("on_end_defiance_attack",def_data)
 
+func apply_heal(val):
+	DATA.HP = min(DATA.HPM,DATA.HP+val)
+	Effector.float_text("+"+str(val)+"HP",Vector2(320,400),"NORMAL")
+	GameManager.PARTY_REF.healt_fx()
+
 func roll_party_dices():
 	print("ROLLING ",STATS)
 	for k in STATS.keys(): 

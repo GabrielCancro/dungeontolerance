@@ -133,6 +133,24 @@ grow_vertical = 2
 texture = ExtResource("3_i83d4")
 expand_mode = 1
 
+[node name="BGColor" type="TextureRect" parent="."]
+modulate = Color(0.277528, 0.277528, 0.277528, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -37.0
+offset_right = 37.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(37, 37)
+texture = ExtResource("2_i83d4")
+expand_mode = 1
+
 [node name="ball" type="TextureRect" parent="."]
 modulate = Color(0.77084, 0.770839, 0.770839, 1)
 layout_mode = 1

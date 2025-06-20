@@ -1,19 +1,25 @@
 extends Node
 
-var dungeon = 1
-var room = 0
-var max_rooms = 5
+var level = 1
+var room_index = 0
+var max_rooms = 0
+
+var DUNGEONS = [
+	[], # Level 0 - TUTORIAL
+	["BB","BB"], #Level 1 - rooms 2 - Basic enemies
+	["BB","BBB"], #Level 2
+	["BN","BNB","BB"], #Level 3
+]
 
 func init_dungeon():
-	dungeon = SaveManager.DATA["prestige"]
-	room = 0
-	if dungeon==0: max_rooms = 0
-	else: max_rooms = 2 + int(dungeon/2) #d1:2 #d2:3 #d3:3 #d4:4
+	level = SaveManager.DATA["prestige"]
+	room_index = -1
+	max_rooms = DUNGEONS[level].size()
 	clean_ui()
 
 func next_level():
-	room += 1
-	if room>max_rooms:
+	room_index += 1
+	if room_index>=max_rooms:
 		SaveManager.DATA["prestige"] += 1
 		SaveManager.DATA["expedition"] += 1
 		SaveManager.save_store_data()
@@ -21,11 +27,10 @@ func next_level():
 		return false
 	update_ui()
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
-	randomize()
-	for i in room+1:
-		var k = DefianceManager.DEFIANCES.keys().duplicate()
-		k.shuffle()
-		_add_defiance(k[0])
+	for def_tag in DUNGEONS[level][room_index]:
+		var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
+		print("ADDING ",key," by tag ",def_tag)
+		_add_defiance(key)
 	return true
 
 func _add_defiance(def_type):
@@ -69,7 +74,7 @@ func _move_def(node,pox,posy):
 	await GameManager.timeout(.3)
 
 func update_ui():
-	Lang.set_text_vars([dungeon,room,max_rooms])
+	Lang.set_text_vars([level,room_index+1,max_rooms])
 	var Label = get_node_or_null("/root/Game/DungeonInfo/Label")
 	if Label: Label.text = Lang.get_text("info_dungeon_level")
 
