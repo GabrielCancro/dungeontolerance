@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://lwpk86seugi6"]
+[gd_scene load_steps=4 format=3 uid="uid://lwpk86seugi6"]
 
 [ext_resource type="Script" uid="uid://co6quf7ws11gf" path="res://nodes/PartyAbility.gd" id="1_ilocx"]
 [ext_resource type="Texture2D" uid="uid://b4l4ffgp7b2c5" path="res://assets/abilities/ab_arrow.png" id="2_htrjk"]
+[ext_resource type="Texture2D" uid="uid://dv8gghhsp0t07" path="res://assets/white_point.png" id="3_ran1b"]
 
 [node name="PartyAbility" type="Control"]
 custom_minimum_size = Vector2(50, 50)
@@ -99,3 +100,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -18.0
+offset_right = 43.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_override_constants/separation = -2
+
+[node name="p1" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("3_ran1b")
+expand_mode = 1
+
+[node name="p2" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("3_ran1b")
+expand_mode = 1
+
+[node name="p3" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("3_ran1b")
+expand_mode = 1
+
+[node name="p4" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("3_ran1b")
+expand_mode = 1

@@ -20,7 +20,8 @@ func show_tuto(code):
 	if code == "ability1": node = GameManager.PARTY_ABILITIES_REF.get_child(0)
 	if code == "power1": node = GameManager.PARTY_REF
 	if code == "power2": node = GameManager.POWERGEM_REF
-	if code == "end": node = GameManager.PARTY_REF.get_node("HP")
+	if code == "healt": node = GameManager.PARTY_REF.get_node("HP_UI")
+	if code == "end": node = GameManager.PARTY_REF
 
 	$Cutter.fit_node(node)
 	var hint_pos = node.global_position + Vector2(node.size.x/2-$HintPanel.size.x/2,-$HintPanel.size.y-30)

@@ -4,23 +4,31 @@ var STATS = {"S":2,"D":1,"M":1}
 var DATA = {"HP":20,"HPM":20}
 var ABILITIES = ["streng"]
 
+var ABILITIES_DATA = { 
+	"streng":{"req":{"S":2} },
+}
+
 func _on_click_party_ability(ab_data):
 	DiceManager.set_dice_drag(null)
 	if has_method("ab_"+ab_data.name):
 		print("call ability "+"ab_"+ab_data.name)
 		call("ab_"+ab_data.name, ab_data)
 
+func get_ability_data(code):
+	return ABILITIES_DATA[code].duplicate()
+
 func ab_streng(ab_data):
 	#CONDITIONS
-	if !GameManager.POWERGEM_REF.has_gems("S",1): return false
+	for k in ab_data.req.keys():
+		if !GameManager.POWERGEM_REF.has_gems(k,ab_data.req[k]): return false
 	GameManager.show_target_chosser("dice",["is_S"])
 	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
 	if !dice: return
 	#EFFECT
-	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-20))
-	GameManager.POWERGEM_REF.dec_gems("S",1)
+	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-35))
+	for k in ab_data.req.keys(): GameManager.POWERGEM_REF.dec_gems(k,ab_data.req[k])
 	ab_data.node.resalt()
-	dice.set_value(dice.value + 1)
+	dice.set_value(dice.value + 2)
 
 func apply_damage(val,def_data):
 	DATA.HP = max(0,DATA.HP-val)

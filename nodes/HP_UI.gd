@@ -15,8 +15,7 @@ func _on_click():
 		DiceManager.set_dice_drag(null)
 		Effector.float_text("MAX HP",global_position + Vector2(80,-20),"NORMAL") 
 		return
-	if dice.value>=5: PartyManager.apply_heal(2)
-	else: PartyManager.apply_heal(1)
+	PartyManager.apply_heal(1)
 	dice.consume_dice()
 
 func update_hp():

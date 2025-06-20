@@ -1,5 +1,6 @@
 extends Control
 
+var max_amount = 3
 var gems = {"S":[],"D":[],"M":[],"OFF":[]}
 
 func _ready() -> void:
@@ -9,6 +10,7 @@ func _ready() -> void:
 	$Button.connect("button_down",on_click)
 	order_points()
 	off_all()
+	update_colors()
 
 func _on_hover(val):
 	$BGColor.visible = val
@@ -36,6 +38,7 @@ func update_colors():
 	for g in gems["OFF"]: g.modulate = Color(.3,.3,.3,1)
 
 func inc_gems(type,val):
+	if gems[type].size()>=max_amount: return false
 	if gems["OFF"].size()<val: return false
 	randomize()
 	gems["OFF"].shuffle()
@@ -69,6 +72,7 @@ func on_click():
 	if !dice: return
 	var result = inc_gems(dice.type,1)
 	if result: dice.consume_dice()
+	else: Effector.float_text(Lang.get_text("max_power"),global_position + Vector2(80,-20),"NORMAL") 
 
 func show_powergem():
 	modulate.a = 0

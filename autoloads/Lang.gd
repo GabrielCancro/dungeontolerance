@@ -5,7 +5,7 @@ var text_vars = []
 
 var TEXTS = {
 	"ab_streng_name_es":"FUERZA BRUTA",
-	"ab_streng_es":"Aumenta en un punto un dado de @STR",
+	"ab_streng_es":"Aumenta en +2 un dado de @STR",
 	
 	"def_rat_name_es":"Rata",
 	"def_bat_name_es":"Murcielago",
@@ -33,6 +33,7 @@ var TEXTS = {
 	"tuto_ability1_es":"Con este truco podras aumentar el valor de tus dados de @STR. Fundamental para no morir mordido por ratas!! jajaja!!",
 	"tuto_power1_es":"Para usar habilidades como esta necesitas PODER!\n Hay muchas formas de conseguir poder, pero principalmente lo haras con tu foco de poder.",
 	"tuto_power2_es":"Arroja algunos dados en tu foco y veras como se consigue el poder. Con eso podras usar tus habilidades.",
+	"tuto_healt_es":"Tambies puedes usar tus dados para tomar aliento, colocalos aqui para obtener +1HP por cada dado.",
 	"tuto_end_es":"Bueno bueno.. Mis labios se secan de tanto hablar, me voy a la taberna..",
 
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
@@ -45,6 +46,9 @@ var REPLACES = {
 	"@PARTY_STR_es" = "[color="+DiceManager.COLORS["S"]+"]Fuerza:"+str(PartyManager.STATS["S"])+"[/color]",
 	"@PARTY_DEX_es" = "[color="+DiceManager.COLORS["D"]+"]Destreza:"+str(PartyManager.STATS["D"])+"[/color]",
 	"@PARTY_MAG_es" = "[color="+DiceManager.COLORS["M"]+"]Magia:"+str(PartyManager.STATS["M"])+"[/color]",
+	"@REQ_S" = "[color="+DiceManager.COLORS["S"]+"] @ [/color]",
+	"@REQ_D" = "[color="+DiceManager.COLORS["D"]+"] @ [/color]",
+	"@REQ_M" = "[color="+DiceManager.COLORS["M"]+"] @ [/color]",
 }
 
 func set_text_vars(vars):

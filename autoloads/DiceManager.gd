@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 	if GameManager.INPUT_BLOCKER_REF.visible: return
 	if current_dice_drag:
 		current_dice_drag.position = get_viewport().get_mouse_position() + Vector2(10,15) - GameManager.DICES_REF.position
-		if current_dice_drag.global_position.x < 220: set_dice_drag(null)
+		if current_dice_drag.global_position.x < 200: set_dice_drag(null)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

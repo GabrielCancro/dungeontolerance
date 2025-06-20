@@ -43,6 +43,7 @@ func tuto_sequence():
 	await GameManager.POWERGEM_REF.show_powergem()
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("power2")
+	await $CLUI/Tutorial.show_tuto("healt")
 	await $CLUI/Tutorial.show_tuto("end")
 	DiceManager.clear_dices()
 	await LevelManager._add_defiance("rat")

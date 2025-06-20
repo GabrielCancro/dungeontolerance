@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 
 func on_end_turn():
 	block_input(1)
-	DiceManager.clear_dices()
+	await DiceManager.clear_dices()
 	await timeout(1)
 	await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
 	await timeout(1)
