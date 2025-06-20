@@ -33,4 +33,5 @@ func now_date():
 
 func clear_data():
 	DATA = {}
-	get_tree().change_scene("res://scenes/Intro.tscn")
+	save_store_data()
+	GameManager.change_scene("Intro")
