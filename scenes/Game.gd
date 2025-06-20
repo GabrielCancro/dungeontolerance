@@ -1,11 +1,10 @@
 extends Control
 
-const play_tutorial = false
-
 func _ready() -> void:
 	HintManager.init($Hint/HintPanel)
 	$BtnAddDice.connect("button_down",DiceManager.add_random_dice)
 	$BtnEndTurn.connect("button_down",GameManager.on_end_turn)
+	$BtnAddEnemy.connect("button_down",LevelManager._add_defiance.bind("rat"))
 	GameManager.GAME_SCENE_REF = self
 	GameManager.TARGET_CHOSSER_REF = $CLUI/TargetChosser
 	GameManager.DEFIANCES_REF = $Defiances
@@ -15,7 +14,8 @@ func _ready() -> void:
 	GameManager.PARTY_REF = $Party
 	GameManager.PARTY_ABILITIES_REF = $Abilities
 	PartyManager.update_abilities_ui()
-	if play_tutorial: tuto_sequence()
+	LevelManager.init_dungeon()
+	if LevelManager.dungeon==0: tuto_sequence()
 	else: start_sequence()
 
 func tuto_sequence():
@@ -44,8 +44,10 @@ func tuto_sequence():
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("power2")
 	await $CLUI/Tutorial.show_tuto("end")
+	DiceManager.clear_dices()
 	await LevelManager._add_defiance("rat")
 	await LevelManager._add_defiance("rat")
+	await PartyManager.roll_party_dices()
 	
 func start_sequence():
 	await GameManager.timeout(1)

@@ -70,6 +70,7 @@ autowrap_mode = 2
 clip_text = true
 
 [node name="Continue" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1004.0
 offset_top = 592.0
 offset_right = 1133.0

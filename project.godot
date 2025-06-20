@@ -25,6 +25,7 @@ DefianceManager="*res://autoloads/DefianceManager.gd"
 GameManager="*res://autoloads/GameManager.gd"
 Effector="*res://autoloads/Effector.gd"
 LevelManager="*res://autoloads/LevelManager.gd"
+SaveManager="*res://autoloads/SaveManager.gd"
 
 [display]
 

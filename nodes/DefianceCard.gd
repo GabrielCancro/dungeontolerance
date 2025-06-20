@@ -75,13 +75,14 @@ func damage_defiance(dam):
 	update_ui()
 	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
 	Effector.boom_big($HP)
+	Effector.damage(self)
 	if def_data.hp <= 0: 
-		await GameManager.timeout(1)
-		await Effector.fade_down_and_free(self)
 		DefianceManager.ALL_DEFIANCES.erase(def_data)
-		await GameManager.timeout(.2)
+		print("DefianceManager.ALL_DEFIANCES ",DefianceManager.ALL_DEFIANCES)
+		await GameManager.timeout(.5)
 		emit_signal("on_destroy")
-	else: Effector.damage(self)
+		Effector.fade_down_and_free(self)
+		LevelManager.reorder_cards()
 	return true
 
 func is_dead(): 

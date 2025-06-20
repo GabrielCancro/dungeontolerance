@@ -192,6 +192,15 @@ offset_bottom = 641.0
 theme = ExtResource("10_3xj3m")
 text = "END TURN"
 
+[node name="BtnAddEnemy" type="Button" parent="."]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 603.0
+offset_right = 796.0
+offset_bottom = 641.0
+theme = ExtResource("10_3xj3m")
+text = "ADD RND ENEMY"
+
 [node name="Dices" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 356.0

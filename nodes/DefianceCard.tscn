@@ -140,9 +140,11 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="AbilityLine4" parent="Abilities" instance=ExtResource("4_bx7io")]
+visible = false
 layout_mode = 2
 
 [node name="AbilityLine5" parent="Abilities" instance=ExtResource("4_bx7io")]
+visible = false
 layout_mode = 2
 
 [node name="HP" type="ColorRect" parent="."]

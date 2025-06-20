@@ -40,13 +40,14 @@ func launch_trigger_to_all_defiances(launcher):
 	await GameManager.timeout(.2)
 
 func launch_trigger(launcher, def_card):
-	print("LAUNCHING TRIGGER ",launcher)
+	if def_card.node.is_dead(): return
 	# on_apply_dice on_pre_appliy_dice
 	for ab in def_card["abs"]:
 		if has_method(ab.name+"_"+launcher): 
 			if has_method("condition_"+ab.name+"_"+launcher): 
 				if !call("condition_"+ab.name+"_"+launcher, ab, def_card): continue
 			if launcher=="on_apply_dice": await GameManager.timeout(1)
+			print("LAUNCHING TRIGGER ",launcher,"->",def_card.name)
 			def_card.node.ligth(true)
 			await call(ab.name+"_"+launcher, ab, def_card)
 			def_card.node.ligth(false)

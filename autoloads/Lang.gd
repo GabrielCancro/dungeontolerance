@@ -33,7 +33,7 @@ var TEXTS = {
 	"tuto_ability1_es":"Con este truco podras aumentar el valor de tus dados de @STR. Fundamental para no morir mordido por ratas!! jajaja!!",
 	"tuto_power1_es":"Para usar habilidades como esta necesitas PODER!\n Hay muchas formas de conseguir poder, pero principalmente lo haras con tu foco de poder.",
 	"tuto_power2_es":"Arroja algunos dados en tu foco y veras como se consigue el poder. Con eso podras usar tus habilidades.",
-	"tuto_end_es":"Bueno bueno.. Mis labios se secan de tanto hablar, me voy a la taberna, no dejes que tus @HP lleguen a cero!!",
+	"tuto_end_es":"Bueno bueno.. Mis labios se secan de tanto hablar, me voy a la taberna..",
 
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
 	"info_dungeon_level_es":"EXPEDICION #0    ROOM #1/#2"

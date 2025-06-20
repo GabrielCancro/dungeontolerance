@@ -25,8 +25,9 @@ func on_end_turn():
 	await timeout(1)
 	await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
 	await timeout(1)
-	if DefianceManager.DEFIANCES.size()<=0: 
-		await LevelManager.next_level()
+	if DefianceManager.ALL_DEFIANCES.size()<=0: 
+		var has_more_rooms = await LevelManager.next_level()
+		if !has_more_rooms: return 
 		await timeout(.5)
 	await PartyManager.roll_party_dices()
 	await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
@@ -40,6 +41,7 @@ func show_target_chosser(target_type,condition_tags):
 	TARGET_CHOSSER_REF.show_target_chosser(target_type,condition_tags)
 
 func block_input(time):
+	if !is_instance_valid(INPUT_BLOCKER_REF): return
 	if block_input_time<time: block_input_time += time
 	INPUT_BLOCKER_REF.visible = true
 	set_process(true)
