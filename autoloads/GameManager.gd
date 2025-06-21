@@ -25,10 +25,10 @@ func on_end_turn():
 	await timeout(1)
 	await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
 	await timeout(1)
-	if DefianceManager.ALL_DEFIANCES.size()<=0: 
-		var has_more_rooms = await LevelManager.next_level()
-		if !has_more_rooms: return 
-		await timeout(.5)
+	await PartyManager.clear_shield()
+	if DefianceManager.ALL_DEFIANCES.size()<=0:
+		var result = await LevelManager.next_level()
+		if !result: return
 	await PartyManager.roll_party_dices()
 	await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
 	await timeout(.3)
@@ -48,3 +48,7 @@ func block_input(time):
 
 func change_scene(scene_name):
 	get_tree().change_scene_to_file("res://scenes/"+scene_name+".tscn")
+
+func show_popup(name_popup):
+	var node = load("res://popups/"+name_popup+".tscn").instantiate()
+	get_node("/root/Game/CLUI").add_child(node)

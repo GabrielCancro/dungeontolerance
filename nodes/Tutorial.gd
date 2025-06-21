@@ -20,7 +20,7 @@ func show_tuto(code):
 	if code == "ability1": node = GameManager.PARTY_ABILITIES_REF.get_child(0)
 	if code == "power1": node = GameManager.PARTY_REF
 	if code == "power2": node = GameManager.POWERGEM_REF
-	if code == "healt": node = GameManager.PARTY_REF.get_node("HP_UI")
+	if code == "shield": node = GameManager.PARTY_REF.get_node("Shield")
 	if code == "end": node = GameManager.PARTY_REF
 
 	$Cutter.fit_node(node)

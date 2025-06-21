@@ -32,7 +32,13 @@ func clear_dices():
 	set_dice_drag(null)
 	for dice in GameManager.DICES_REF.get_children():
 		Effector.fade_down_and_free(dice)
-		await GameManager.timeout(.1)
+		PartyManager.add_shield(1)
+		await GameManager.timeout(.4)
+
+func remove_dices():
+	set_dice_drag(null)
+	for dice in GameManager.DICES_REF.get_children(): 
+		dice.queue_free()
 
 func add_random_dice():
 	add_dice(["S","D","M"][randi()%3])

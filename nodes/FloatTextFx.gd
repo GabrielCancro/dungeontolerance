@@ -5,6 +5,8 @@ func init(text,pos,style="NORMAL"):
 	position = pos
 	if style=="NORMAL": pass
 	elif style=="DAMAGE": $Label.add_theme_color_override("font_color","#F01010")
+	elif style=="SHIELD": $Label.add_theme_color_override("font_color","#bcbcbc")
+	
 	else: $Label.add_theme_color_override("font_color",style)
 	
 	var tw = create_tween()

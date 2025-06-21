@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4tbv7x06y4rc"]
+[gd_scene load_steps=6 format=3 uid="uid://c4tbv7x06y4rc"]
 
 [ext_resource type="Script" uid="uid://c15s4j407b52x" path="res://nodes/TargetChosser.gd" id="1_kejxc"]
+[ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="2_30nsl"]
 
 [sub_resource type="Animation" id="Animation_30nsl"]
 resource_name = "AnimFade"
@@ -114,3 +115,16 @@ grow_vertical = 0
 libraries = {
 &"": SubResource("AnimationLibrary_a6qf0")
 }
+
+[node name="Cancel" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.5
+offset_top = 88.0
+offset_right = 64.5
+offset_bottom = 126.0
+grow_horizontal = 2
+theme = ExtResource("2_30nsl")
+text = "CANCEL"

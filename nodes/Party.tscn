@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://br312qnlppkft"]
+[gd_scene load_steps=7 format=3 uid="uid://br312qnlppkft"]
 
 [ext_resource type="Script" uid="uid://dcfo6dwsa62qo" path="res://nodes/Party.gd" id="1_gcnip"]
 [ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_b61ui"]
 [ext_resource type="PackedScene" uid="uid://buqvfadnya6qe" path="res://nodes/HP_UI.tscn" id="2_gcnip"]
+[ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="4_b61ui"]
+[ext_resource type="Texture2D" uid="uid://bwqyfpyr7uq0u" path="res://assets/shield.png" id="4_l2k5q"]
 
 [sub_resource type="SystemFont" id="SystemFont_gcnip"]
 subpixel_positioning = 0
@@ -29,10 +31,10 @@ expand_mode = 1
 
 [node name="HP_UI" parent="." instance=ExtResource("2_gcnip")]
 layout_mode = 0
-offset_left = 237.0
-offset_top = 0.0
-offset_right = 302.0
-offset_bottom = 57.0
+offset_left = 230.0
+offset_top = 11.0
+offset_right = 310.0
+offset_bottom = 91.0
 
 [node name="Stats" type="ColorRect" parent="."]
 layout_mode = 1
@@ -58,5 +60,29 @@ theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "FUERZA:1   DESTREZA:2   MAGIA:4  "
 scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shield" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 296.0
+offset_top = 55.0
+offset_right = 356.0
+offset_bottom = 115.0
+texture = ExtResource("4_l2k5q")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Shield"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.707967, 0.707967, 0.707967, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_b61ui")
+theme_override_font_sizes/font_size = 26
+text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1

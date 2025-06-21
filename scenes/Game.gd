@@ -14,6 +14,7 @@ func _ready() -> void:
 	GameManager.PARTY_REF = $Party
 	GameManager.PARTY_ABILITIES_REF = $Abilities
 	PartyManager.update_abilities_ui()
+	PartyManager.restore_hp()
 	LevelManager.init_dungeon()
 	if LevelManager.level==0: tuto_sequence()
 	else: start_sequence()
@@ -31,8 +32,10 @@ func tuto_sequence():
 	await $CLUI/Tutorial.show_tuto("rat1")
 	await $CLUI/Tutorial.show_tuto("rat2")
 	await $CLUI/Tutorial.show_tuto("rat3")
-	await $CLUI/Tutorial.show_tuto("rat4")
 	await GameManager.timeout(1)
+	PartyManager.add_shield(1)
+	await $CLUI/Tutorial.show_tuto("shield")
+	await $CLUI/Tutorial.show_tuto("rat4")
 	await DefianceManager.ALL_DEFIANCES[0].node.on_destroy
 	await GameManager.timeout(1.5)
 	await $CLUI/Tutorial.show_tuto("good_work")
@@ -43,9 +46,8 @@ func tuto_sequence():
 	await GameManager.POWERGEM_REF.show_powergem()
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("power2")
-	await $CLUI/Tutorial.show_tuto("healt")
 	await $CLUI/Tutorial.show_tuto("end")
-	DiceManager.clear_dices()
+	DiceManager.remove_dices()
 	await LevelManager._add_defiance("rat")
 	await LevelManager._add_defiance("rat")
 	await PartyManager.roll_party_dices()

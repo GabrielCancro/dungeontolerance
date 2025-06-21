@@ -2,6 +2,8 @@ extends Control
 
 func _ready() -> void:
 	update_ui()
+	update_shield()
+	$Shield.modulate.a = 0
 
 func update_ui():
 	$Stats/RichTextLabel.text = Lang.get_text("all_party_stats")
@@ -15,3 +17,11 @@ func damage_fx():
 func healt_fx():
 	Effector.boom_big($HP_UI)
 	update_ui()
+
+func update_shield():
+	if (PartyManager.DATA.SH>0):
+		$Shield.modulate.a = 1
+		$Shield/Label.text = str(PartyManager.DATA.SH)
+		Effector.boom($Shield)
+	else: 
+		Effector.fade_down($Shield)

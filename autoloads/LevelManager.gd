@@ -23,7 +23,7 @@ func next_level():
 		SaveManager.DATA["prestige"] += 1
 		SaveManager.DATA["expedition"] += 1
 		SaveManager.save_store_data()
-		GameManager.change_scene("Tabern")
+		GameManager.show_popup("EndExpedition")
 		return false
 	update_ui()
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()

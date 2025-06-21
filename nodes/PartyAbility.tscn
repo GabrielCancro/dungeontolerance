@@ -111,28 +111,33 @@ offset_top = -18.0
 offset_right = 43.0
 offset_bottom = -3.0
 grow_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = -2
 
 [node name="p1" type="TextureRect" parent="HBox"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_ran1b")
 expand_mode = 1
 
 [node name="p2" type="TextureRect" parent="HBox"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_ran1b")
 expand_mode = 1
 
 [node name="p3" type="TextureRect" parent="HBox"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_ran1b")
 expand_mode = 1
 
 [node name="p4" type="TextureRect" parent="HBox"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_ran1b")
 expand_mode = 1

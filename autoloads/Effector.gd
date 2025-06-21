@@ -61,3 +61,12 @@ func move_to(node,pos):
 	var tw = create_tween()
 	tw.tween_property(node,"position",pos,.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tw.play()
+
+func fade_down(node):
+	var start_pos = node.position
+	var tw = create_tween()
+	tw.tween_property(node,"position:y",node.position.y+25,.3).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(node,"modulate:a",0,.3).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await tw.finished
+	node.position = start_pos

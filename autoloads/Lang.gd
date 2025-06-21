@@ -29,11 +29,11 @@ var TEXTS = {
 	"tuto_rat2_es":"Pero cuidado, la rata tambien tiene estadisticas, que se descuentan al valor de los dados que apliques.",
 	"tuto_rat3_es":"Ademas, todos los enemigos tienen habilidades, verifica que hace cada una antes de hacer tu jugada!",
 	"tuto_rat4_es":"Ahora si, elimina a esa rata de una vez..",
+	"tuto_shield_es":"Casi lo olvido! Puedes usar dados para defenderte, los dados que te sobren al final del turno se transforman en escudo para mitigar ataques!",
 	"tuto_good_work_es":"Buen trabajo! Ahora dejame mostrarte algunos trucos bajo la manga que te salvaran la vida mas de una vez.",
 	"tuto_ability1_es":"Con este truco podras aumentar el valor de tus dados de @STR. Fundamental para no morir mordido por ratas!! jajaja!!",
 	"tuto_power1_es":"Para usar habilidades como esta necesitas PODER!\n Hay muchas formas de conseguir poder, pero principalmente lo haras con tu foco de poder.",
 	"tuto_power2_es":"Arroja algunos dados en tu foco y veras como se consigue el poder. Con eso podras usar tus habilidades.",
-	"tuto_healt_es":"Tambies puedes usar tus dados para tomar aliento, colocalos aqui para obtener +1HP por cada dado.",
 	"tuto_end_es":"Bueno bueno.. Mis labios se secan de tanto hablar, me voy a la taberna..",
 
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
