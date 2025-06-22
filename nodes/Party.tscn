@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://br312qnlppkft"]
+[gd_scene load_steps=10 format=3 uid="uid://br312qnlppkft"]
 
 [ext_resource type="Script" uid="uid://dcfo6dwsa62qo" path="res://nodes/Party.gd" id="1_gcnip"]
 [ext_resource type="Texture2D" uid="uid://t4jqvvdv7oux" path="res://assets/party.png" id="2_b61ui"]
 [ext_resource type="PackedScene" uid="uid://buqvfadnya6qe" path="res://nodes/HP_UI.tscn" id="2_gcnip"]
+[ext_resource type="Texture2D" uid="uid://dl5fh6xa1iwpe" path="res://assets/characters/c1.png" id="3_x1jt5"]
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="4_b61ui"]
 [ext_resource type="Texture2D" uid="uid://bwqyfpyr7uq0u" path="res://assets/shield.png" id="4_l2k5q"]
+[ext_resource type="Texture2D" uid="uid://u3r2vknjspcd" path="res://assets/characters/c4.png" id="4_x1jt5"]
+[ext_resource type="Texture2D" uid="uid://dbsnkammcgljy" path="res://assets/characters/c2.png" id="5_fv547"]
 
 [sub_resource type="SystemFont" id="SystemFont_gcnip"]
 subpixel_positioning = 0
@@ -20,6 +23,7 @@ grow_vertical = 0
 script = ExtResource("1_gcnip")
 
 [node name="Retraits" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +32,51 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_b61ui")
 expand_mode = 1
+
+[node name="Character1" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 13.0
+offset_right = -24.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fv547")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 119.0
+offset_top = 79.0
+offset_right = 96.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_x1jt5")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character3" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = 77.0
+offset_right = -117.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_x1jt5")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="HP_UI" parent="." instance=ExtResource("2_gcnip")]
 layout_mode = 0
