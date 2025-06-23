@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6hiu6io8aurw"]
+[gd_scene load_steps=13 format=3 uid="uid://b6hiu6io8aurw"]
 
 [ext_resource type="Script" uid="uid://dvbsntqikvrvf" path="res://scenes/Tabern.gd" id="1_lyctx"]
 [ext_resource type="Texture2D" uid="uid://73hs6emblaqu" path="res://assets/backgrounds/bg_tabern.jpg" id="2_nfy2w"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="3_lyctx"]
+[ext_resource type="Texture2D" uid="uid://dl5fh6xa1iwpe" path="res://assets/characters/c1.png" id="4_o1pim"]
+[ext_resource type="Texture2D" uid="uid://dbsnkammcgljy" path="res://assets/characters/c2.png" id="5_e65dq"]
+[ext_resource type="Texture2D" uid="uid://y7e30ptvyj3y" path="res://assets/characters/c3.png" id="6_0v3p0"]
+[ext_resource type="Texture2D" uid="uid://u3r2vknjspcd" path="res://assets/characters/c4.png" id="7_oq6e2"]
+[ext_resource type="Texture2D" uid="uid://bgflhp4km36mv" path="res://assets/characters/c5.png" id="8_g8xdv"]
+[ext_resource type="Texture2D" uid="uid://chxs4s1sq2x11" path="res://assets/characters/c6.png" id="9_6av1h"]
+[ext_resource type="Texture2D" uid="uid://coet4r7m8vxav" path="res://assets/characters/c7.png" id="10_fbm2o"]
+[ext_resource type="Texture2D" uid="uid://d3hnu1xaed60d" path="res://assets/backgrounds/bg_tabern_front.png" id="11_e65dq"]
 
 [sub_resource type="SystemFont" id="SystemFont_nfy2w"]
 subpixel_positioning = 0
@@ -24,6 +32,161 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_nfy2w")
+
+[node name="Characters" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Character1" type="TextureRect" parent="Characters"]
+clip_contents = true
+layout_mode = 1
+offset_left = 344.0
+offset_top = 187.0
+offset_right = 758.0
+offset_bottom = 670.0
+texture = ExtResource("4_o1pim")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character2" type="TextureRect" parent="Characters"]
+layout_mode = 1
+offset_left = 716.0
+offset_top = 170.0
+offset_right = 909.0
+offset_bottom = 396.0
+texture = ExtResource("5_e65dq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character3" type="TextureRect" parent="Characters"]
+layout_mode = 1
+offset_left = 863.0
+offset_top = 184.0
+offset_right = 1114.0
+offset_bottom = 459.0
+texture = ExtResource("6_0v3p0")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Character4" type="TextureRect" parent="Characters"]
+layout_mode = 1
+offset_left = 518.0
+offset_top = 199.0
+offset_right = 912.0
+offset_bottom = 681.0
+texture = ExtResource("7_oq6e2")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Character7" type="TextureRect" parent="Characters"]
+clip_contents = true
+layout_mode = 1
+offset_left = 60.0
+offset_top = 192.0
+offset_right = 448.0
+offset_bottom = 656.0
+texture = ExtResource("10_fbm2o")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character5" type="TextureRect" parent="Characters"]
+clip_contents = true
+layout_mode = 1
+offset_left = 223.0
+offset_top = 209.0
+offset_right = 557.0
+offset_bottom = 610.0
+texture = ExtResource("8_g8xdv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character6" type="TextureRect" parent="Characters"]
+clip_contents = true
+layout_mode = 1
+offset_left = 639.0
+offset_top = 255.0
+offset_right = 1028.0
+offset_bottom = 675.0
+texture = ExtResource("9_6av1h")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BG_FRONT" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_e65dq")
+metadata/_edit_lock_ = true
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Btn1" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 199.0
+offset_right = 609.0
+offset_bottom = 375.0
+focus_mode = 0
+flat = true
+
+[node name="Btn2" type="Button" parent="Buttons"]
+offset_left = 755.0
+offset_top = 174.0
+offset_right = 855.0
+offset_bottom = 274.0
+focus_mode = 0
+flat = true
+
+[node name="Btn3" type="Button" parent="Buttons"]
+offset_left = 927.0
+offset_top = 205.0
+offset_right = 1024.0
+offset_bottom = 320.0
+focus_mode = 0
+flat = true
+
+[node name="Btn4" type="Button" parent="Buttons"]
+offset_left = 638.0
+offset_top = 228.0
+offset_right = 760.0
+offset_bottom = 364.0
+focus_mode = 0
+flat = true
+
+[node name="Btn7" type="Button" parent="Buttons"]
+offset_left = 204.0
+offset_top = 205.0
+offset_right = 329.0
+offset_bottom = 396.0
+focus_mode = 0
+flat = true
+
+[node name="Btn5" type="Button" parent="Buttons"]
+offset_left = 326.0
+offset_top = 230.0
+offset_right = 451.0
+offset_bottom = 372.0
+focus_mode = 0
+flat = true
+
+[node name="Btn6" type="Button" parent="Buttons"]
+offset_left = 754.0
+offset_top = 292.0
+offset_right = 884.0
+offset_bottom = 407.0
+focus_mode = 0
+flat = true
 
 [node name="ExpText" type="ColorRect" parent="."]
 layout_mode = 1
@@ -59,15 +222,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="Continue" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1004.0
-offset_top = 592.0
-offset_right = 1133.0
-offset_bottom = 630.0
-theme = ExtResource("3_lyctx")
-text = "CONTINUAR"
-
 [node name="ResetData" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1006.0
@@ -85,3 +239,12 @@ offset_right = 1135.0
 offset_bottom = 113.0
 theme = ExtResource("3_lyctx")
 text = "ADD PRESTIGE"
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1004.0
+offset_top = 592.0
+offset_right = 1133.0
+offset_bottom = 630.0
+theme = ExtResource("3_lyctx")
+text = "CONTINUAR"

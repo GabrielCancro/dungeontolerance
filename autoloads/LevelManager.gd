@@ -12,7 +12,7 @@ var DUNGEONS = [
 ]
 
 func init_dungeon():
-	level = SaveManager.DATA["prestige"]
+	level = min(DUNGEONS.size()-1,SaveManager.DATA["prestige"])
 	room_index = -1
 	max_rooms = DUNGEONS[level].size()
 	clean_ui()

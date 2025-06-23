@@ -1,14 +1,24 @@
 extends Control
 
 var t = [0,.4,.8]
+var char = [1,2,3,4,5,6,7]
 
 func _ready() -> void:
+	$Button.connect("button_down",set_retraits)
 	update_ui()
 	update_shield()
 	$Shield.modulate.a = 0
+	set_retraits()
+
+func set_retraits():
+	randomize()
+	char.shuffle()
 	$Character1.pivot_offset = $Character1.size * Vector2(.50,.75)
 	$Character2.pivot_offset = $Character1.size * Vector2(.50,.75)
 	$Character3.pivot_offset = $Character1.size * Vector2(.50,.75)
+	$Character1.texture = load("res://assets/characters/c"+str(char[0])+".png")
+	$Character2.texture = load("res://assets/characters/c"+str(char[1])+".png")
+	$Character3.texture = load("res://assets/characters/c"+str(char[2])+".png")
 
 func _process(delta: float) -> void:
 	t[0] += delta*.8
@@ -35,6 +45,6 @@ func update_shield():
 	if (PartyManager.DATA.SH>0):
 		$Shield.modulate.a = 1
 		$Shield/Label.text = str(PartyManager.DATA.SH)
-		Effector.boom($Shield)
+		await Effector.boom($Shield)
 	else: 
-		Effector.fade_down($Shield)
+		await Effector.fade_down($Shield)
