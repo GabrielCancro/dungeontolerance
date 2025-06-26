@@ -8,6 +8,10 @@ var ABILITIES_DATA = {
 	"streng":{"req":{"S":2} },
 }
 
+var CHARACTERS = [
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+]
+
 func _on_click_party_ability(ab_data):
 	DiceManager.set_dice_drag(null)
 	if has_method("ab_"+ab_data.name):

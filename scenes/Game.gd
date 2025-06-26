@@ -13,6 +13,7 @@ func _ready() -> void:
 	GameManager.INPUT_BLOCKER_REF = $CLUI/InputBlocker
 	GameManager.PARTY_REF = $Party
 	GameManager.PARTY_ABILITIES_REF = $Abilities
+	GameManager.DESTINE_REF = $DestinePopup
 	PartyManager.update_abilities_ui()
 	PartyManager.restore_hp()
 	LevelManager.init_dungeon()

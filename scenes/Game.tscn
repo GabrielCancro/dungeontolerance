@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
 [ext_resource type="PackedScene" uid="uid://br312qnlppkft" path="res://nodes/Party.tscn" id="3_g4kob"]
 [ext_resource type="Texture2D" uid="uid://dimpxbwpop3dg" path="res://assets/abilities/ab_shield.png" id="6_g4kob"]
+[ext_resource type="PackedScene" uid="uid://dcr7x3ojlmaqm" path="res://nodes/DestinePopup.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="10_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://clf3wf8j0jaqv" path="res://nodes/Tutorial.tscn" id="12_2rd6h"]
@@ -208,6 +209,9 @@ offset_top = 379.0
 offset_right = 627.0
 offset_bottom = 533.0
 color = Color(0.172549, 0.172549, 0.172549, 0.392157)
+
+[node name="DestinePopup" parent="." instance=ExtResource("8_qy1jj")]
+layout_mode = 1
 
 [node name="Hint" type="CanvasLayer" parent="."]
 

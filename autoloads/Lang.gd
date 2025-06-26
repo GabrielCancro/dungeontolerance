@@ -37,11 +37,16 @@ var TEXTS = {
 	"tuto_end_es":"Bueno bueno.. Mis labios se secan de tanto hablar, me voy a la taberna..",
 
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
-	"info_dungeon_level_es":"EXPEDICION #0    ROOM #1/#2"
+	"info_dungeon_level_es":"EXPEDICION #0    ROOM #1/#2",
+	"some_stats_es":"@STR:#0  @DEX:#1  @MAG:#2",
+	
+	"rogue_es": "picaro"
 }
 
 var REPLACES = {
 	"@STR_es" = "[color="+DiceManager.COLORS["S"]+"]Fuerza[/color]",
+	"@DEX_es" = "[color="+DiceManager.COLORS["D"]+"]Destreza[/color]",
+	"@MAG_es" = "[color="+DiceManager.COLORS["M"]+"]Magia[/color]",
 	"@HP" = "[color=ff0000]HP[/color]",
 	"@PARTY_STR_es" = "[color="+DiceManager.COLORS["S"]+"]Fuerza:"+str(PartyManager.STATS["S"])+"[/color]",
 	"@PARTY_DEX_es" = "[color="+DiceManager.COLORS["D"]+"]Destreza:"+str(PartyManager.STATS["D"])+"[/color]",

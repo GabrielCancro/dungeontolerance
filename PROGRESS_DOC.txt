@@ -1,3 +1,8 @@
+TODO:
+AGREGAR SELECCION DE PERSONAJES Y AGREGACION DE STATS EN TABERNA
+AGREGAR SELECCION DE OBJETOS
+
+
 ENEMIGOS:
 -contrataque: cuando colocas dado recibes daño
 -agresivo: al final del turno causa daño
@@ -7,4 +12,6 @@ ENEMIGOS:
 -efecto paralisis: quita tres de tus dados
 
 HABILIDADES
--
+- 
+
+DESAFIO - En una de sus incursiones, Garran encontro una camara oculta que parece llevar a una especie de salon magico, pero decide retirarse al escuchar susurros y ecos indesifrables. Ve alli y explora la camara oculta.

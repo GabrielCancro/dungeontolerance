@@ -126,6 +126,83 @@ mouse_filter = 2
 texture = ExtResource("11_e65dq")
 metadata/_edit_lock_ = true
 
+[node name="Party" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Character1" type="TextureRect" parent="Party"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -141.0
+offset_right = 250.0
+offset_bottom = 159.0
+grow_vertical = 0
+texture = ExtResource("4_o1pim")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="Party/Character1"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 12.0
+offset_right = 182.0
+offset_bottom = 144.0
+focus_mode = 0
+flat = true
+
+[node name="Character2" type="TextureRect" parent="Party"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 134.0
+offset_top = -141.0
+offset_right = 384.0
+offset_bottom = 159.0
+grow_vertical = 0
+texture = ExtResource("5_e65dq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="Party/Character2"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 12.0
+offset_right = 182.0
+offset_bottom = 144.0
+focus_mode = 0
+flat = true
+
+[node name="Character3" type="TextureRect" parent="Party"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 261.0
+offset_top = -141.0
+offset_right = 511.0
+offset_bottom = 159.0
+grow_vertical = 0
+texture = ExtResource("6_0v3p0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="Party/Character3"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 12.0
+offset_right = 182.0
+offset_bottom = 144.0
+focus_mode = 0
+flat = true
+
 [node name="Buttons" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -141,6 +218,7 @@ focus_mode = 0
 flat = true
 
 [node name="Btn2" type="Button" parent="Buttons"]
+layout_mode = 0
 offset_left = 755.0
 offset_top = 174.0
 offset_right = 855.0
@@ -149,6 +227,7 @@ focus_mode = 0
 flat = true
 
 [node name="Btn3" type="Button" parent="Buttons"]
+layout_mode = 0
 offset_left = 927.0
 offset_top = 205.0
 offset_right = 1024.0
@@ -157,6 +236,7 @@ focus_mode = 0
 flat = true
 
 [node name="Btn4" type="Button" parent="Buttons"]
+layout_mode = 0
 offset_left = 638.0
 offset_top = 228.0
 offset_right = 760.0
@@ -165,6 +245,7 @@ focus_mode = 0
 flat = true
 
 [node name="Btn7" type="Button" parent="Buttons"]
+layout_mode = 0
 offset_left = 204.0
 offset_top = 205.0
 offset_right = 329.0
@@ -173,6 +254,7 @@ focus_mode = 0
 flat = true
 
 [node name="Btn5" type="Button" parent="Buttons"]
+layout_mode = 0
 offset_left = 326.0
 offset_top = 230.0
 offset_right = 451.0
@@ -181,6 +263,7 @@ focus_mode = 0
 flat = true
 
 [node name="Btn6" type="Button" parent="Buttons"]
+layout_mode = 0
 offset_left = 754.0
 offset_top = 292.0
 offset_right = 884.0
@@ -248,3 +331,29 @@ offset_right = 1133.0
 offset_bottom = 630.0
 theme = ExtResource("3_lyctx")
 text = "CONTINUAR"
+
+[node name="HintPanel" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 324.0
+offset_bottom = 151.0
+mouse_filter = 2
+color = Color(0.0994934, 0.158719, 0.0926439, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HintPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

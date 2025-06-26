@@ -8,6 +8,7 @@ var POWERGEM_REF
 var INPUT_BLOCKER_REF
 var PARTY_ABILITIES_REF
 var PARTY_REF
+var DESTINE_REF
 
 var block_input_time = 0
 
