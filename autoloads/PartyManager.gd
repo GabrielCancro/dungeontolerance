@@ -3,9 +3,14 @@ extends Node
 var STATS = {"S":2,"D":1,"M":1}
 var DATA = {"HP":20,"HPM":20, "SH":0}
 var ABILITIES = ["streng"]
+var ITEMS = ["old_axe"]
 
 var ABILITIES_DATA = { 
 	"streng":{"req":{"S":2} },
+}
+
+var ITEMS_DATA = { 
+	"old_axe":{"ch":1, "chm":1, "req":{"S":2} },
 }
 
 var CHARACTERS = [
@@ -16,23 +21,37 @@ func _on_click_party_ability(ab_data):
 	DiceManager.set_dice_drag(null)
 	if has_method("ab_"+ab_data.name):
 		print("call ability "+"ab_"+ab_data.name)
-		call("ab_"+ab_data.name, ab_data)
+		if call("ab_"+ab_data.name, ab_data):
+			for k in ab_data.req.keys(): GameManager.POWERGEM_REF.dec_gems(k,ab_data.req[k])
+			ab_data["node"].dec_charge()
 
 func get_ability_data(code):
 	return ABILITIES_DATA[code].duplicate()
 
+func get_item_data(code):
+	return ITEMS_DATA[code].duplicate()
+
 func ab_streng(ab_data):
 	#CONDITIONS
-	for k in ab_data.req.keys():
-		if !GameManager.POWERGEM_REF.has_gems(k,ab_data.req[k]): return false
 	GameManager.show_target_chosser("dice",["is_S"])
 	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
-	if !dice: return
+	if !dice: return false
 	#EFFECT
 	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-35))
-	for k in ab_data.req.keys(): GameManager.POWERGEM_REF.dec_gems(k,ab_data.req[k])
 	ab_data.node.resalt()
 	dice.set_value(dice.value + 2)
+	return true
+
+func ab_old_axe(ab_data):
+	#CONDITIONS
+	GameManager.show_target_chosser("dice",["is_S"])
+	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
+	if !dice: return false
+	#EFFECT
+	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-35))
+	ab_data.node.resalt()
+	dice.set_value(dice.value * 2)
+	return true
 
 func apply_damage(val,def_data):
 	if DATA.SH>0: 
@@ -81,3 +100,10 @@ func update_abilities_ui():
 	for i in ABILITIES.size():
 		GameManager.PARTY_ABILITIES_REF.get_child(i).set_ability(ABILITIES[i])
 		GameManager.PARTY_ABILITIES_REF.get_child(i).visible = true
+
+func update_items_ui():
+	for pa in GameManager.PARTY_ITEMS_REF.get_children(): 
+		pa.visible = false
+	for i in ABILITIES.size():
+		GameManager.PARTY_ITEMS_REF.get_child(i).set_item(ITEMS[i])
+		GameManager.PARTY_ITEMS_REF.get_child(i).visible = true

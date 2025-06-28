@@ -6,6 +6,8 @@ var text_vars = []
 var TEXTS = {
 	"ab_streng_name_es":"FUERZA BRUTA",
 	"ab_streng_es":"Aumenta en +2 un dado de @STR",
+	"ab_old_axe_name_es":"VIEJA HACHA",
+	"ab_old_axe_es":"Duplica el valor de un dado de @STR.",
 	
 	"def_rat_name_es":"Rata",
 	"def_bat_name_es":"Murcielago",

@@ -32,7 +32,7 @@ func clear_dices():
 	set_dice_drag(null)
 	for dice in GameManager.DICES_REF.get_children():
 		Effector.fade_down_and_free(dice)
-		PartyManager.add_shield(1)
+		if DefianceManager.ALL_DEFIANCES.size()>0: PartyManager.add_shield(1)
 		await GameManager.timeout(.4)
 
 func remove_dices():

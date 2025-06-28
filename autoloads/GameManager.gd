@@ -7,9 +7,10 @@ var DICES_REF
 var POWERGEM_REF
 var INPUT_BLOCKER_REF
 var PARTY_ABILITIES_REF
+var PARTY_ITEMS_REF
 var PARTY_REF
 var DESTINE_REF
-
+var BG_IMAGE_REF
 var block_input_time = 0
 
 func _process(delta: float) -> void:
@@ -28,12 +29,27 @@ func on_end_turn():
 	await timeout(1)
 	await PartyManager.clear_shield()
 	if DefianceManager.ALL_DEFIANCES.size()<=0:
+		await end_room()
 		var result = await LevelManager.next_level()
+		await start_room()
 		if !result: return
-	await PartyManager.roll_party_dices()
-	await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
+	else:
+		await start_turn()
+
+func start_turn():
+	if !LevelManager.is_now_in_destine():
+		await PartyManager.roll_party_dices()
+		await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
 	await timeout(.3)
-	
+
+func start_room():
+	await start_turn()
+
+func end_room():
+	for it in GameManager.PARTY_ITEMS_REF.get_children():
+		it.restore_charges()
+	GameManager.POWERGEM_REF.clear_gems()
+
 func timeout(val):
 	GameManager.block_input(val+0.2)
 	await get_tree().create_timer(val).timeout

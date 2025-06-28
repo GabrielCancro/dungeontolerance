@@ -13,8 +13,11 @@ func _ready() -> void:
 	GameManager.INPUT_BLOCKER_REF = $CLUI/InputBlocker
 	GameManager.PARTY_REF = $Party
 	GameManager.PARTY_ABILITIES_REF = $Abilities
+	GameManager.PARTY_ITEMS_REF = $Items
 	GameManager.DESTINE_REF = $DestinePopup
+	GameManager.BG_IMAGE_REF = $CLBG/TextureRect
 	PartyManager.update_abilities_ui()
+	PartyManager.update_items_ui()
 	PartyManager.restore_hp()
 	LevelManager.init_dungeon()
 	if LevelManager.level==0: tuto_sequence()
@@ -57,6 +60,4 @@ func start_sequence():
 	await GameManager.timeout(1)
 	await GameManager.POWERGEM_REF.show_powergem()
 	await GameManager.timeout(1)
-	await LevelManager.next_level()
-	await GameManager.timeout(2)
-	await PartyManager.roll_party_dices()
+	await GameManager.on_end_turn()

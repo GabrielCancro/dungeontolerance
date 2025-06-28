@@ -24,6 +24,21 @@ grow_vertical = 2
 texture = ExtResource("1_47bv0")
 expand_mode = 2
 
+[node name="Shadow2" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -79.0
+offset_right = 51.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_47bv0")
+expand_mode = 2
+
 [node name="BG" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -31,7 +46,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0313726, 0.0313726, 0.0313726, 0.313726)
+color = Color(0.0313726, 0.0313726, 0.0313726, 0.286275)
 
 [node name="Panel" type="ColorRect" parent="."]
 layout_mode = 1

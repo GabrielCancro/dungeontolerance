@@ -7,8 +7,8 @@ var max_rooms = 0
 var DUNGEONS = [
 	[], # Level 0 - TUTORIAL
 	["BB","BB"], #Level 1 - rooms 2 - Basic enemies
-	["BB","BBB"], #Level 2
-	["BN","BNB","BB"], #Level 3
+	["B","DESTINE","BB","BBB"], #Level 2
+	["BN","BNB","DESTINE","BB"], #Level 3
 ]
 
 func init_dungeon():
@@ -25,13 +25,22 @@ func next_level():
 		SaveManager.save_store_data()
 		GameManager.show_popup("EndExpedition")
 		return false
-	update_ui()
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
-	for def_tag in DUNGEONS[level][room_index]:
-		var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
-		print("ADDING ",key," by tag ",def_tag)
-		_add_defiance(key)
+	await Effector.transition_level_off()
+	update_ui()
+	if DUNGEONS[level][room_index]=="DESTINE":
+		DestineManager.show_destine()
+	else:
+		await Effector.transition_level_on()
+		for def_tag in DUNGEONS[level][room_index]:
+			var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
+			print("ADDING ",key," by tag ",def_tag)
+			_add_defiance(key)
 	return true
+
+func is_now_in_destine():
+	print("IS NOW IN DESTINE ",(DUNGEONS[level][room_index]=="DESTINE"))
+	return (DUNGEONS[level][room_index]=="DESTINE")
 
 func _add_defiance(def_type):
 	if DefianceManager.ALL_DEFIANCES.size()>=5: 

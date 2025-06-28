@@ -5,6 +5,7 @@ func shake(node):
 	var opos = node.position
 	var ocolor = node.modulate
 	node.modulate = Color(1,1,.5)
+	GameManager.timeout(.7)
 	for i in range(10):
 		node.position.x = opos.x + randf_range(-5,5)
 		await get_tree().create_timer(.05).timeout
@@ -70,3 +71,32 @@ func fade_down(node):
 	tw.play()
 	await tw.finished
 	node.position = start_pos
+
+func transition_level_off():
+	var node = GameManager.BG_IMAGE_REF
+	var tw = create_tween()
+	tw.tween_property(node,"position",node.position+Vector2(-100,50),1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(node,"modulate:a",0,1).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(GameManager.DICES_REF,"modulate:a",0,1).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await GameManager.timeout(1.5)
+
+func transition_level_on():
+	var node = GameManager.BG_IMAGE_REF
+	node.position = Vector2(100,-50)
+	var tw = create_tween()
+	tw.tween_property(node,"position",node.position+Vector2(-100,50),1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(node,"modulate:a",1,1).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(GameManager.DICES_REF,"modulate:a",1,1).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await GameManager.timeout(1.5)
+
+func appear_destine(node):
+	var to = node.position
+	node.modulate.a = 0
+	node.position += Vector2(+50,-25)
+	var tw = create_tween()
+	tw.tween_property(node,"position",to,.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(node,"modulate:a",1,.5).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await GameManager.timeout(.7)

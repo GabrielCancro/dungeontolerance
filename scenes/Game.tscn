@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=11 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
 [ext_resource type="PackedScene" uid="uid://br312qnlppkft" path="res://nodes/Party.tscn" id="3_g4kob"]
-[ext_resource type="Texture2D" uid="uid://dimpxbwpop3dg" path="res://assets/abilities/ab_shield.png" id="6_g4kob"]
 [ext_resource type="PackedScene" uid="uid://dcr7x3ojlmaqm" path="res://nodes/DestinePopup.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="10_3xj3m"]
@@ -24,6 +23,14 @@ script = ExtResource("1_g4kob")
 
 [node name="CLBG" type="CanvasLayer" parent="."]
 layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CLBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00581665, 0.00581658, 0.00415262, 1)
 
 [node name="TextureRect" type="TextureRect" parent="CLBG"]
 modulate = Color(0.67069, 0.67069, 0.67069, 1)
@@ -87,60 +94,40 @@ offset_right = 69.0
 offset_bottom = 278.0
 
 [node name="Items" type="HBoxContainer" parent="."]
-modulate = Color(0.538549, 0.436655, 1, 1)
 layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
-offset_right = 516.0
+offset_right = 601.0
 offset_bottom = 76.0
+theme_override_constants/separation = 8
 
-[node name="Item1" type="TextureRect" parent="Items"]
+[node name="PartyAbility1" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
-[node name="Item2" type="TextureRect" parent="Items"]
+[node name="PartyAbility2" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
-[node name="Item3" type="TextureRect" parent="Items"]
+[node name="PartyAbility3" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
-[node name="Item4" type="TextureRect" parent="Items"]
+[node name="PartyAbility4" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
-[node name="Item5" type="TextureRect" parent="Items"]
+[node name="PartyAbility5" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
-[node name="Item6" type="TextureRect" parent="Items"]
+[node name="PartyAbility6" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
-[node name="Item7" type="TextureRect" parent="Items"]
+[node name="PartyAbility7" parent="Items" instance=ExtResource("9_qy1jj")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
-
-[node name="Item8" type="TextureRect" parent="Items"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-texture = ExtResource("6_g4kob")
-expand_mode = 1
 
 [node name="PowerGem" parent="." instance=ExtResource("12_mcffj")]
 offset_left = 350.0
@@ -211,6 +198,7 @@ offset_bottom = 533.0
 color = Color(0.172549, 0.172549, 0.172549, 0.392157)
 
 [node name="DestinePopup" parent="." instance=ExtResource("8_qy1jj")]
+visible = false
 layout_mode = 1
 
 [node name="Hint" type="CanvasLayer" parent="."]

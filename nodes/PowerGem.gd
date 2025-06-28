@@ -59,6 +59,11 @@ func dec_gems(type,val):
 	update_colors()
 	return true
 
+func clear_gems():
+	for g in gems["S"]: gems["OFF"].append(gems["S"].pop_back())
+	for g in gems["D"]: gems["OFF"].append(gems["D"].pop_back())
+	for g in gems["M"]: gems["OFF"].append(gems["M"].pop_back())
+
 func has_gems(type,val=1):
 	var result = (gems[type].size()>=val)
 	if !result: 
