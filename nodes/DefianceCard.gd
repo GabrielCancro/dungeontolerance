@@ -46,10 +46,9 @@ func _on_click():
 		dice.set_value(dice.value-def_data.stats[dice.type])
 		await GameManager.timeout(.7)
 	await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
-	await damage_defiance(dice.value)
 	dice.consume_dice()
-	if is_dead(): await DefianceManager.launch_trigger("on_dead_defiance", def_data)
-	else: await DefianceManager.launch_trigger("on_apply_dice", def_data)
+	await damage_defiance(dice.value)
+	if !is_dead(): await DefianceManager.launch_trigger("on_apply_dice", def_data)
 
 func dec_stats(type,val):
 	def_data.stats[type] -= val
@@ -72,11 +71,16 @@ func heal_defiance(val):
 func damage_defiance(dam):
 	if dam<=0: return
 	def_data.hp -= dam
+	if def_data.hp<=0: $HP.modulate = Color(1,0,0,1)
+	else: $HP.modulate = Color(1,1,1,1)
 	update_ui()
+	GameManager.timeout(.5)
 	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
 	Effector.boom_big($HP)
-	Effector.damage(self)
+	await Effector.damage(self)
 	if def_data.hp <= 0: 
+		$Light.modulate = Color(1,0,0)
+		await DefianceManager.launch_trigger("on_dead_defiance", def_data)
 		DefianceManager.ALL_DEFIANCES.erase(def_data)
 		print("DefianceManager.ALL_DEFIANCES ",DefianceManager.ALL_DEFIANCES)
 		await GameManager.timeout(.5)

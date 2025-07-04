@@ -23,6 +23,8 @@ var TEXTS = {
 	"def_ab_shield_es":"Reduce hasta #2 puntos el valor de cualquier dado de @STR colocado en esta carta. Se restablece al inicio de cada turno.",
 	"def_ab_drainer_name_es":"DRENADOR",
 	"def_ab_drainer_es":"Cada vez que te ataque con exito, recupera +#0HP.",
+	"def_ab_teasure_name_es":"TESORO",
+	"def_ab_teasure_es":"Al resolver esta carta obtendras un objeto.",
 	
 	"tuto_welcome_es":"Bienvenidos aventureros! Les explicare las cosas basicas que todo aficionado deberia conocer antes de adentrarse en una mazmorra, hay muchos peligros alli.",
 	"tuto_party_es":"En la parte inferior veras las estadisticas de tu grupo. En cada turno lanzas un dado por cada punto de caracteristica que tengas.",
@@ -37,6 +39,14 @@ var TEXTS = {
 	"tuto_power1_es":"Para usar habilidades como esta necesitas PODER!\n Hay muchas formas de conseguir poder, pero principalmente lo haras con tu foco de poder.",
 	"tuto_power2_es":"Arroja algunos dados en tu foco y veras como se consigue el poder. Con eso podras usar tus habilidades.",
 	"tuto_end_es":"Bueno bueno.. Mis labios se secan de tanto hablar, me voy a la taberna..",
+	
+	"tuto_tabern1_es":"Bien hecho, mereces un descanso en la taberna! Aqui podras reponerte y prepararte para tu proxima expedicion.",
+	"tuto_tabern2_es":"Este es tu indicador de prestigio, cada vez que completes una expedicion aumentara tu reputacion!",
+	"tuto_tabern3_es":"Esa reputacion te servira para determinar cuantos objetos se te permitira llevar a tu proxima expedicion.",
+	"tuto_tabern4_es":"Siempre esta llegando gente nueva a la taberna, seguramente a algunos les gustaria ir contigo a las viejas ruinas.",
+	"tuto_tabern5_es":"Combina tu grupo de tres aventureros como mas te convenga, cada personaje aporta sus propios stats y habilidades al grupo.",
+	"tuto_tabern6_es":"Cuendo estes listo, puedes viajar a la ruina por este sendero.",
+	"tuto_tabern7_es":"Muy bien!, Tengo mucho que limpiar alli atras, disfruta tu estadia!",
 
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
 	"info_dungeon_level_es":"EXPEDICION #0    ROOM #1/#2",

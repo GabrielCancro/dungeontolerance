@@ -7,7 +7,7 @@ var max_rooms = 0
 var DUNGEONS = [
 	[], # Level 0 - TUTORIAL
 	["BB","BB"], #Level 1 - rooms 2 - Basic enemies
-	["B","DESTINE","BB","BBB"], #Level 2
+	["BT","DESTINE","BB","BBB"], #Level 2
 	["BN","BNB","DESTINE","BB"], #Level 3
 ]
 
@@ -39,6 +39,7 @@ func next_level():
 	return true
 
 func is_now_in_destine():
+	if room_index >=DUNGEONS[level].size(): return false
 	print("IS NOW IN DESTINE ",(DUNGEONS[level][room_index]=="DESTINE"))
 	return (DUNGEONS[level][room_index]=="DESTINE")
 

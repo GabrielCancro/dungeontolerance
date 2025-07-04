@@ -30,6 +30,7 @@ func _input(event: InputEvent) -> void:
 
 func clear_dices():
 	set_dice_drag(null)
+	print("CLEAR DICES!! ",GameManager.DICES_REF.get_children().size())
 	for dice in GameManager.DICES_REF.get_children():
 		Effector.fade_down_and_free(dice)
 		if DefianceManager.ALL_DEFIANCES.size()>0: PartyManager.add_shield(1)

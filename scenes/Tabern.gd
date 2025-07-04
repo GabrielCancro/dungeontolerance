@@ -1,14 +1,17 @@
 extends Control
 
 var t = {}
-var off_color = Color(.6,.6,.6,1)
+var off_color = Color(.7,.7,.7,1)
 var selected = [null,null,null]
+var selected_items = []
 
 func _ready() -> void:
-	$Continue.connect("button_down",_on_click)
+	#SaveManager.DATA["prestige"]=1
+	$Continue.connect("button_down",_on_click_continue)
 	$ResetData.connect("button_down",_on_click_reset)
 	$AddPrestige.connect("button_down",_on_click_add_prestige)
 	$ExpText/Label.text = "PRESTIGIO "+str(SaveManager.DATA["prestige"])
+	$PR/Label.text = str(floor(SaveManager.DATA["prestige"]))
 	$ExpText/Label.text += "\nEXPEDITION "+str(SaveManager.DATA["expedition"])
 	HintManager.init($HintPanel)
 	update_selected()
@@ -22,9 +25,22 @@ func _ready() -> void:
 		$Buttons.get_child(i).connect("button_down",_on_click_character.bind(c))
 	for ch in $Party.get_children():
 		ch.modulate = off_color
-		ch.get_node("Button").connect("mouse_entered",_on_hover.bind(ch,true))
-		ch.get_node("Button").connect("mouse_exited",_on_hover.bind(ch,false))
-		ch.get_node("Button").connect("button_down",_on_click_character.bind(ch))
+		$PartyButtons.get_child(ch.get_index()).connect("mouse_entered",_on_hover.bind(ch,true))
+		$PartyButtons.get_child(ch.get_index()).connect("mouse_exited",_on_hover.bind(ch,false))
+		$PartyButtons.get_child(ch.get_index()).connect("button_down",_on_click_character.bind(ch))
+	
+	update_items_ui()
+	for it in $Items.get_children(): 
+		it.connect("on_click_tabern_item",_on_item_click)
+	
+	if SaveManager.DATA["prestige"]==1:
+		await $Tutorial.show_tuto("tabern1")
+		await $Tutorial.show_tuto("tabern2")
+		await $Tutorial.show_tuto("tabern3")
+		await $Tutorial.show_tuto("tabern4")
+		await $Tutorial.show_tuto("tabern5")
+		await $Tutorial.show_tuto("tabern6")
+		await $Tutorial.show_tuto("tabern7")
 
 func _process(delta: float) -> void:
 	for c in $Characters.get_children():
@@ -47,7 +63,13 @@ func _on_hover(node,val):
 		node.modulate = off_color
 		HintManager.set_text()
 
-func _on_click():
+func _on_click_continue():
+	PartyManager.ITEMS.clear()
+	for it in selected_items: PartyManager.ITEMS.append(it.ab_data.name)
+	PartyManager.PARTY_CHARACTERS.clear()
+	for ch in selected: 
+		print(ch.get_name())
+		PartyManager.PARTY_CHARACTERS.append(int(str(ch.get_name())[-1]))
 	GameManager.change_scene("Game")
 
 func _on_click_reset():
@@ -60,9 +82,17 @@ func _on_click_add_prestige():
 func update_selected():
 	for c in $Characters.get_children(): 
 		if !c in selected: c.modulate = off_color
+		$Continue.disabled = false
+		$Continue.modulate.a = 1
 	for ch in $Party.get_children():
-		ch.visible = selected[ch.get_index()]!=null
-		if selected[ch.get_index()]: ch.texture = selected[ch.get_index()].texture
+		$PartyButtons.get_child(ch.get_index()).visible = (selected[ch.get_index()]!=null)
+		if selected[ch.get_index()]: 
+			ch.texture = selected[ch.get_index()].texture
+		else: 
+			ch.texture = load("res://assets/characters/siluet.png")
+			$Continue.disabled = true
+			$Continue.modulate.a = .6
+		
 
 func _on_click_character(ch):
 	if ch in $Party.get_children():
@@ -75,7 +105,24 @@ func _on_click_character(ch):
 		
 	for i in 3:
 		if !selected[i]:
-			ch.modulate = Color(0,0,0,1)
+			ch.modulate = Color(.1,.1,.1,1)
 			selected[i] = ch
 			update_selected()
 			return
+
+func update_items_ui():
+	for pa in $Items.get_children(): 
+		pa.visible = false
+		pa.is_tabern = true
+	for i in PartyManager.ITEMS_UNLOCKED.size():
+		$Items.get_child(i).set_item(PartyManager.ITEMS_UNLOCKED[i])
+		$Items.get_child(i).visible = true
+		$Items.get_child(i).set_selected( $Items.get_child(i) in selected_items )
+
+func _on_item_click(item_node):
+	print("NODE IS ",item_node.name)
+	if item_node in selected_items:
+		selected_items.erase(item_node)
+	else: 
+		selected_items.append(item_node)
+	update_items_ui()

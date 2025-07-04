@@ -1,7 +1,7 @@
 extends Node
 
 # triggercodes: on_apply_dice
-var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice"]
+var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice", "on_dead_defiance"]
 var ALL_DEFIANCES = []
 const DEFIANCES = {
 	"goblin":{  "hp":8, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
@@ -10,6 +10,8 @@ const DEFIANCES = {
 		"abs":[ "aggressive*2" ] }, #"shield*2",
 	"bat":{     "hp":5 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
 		"abs":[ "drainer*1","aggressive*2" ] },
+	"chest":{     "hp":5 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
+		"abs":[ "teasure*1" ] },
 }
 
 func get_defiance_data(def_code,level=1):
@@ -52,7 +54,8 @@ func launch_trigger_to_all_defiances(launcher):
 	await GameManager.timeout(.2)
 
 func launch_trigger(launcher, def_card):
-	if !is_instance_valid(def_card.node) or def_card.node.is_dead(): return
+	if !is_instance_valid(def_card.node): return
+	if def_card.node.is_dead() and launcher!="on_dead_defiance": return
 	# on_apply_dice on_pre_appliy_dice
 	for ab in def_card["abs"]:
 		if has_method(ab.name+"_"+launcher): 
@@ -109,3 +112,13 @@ func drainer_on_end_defiance_attack(ab_data, def_card):
 	await GameManager.timeout(.5)
 	def_card.node.heal_defiance(1)
 	await GameManager.timeout(.5)
+
+func teasure_on_dead_defiance(ab_data, def_card):
+	await GameManager.timeout(.7)
+	randomize()
+	var keys = PartyManager.ITEMS_DATA.keys()
+	keys.shuffle()
+	var texture = load("res://assets/abilities/ab_"+keys[0]+".png")
+	Effector.texture_from_to(texture,ab_data.node.global_position+ab_data.node.size/2+Vector2(0,-100),Vector2(25,5),Vector2(1,1),Vector2(.5,.5))
+	await GameManager.timeout(1)
+	PartyManager.add_item(keys[0])

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6hiu6io8aurw"]
+[gd_scene load_steps=17 format=3 uid="uid://b6hiu6io8aurw"]
 
 [ext_resource type="Script" uid="uid://dvbsntqikvrvf" path="res://scenes/Tabern.gd" id="1_lyctx"]
 [ext_resource type="Texture2D" uid="uid://73hs6emblaqu" path="res://assets/backgrounds/bg_tabern.jpg" id="2_nfy2w"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="3_lyctx"]
+[ext_resource type="Texture2D" uid="uid://b56c4aknscekj" path="res://assets/prestige_ico.png" id="3_oq6e2"]
 [ext_resource type="Texture2D" uid="uid://dl5fh6xa1iwpe" path="res://assets/characters/c1.png" id="4_o1pim"]
 [ext_resource type="Texture2D" uid="uid://dbsnkammcgljy" path="res://assets/characters/c2.png" id="5_e65dq"]
 [ext_resource type="Texture2D" uid="uid://y7e30ptvyj3y" path="res://assets/characters/c3.png" id="6_0v3p0"]
@@ -11,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://chxs4s1sq2x11" path="res://assets/characters/c6.png" id="9_6av1h"]
 [ext_resource type="Texture2D" uid="uid://coet4r7m8vxav" path="res://assets/characters/c7.png" id="10_fbm2o"]
 [ext_resource type="Texture2D" uid="uid://d3hnu1xaed60d" path="res://assets/backgrounds/bg_tabern_front.png" id="11_e65dq"]
+[ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="12_0v3p0"]
+[ext_resource type="Texture2D" uid="uid://b75yeh0s10bs1" path="res://assets/ruins_btn.png" id="13_6av1h"]
+[ext_resource type="PackedScene" uid="uid://clf3wf8j0jaqv" path="res://nodes/Tutorial.tscn" id="14_g8xdv"]
 
 [sub_resource type="SystemFont" id="SystemFont_nfy2w"]
 subpixel_positioning = 0
@@ -33,6 +37,36 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_nfy2w")
 
+[node name="PR" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 2.0
+offset_right = 124.0
+offset_bottom = 103.0
+texture = ExtResource("3_oq6e2")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="PR"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 39.0
+offset_right = -14.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.745098, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_nfy2w")
+theme_override_font_sizes/font_size = 31
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
 [node name="Characters" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -51,6 +85,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Character2" type="TextureRect" parent="Characters"]
+visible = false
 layout_mode = 1
 offset_left = 716.0
 offset_top = 170.0
@@ -61,6 +96,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Character3" type="TextureRect" parent="Characters"]
+visible = false
 layout_mode = 1
 offset_left = 863.0
 offset_top = 184.0
@@ -114,94 +150,6 @@ offset_bottom = 675.0
 texture = ExtResource("9_6av1h")
 expand_mode = 1
 stretch_mode = 4
-
-[node name="BG_FRONT" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("11_e65dq")
-metadata/_edit_lock_ = true
-
-[node name="Party" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="Character1" type="TextureRect" parent="Party"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -141.0
-offset_right = 250.0
-offset_bottom = 159.0
-grow_vertical = 0
-texture = ExtResource("4_o1pim")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Button" type="Button" parent="Party/Character1"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 182.0
-offset_bottom = 144.0
-focus_mode = 0
-flat = true
-
-[node name="Character2" type="TextureRect" parent="Party"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 134.0
-offset_top = -141.0
-offset_right = 384.0
-offset_bottom = 159.0
-grow_vertical = 0
-texture = ExtResource("5_e65dq")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Button" type="Button" parent="Party/Character2"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 182.0
-offset_bottom = 144.0
-focus_mode = 0
-flat = true
-
-[node name="Character3" type="TextureRect" parent="Party"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 261.0
-offset_top = -141.0
-offset_right = 511.0
-offset_bottom = 159.0
-grow_vertical = 0
-texture = ExtResource("6_0v3p0")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Button" type="Button" parent="Party/Character3"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 12.0
-offset_right = 182.0
-offset_bottom = 144.0
-focus_mode = 0
-flat = true
 
 [node name="Buttons" type="Control" parent="."]
 anchors_preset = 0
@@ -271,6 +219,102 @@ offset_bottom = 407.0
 focus_mode = 0
 flat = true
 
+[node name="BG_FRONT" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_e65dq")
+metadata/_edit_lock_ = true
+
+[node name="Party" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Character1" type="TextureRect" parent="Party"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -141.0
+offset_right = 250.0
+offset_bottom = 159.0
+grow_vertical = 0
+texture = ExtResource("4_o1pim")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character2" type="TextureRect" parent="Party"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 134.0
+offset_top = -141.0
+offset_right = 384.0
+offset_bottom = 159.0
+grow_vertical = 0
+texture = ExtResource("5_e65dq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Character3" type="TextureRect" parent="Party"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 261.0
+offset_top = -141.0
+offset_right = 511.0
+offset_bottom = 159.0
+grow_vertical = 0
+texture = ExtResource("6_0v3p0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PartyButtons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Button1" type="Button" parent="PartyButtons"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -129.0
+offset_right = 182.0
+offset_bottom = 3.0
+focus_mode = 0
+flat = true
+
+[node name="Button2" type="Button" parent="PartyButtons"]
+layout_mode = 0
+offset_left = 206.0
+offset_top = -129.0
+offset_right = 316.0
+offset_bottom = 3.0
+focus_mode = 0
+flat = true
+
+[node name="Button3" type="Button" parent="PartyButtons"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = -129.0
+offset_right = 443.0
+offset_bottom = 3.0
+focus_mode = 0
+flat = true
+
 [node name="ExpText" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -325,12 +369,23 @@ text = "ADD PRESTIGE"
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1004.0
-offset_top = 592.0
+offset_left = 906.0
+offset_top = 503.0
 offset_right = 1133.0
-offset_bottom = 630.0
+offset_bottom = 628.0
+focus_mode = 0
 theme = ExtResource("3_lyctx")
-text = "CONTINUAR"
+
+[node name="BG2" type="TextureRect" parent="Continue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_6av1h")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="HintPanel" type="ColorRect" parent="."]
 visible = false
@@ -357,3 +412,78 @@ text = "aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red]
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Items" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 113.0
+offset_right = 970.0
+offset_bottom = 173.0
+theme_override_constants/separation = 8
+
+[node name="PartyAbility1" parent="Items" instance=ExtResource("12_0v3p0")]
+visible = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility2" parent="Items" instance=ExtResource("12_0v3p0")]
+visible = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility3" parent="Items" instance=ExtResource("12_0v3p0")]
+visible = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility4" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility5" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility6" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility7" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="TutoPoints" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Table" type="Control" parent="TutoPoints"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 292.0
+offset_top = 329.0
+offset_right = 804.0
+offset_bottom = 508.0
+mouse_filter = 2
+
+[node name="Characters" type="Control" parent="TutoPoints"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 179.0
+offset_top = 182.0
+offset_right = 934.0
+offset_bottom = 442.0
+mouse_filter = 2
+
+[node name="Party" type="Control" parent="TutoPoints"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 39.0
+offset_top = 477.0
+offset_right = 491.0
+offset_bottom = 651.0
+mouse_filter = 2
+
+[node name="Tutorial" parent="." instance=ExtResource("14_g8xdv")]
+visible = false
+layout_mode = 1

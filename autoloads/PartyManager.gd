@@ -3,14 +3,20 @@ extends Node
 var STATS = {"S":2,"D":1,"M":1}
 var DATA = {"HP":20,"HPM":20, "SH":0}
 var ABILITIES = ["streng"]
-var ITEMS = ["old_axe"]
-
+var ITEMS = ["old_axe","sword","rope","crossbow","gold_ring","iron_helm"]
+var ITEMS_UNLOCKED = ["old_axe","sword","rope","crossbow","gold_ring","iron_helm"]
+var PARTY_CHARACTERS = [null,null,null]
 var ABILITIES_DATA = { 
 	"streng":{"req":{"S":2} },
 }
 
 var ITEMS_DATA = { 
 	"old_axe":{"ch":1, "chm":1, "req":{"S":2} },
+	"sword":{"ch":1, "chm":1, "req":{} },
+	"rope":{"ch":1, "chm":1, "req":{} },
+	"crossbow":{"ch":1, "chm":1, "req":{} },
+	"gold_ring":{"ch":1, "chm":1, "req":{} },
+	"iron_helm":{"ch":1, "chm":1, "req":{} },
 }
 
 var CHARACTERS = [
@@ -21,7 +27,8 @@ func _on_click_party_ability(ab_data):
 	DiceManager.set_dice_drag(null)
 	if has_method("ab_"+ab_data.name):
 		print("call ability "+"ab_"+ab_data.name)
-		if call("ab_"+ab_data.name, ab_data):
+		var result = await call("ab_"+ab_data.name, ab_data)
+		if result:
 			for k in ab_data.req.keys(): GameManager.POWERGEM_REF.dec_gems(k,ab_data.req[k])
 			ab_data["node"].dec_charge()
 
@@ -81,10 +88,9 @@ func add_shield(val):
 	await GameManager.PARTY_REF.update_shield()
 
 func clear_shield():
-	if DATA.SH>0: 
-		DATA.SH = 0
-		GameManager.PARTY_REF.update_shield()
-		GameManager.timeout(.5)
+	DATA.SH = 0
+	GameManager.PARTY_REF.update_shield()
+	GameManager.timeout(.5)
 
 func roll_party_dices():
 	print("ROLLING ",STATS)
@@ -104,6 +110,11 @@ func update_abilities_ui():
 func update_items_ui():
 	for pa in GameManager.PARTY_ITEMS_REF.get_children(): 
 		pa.visible = false
-	for i in ABILITIES.size():
+	for i in ITEMS.size():
 		GameManager.PARTY_ITEMS_REF.get_child(i).set_item(ITEMS[i])
 		GameManager.PARTY_ITEMS_REF.get_child(i).visible = true
+
+func add_item(code):
+	ITEMS.append(code)
+	update_items_ui()
+	GameManager.PARTY_ITEMS_REF.get_child(ITEMS.size()-1).resalt()

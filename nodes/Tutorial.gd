@@ -22,6 +22,14 @@ func show_tuto(code):
 	if code == "power2": node = GameManager.POWERGEM_REF
 	if code == "shield": node = GameManager.PARTY_REF.get_node("Shield")
 	if code == "end": node = GameManager.PARTY_REF
+	
+	if code == "tabern1": node = get_node("/root/Tabern/TutoPoints/Table")
+	if code == "tabern2": node = get_node("/root/Tabern/PR")
+	if code == "tabern3": node = get_node("/root/Tabern/Items").get_child(0)
+	if code == "tabern4": node = get_node("/root/Tabern/TutoPoints/Characters")
+	if code == "tabern5": node = get_node("/root/Tabern/TutoPoints/Party")
+	if code == "tabern6": node = get_node("/root/Tabern/Continue")
+	if code == "tabern7": node = get_node("/root/Tabern/TutoPoints/Table")
 
 	$Cutter.fit_node(node)
 	var hint_pos = node.global_position + Vector2(node.size.x/2-$HintPanel.size.x/2,-$HintPanel.size.y-30)

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bmgovp3cwrwrg" path="res://assets/full_white_point.png" id="3_ran1b"]
 
 [node name="PartyAbility" type="Control"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 3
 anchors_preset = 0
@@ -91,6 +92,53 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 color = Color(0.215925, 0.226833, 0.215925, 1)
+
+[node name="BorderSelected" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="cr1" type="ColorRect" parent="BorderSelected"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.873853, 0.985835, 0.589436, 1)
+
+[node name="cr2" type="ColorRect" parent="BorderSelected"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.873853, 0.985835, 0.589436, 1)
+
+[node name="cr3" type="ColorRect" parent="BorderSelected"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0.873853, 0.985835, 0.589436, 1)
+
+[node name="cr4" type="ColorRect" parent="BorderSelected"]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.873853, 0.985835, 0.589436, 1)
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

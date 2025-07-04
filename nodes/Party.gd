@@ -1,7 +1,6 @@
 extends Control
 
 var t = [0,.4,.8]
-var char = [1,2,3,4,5,6,7]
 
 func _ready() -> void:
 	$Button.connect("button_down",set_retraits)
@@ -11,14 +10,12 @@ func _ready() -> void:
 	set_retraits()
 
 func set_retraits():
-	randomize()
-	char.shuffle()
 	$Character1.pivot_offset = $Character1.size * Vector2(.50,.75)
-	$Character2.pivot_offset = $Character1.size * Vector2(.50,.75)
-	$Character3.pivot_offset = $Character1.size * Vector2(.50,.75)
-	$Character1.texture = load("res://assets/characters/c"+str(char[0])+".png")
-	$Character2.texture = load("res://assets/characters/c"+str(char[1])+".png")
-	$Character3.texture = load("res://assets/characters/c"+str(char[2])+".png")
+	$Character2.pivot_offset = $Character2.size * Vector2(.50,.75)
+	$Character3.pivot_offset = $Character3.size * Vector2(.50,.75)
+	$Character1.texture = load("res://assets/characters/c"+str(PartyManager.PARTY_CHARACTERS[1])+".png")
+	$Character2.texture = load("res://assets/characters/c"+str(PartyManager.PARTY_CHARACTERS[2])+".png")
+	$Character3.texture = load("res://assets/characters/c"+str(PartyManager.PARTY_CHARACTERS[0])+".png")
 
 func _process(delta: float) -> void:
 	t[0] += delta*.8

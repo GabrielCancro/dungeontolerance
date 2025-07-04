@@ -1,6 +1,8 @@
 extends Control
 
+var is_tabern = false
 var ab_data = {}
+signal on_click_tabern_item(item)
 
 func _ready() -> void:
 	$Button.connect("mouse_entered",_on_hover.bind(true))
@@ -33,6 +35,9 @@ func _on_hover(val):
 	else: HintManager.set_text()
 
 func _on_click():
+	if is_tabern: 
+		emit_signal("on_click_tabern_item",self)
+		return
 	#CHECK CHARGE
 	if "ch" in ab_data and ab_data["ch"]<=0: 
 		Effector.shake(get_node("TextureRect"))
@@ -65,3 +70,6 @@ func restore_charges():
 
 func resalt():
 	Effector.boom(self)
+
+func set_selected(val):
+	$BorderSelected.visible = val

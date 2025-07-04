@@ -72,6 +72,15 @@ func fade_down(node):
 	await tw.finished
 	node.position = start_pos
 
+func fade_up(node):
+	var end_pos = node.position
+	node.position.y += 25
+	var tw = create_tween()
+	tw.tween_property(node,"position:y",end_pos.y,.3).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(node,"modulate:a",1,.3).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await tw.finished
+
 func transition_level_off():
 	var node = GameManager.BG_IMAGE_REF
 	var tw = create_tween()
@@ -100,3 +109,24 @@ func appear_destine(node):
 	tw.parallel().tween_property(node,"modulate:a",1,.5).set_ease(Tween.EASE_OUT)
 	tw.play()
 	await GameManager.timeout(.7)
+
+func texture_from_to(_texture,_start_pos,_end_pos,_start_scale,_end_scale):
+	var node = TextureRect.new()
+	node.texture = _texture
+	node.pivot_offset = node.size/2
+	node.position = _start_pos-node.size/2
+	node.scale = _start_scale*0.7
+	node.modulate.a = 0
+	GameManager.GAME_SCENE_REF.add_child(node)
+	var tw = create_tween()
+	tw.tween_property(node,"scale",_start_scale,.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(node,"modulate:a",1,1).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await tw.finished
+	tw = create_tween()
+	tw.tween_property(node,"position",_end_pos,.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(node,"scale",_end_scale,.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(node,"modulate:a",0,1).set_ease(Tween.EASE_OUT)
+	tw.play()
+	await tw.finished
+	node.queue_free() 
