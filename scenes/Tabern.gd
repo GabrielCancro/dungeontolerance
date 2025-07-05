@@ -92,7 +92,17 @@ func update_selected():
 			ch.texture = load("res://assets/characters/siluet.png")
 			$Continue.disabled = true
 			$Continue.modulate.a = .6
-		
+	PartyManager.STATS["S"]=0
+	PartyManager.STATS["D"]=0
+	PartyManager.STATS["M"]=0
+	for ch in $Party.get_children():
+		if selected[ch.get_index()]: 
+			var index = int(str(selected[ch.get_index()])[-1])
+			PartyManager.STATS["S"]+=PartyManager.CHARACTERS[index]["stats"][0]
+			PartyManager.STATS["D"]+=PartyManager.CHARACTERS[index]["stats"][1]
+			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
+	Lang.set_text_vars(PartyManager.get_stats_array())
+	$Stats/RichTextLabel.text = Lang.get_text("some_stats")
 
 func _on_click_character(ch):
 	if ch in $Party.get_children():

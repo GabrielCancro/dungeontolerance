@@ -26,7 +26,8 @@ func _process(delta: float) -> void:
 	$Character3.rotation_degrees = sin(t[2])*3
 
 func update_ui():
-	$Stats/RichTextLabel.text = Lang.get_text("all_party_stats")
+	Lang.set_text_vars(PartyManager.get_stats_array())
+	$Stats/RichTextLabel.text = Lang.get_text("some_stats")
 	$HP_UI.update_hp()
 
 func damage_fx():

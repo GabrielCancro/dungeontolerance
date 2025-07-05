@@ -21,6 +21,12 @@ var ITEMS_DATA = {
 
 var CHARACTERS = [
 	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
 ]
 
 func _on_click_party_ability(ab_data):
@@ -118,3 +124,6 @@ func add_item(code):
 	ITEMS.append(code)
 	update_items_ui()
 	GameManager.PARTY_ITEMS_REF.get_child(ITEMS.size()-1).resalt()
+
+func get_stats_array():
+	return [STATS["S"],STATS["D"],STATS["M"]]

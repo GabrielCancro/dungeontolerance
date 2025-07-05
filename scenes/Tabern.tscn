@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6hiu6io8aurw"]
+[gd_scene load_steps=18 format=3 uid="uid://b6hiu6io8aurw"]
 
 [ext_resource type="Script" uid="uid://dvbsntqikvrvf" path="res://scenes/Tabern.gd" id="1_lyctx"]
 [ext_resource type="Texture2D" uid="uid://73hs6emblaqu" path="res://assets/backgrounds/bg_tabern.jpg" id="2_nfy2w"]
@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://clf3wf8j0jaqv" path="res://nodes/Tutorial.tscn" id="14_g8xdv"]
 
 [sub_resource type="SystemFont" id="SystemFont_nfy2w"]
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_6av1h"]
 subpixel_positioning = 0
 
 [node name="Tabern" type="Control"]
@@ -235,6 +238,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -14.0
+offset_right = -2.0
+offset_bottom = -14.0
 grow_vertical = 0
 mouse_filter = 2
 
@@ -285,6 +292,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -14.0
+offset_right = -2.0
+offset_bottom = -14.0
 grow_vertical = 0
 mouse_filter = 2
 
@@ -369,10 +380,10 @@ text = "ADD PRESTIGE"
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
-offset_left = 906.0
-offset_top = 503.0
-offset_right = 1133.0
-offset_bottom = 628.0
+offset_left = 902.0
+offset_top = 501.0
+offset_right = 1129.0
+offset_bottom = 626.0
 focus_mode = 0
 theme = ExtResource("3_lyctx")
 
@@ -388,10 +399,11 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="HintPanel" type="ColorRect" parent="."]
-visible = false
 layout_mode = 0
-offset_right = 324.0
-offset_bottom = 151.0
+offset_left = 543.0
+offset_top = 518.0
+offset_right = 867.0
+offset_bottom = 641.0
 mouse_filter = 2
 color = Color(0.0994934, 0.158719, 0.0926439, 1)
 
@@ -478,12 +490,39 @@ mouse_filter = 2
 [node name="Party" type="Control" parent="TutoPoints"]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 39.0
-offset_top = 477.0
-offset_right = 491.0
-offset_bottom = 651.0
+offset_left = 36.0
+offset_top = 476.0
+offset_right = 488.0
+offset_bottom = 650.0
 mouse_filter = 2
 
 [node name="Tutorial" parent="." instance=ExtResource("14_g8xdv")]
 visible = false
 layout_mode = 1
+
+[node name="Stats" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 606.0
+offset_right = 408.0
+offset_bottom = 642.0
+color = Color(0.103744, 0.103744, 0.103744, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_6av1h")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "FUERZA:1   DESTREZA:2   MAGIA:4  "
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

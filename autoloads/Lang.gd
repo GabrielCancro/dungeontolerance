@@ -50,7 +50,7 @@ var TEXTS = {
 
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
 	"info_dungeon_level_es":"EXPEDICION #0    ROOM #1/#2",
-	"some_stats_es":"@STR:#0  @DEX:#1  @MAG:#2",
+	"some_stats_es":"[color="+DiceManager.COLORS["S"]+"]@STR:#0[/color]  [color="+DiceManager.COLORS["D"]+"]@DEX:#1[/color]  [color="+DiceManager.COLORS["M"]+"]@MAG:#2[/color]",
 	
 	"rogue_es": "picaro"
 }
