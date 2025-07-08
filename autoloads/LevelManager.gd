@@ -28,6 +28,7 @@ func next_level():
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
 	await Effector.transition_level_off()
 	update_ui()
+	DUNGEONS[level][room_index]="C"
 	if DUNGEONS[level][room_index]=="DESTINE":
 		DestineManager.show_destine()
 	else:

@@ -12,6 +12,8 @@ const DEFIANCES = {
 		"abs":[ "drainer*1","aggressive*2" ] },
 	"chest":{     "hp":5 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
 		"abs":[ "teasure*1" ] },
+	"arrow_trap":{"hp":5 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
+		"abs":[ "activation*5", "trap_damage*4" ] },
 }
 
 func get_defiance_data(def_code,level=1):
@@ -44,6 +46,7 @@ func get_def_ability_data(ab_code,ab_level):
 	var ab_data = {"name":ab_code, "level":ab_level}
 	if ab_code=="counterattack": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="aggressive": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
+	if ab_code=="trap_damage": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="activation": ab_data.merge({"count":0,"max_count":max(2,7-ab_level)})
 	if ab_code=="shield": ab_data.merge({"count":ab_level,"max_count":ab_level})
 	return ab_data
@@ -122,3 +125,19 @@ func teasure_on_dead_defiance(ab_data, def_card):
 	Effector.texture_from_to(texture,ab_data.node.global_position+ab_data.node.size/2+Vector2(0,-100),Vector2(25,5),Vector2(1,1),Vector2(.5,.5))
 	await GameManager.timeout(1)
 	PartyManager.add_item(keys[0])
+
+func activation_on_end_turn(ab_data, def_card):
+	await GameManager.timeout(.7)
+	ab_data.count = min(ab_data.count+1,ab_data.max_count)
+	ab_data.node.resalt()
+	def_card.node.update_abs()
+	await GameManager.timeout(.7)
+	if ab_data.count==ab_data.max_count:
+		launch_trigger("on_activate",def_card)
+
+func trap_damage_on_activate(ab_data, def_card):
+	ab_data.node.resalt()
+	await GameManager.timeout(.5)
+	randomize()
+	await PartyManager.apply_damage(randi_range(ab_data.min,ab_data.max),def_card)
+	await GameManager.timeout(.8)

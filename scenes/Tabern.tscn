@@ -399,15 +399,42 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="HintPanel" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 543.0
-offset_top = 518.0
-offset_right = 867.0
-offset_bottom = 641.0
+offset_right = 312.0
+offset_bottom = 112.0
 mouse_filter = 2
 color = Color(0.0994934, 0.158719, 0.0926439, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HintPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/color]aasd [color=red] asd[/"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharDataPanel" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 517.0
+offset_top = 500.0
+offset_right = 861.0
+offset_bottom = 630.0
+mouse_filter = 2
+color = Color(0.0994934, 0.158719, 0.0926439, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CharDataPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

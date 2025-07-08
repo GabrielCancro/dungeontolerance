@@ -12,6 +12,7 @@ var TEXTS = {
 	"def_rat_name_es":"Rata",
 	"def_bat_name_es":"Murcielago",
 	"def_goblin_name_es":"Trasgo",
+	"def_arrow_trap_name_es":"Trampa de Flechas",
 	
 	"def_ab_aggressive_name_es":"AGRESIVO",
 	"def_ab_aggressive_es":"Te atacara al finalizar el turno causando entre -#1HP y -#2HP.",
@@ -19,6 +20,8 @@ var TEXTS = {
 	"def_ab_counterattack_es":"Cada vez que colocas un dado en esta carta recibes entre -#1HP y -#2HP",
 	"def_ab_activation_name_es":"ACTIVACION",
 	"def_ab_activation_es":"Este temporizador avanza cada turno, al completarse se desencadenan sus efectos.",
+	"def_ab_trap_damage_name_es":"DANIO MASIVO",
+	"def_ab_trap_damage_es":"Al activarse aplica entre -#1HP y -#2HP.",
 	"def_ab_shield_name_es":"ESCUDO",
 	"def_ab_shield_es":"Reduce hasta #2 puntos el valor de cualquier dado de @STR colocado en esta carta. Se restablece al inicio de cada turno.",
 	"def_ab_drainer_name_es":"DRENADOR",

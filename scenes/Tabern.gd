@@ -14,6 +14,7 @@ func _ready() -> void:
 	$PR/Label.text = str(floor(SaveManager.DATA["prestige"]))
 	$ExpText/Label.text += "\nEXPEDITION "+str(SaveManager.DATA["expedition"])
 	HintManager.init($HintPanel)
+	$CharDataPanel.visible = false
 	update_selected()
 	for c in $Characters.get_children():
 		var i = c.get_index()
@@ -54,14 +55,19 @@ func _on_hover(node,val):
 	if val: 
 		node.modulate = Color(1,1,1,1)
 		var pj = PartyManager.CHARACTERS[0]
-		var text = pj.name.to_upper() + " <" + Lang.get_text(pj.class) + ">\n\n"
+		var text = pj.name.to_upper() + " <" + Lang.get_text(pj.class) + ">\n"
 		Lang.set_text_vars(pj.stats)
-		text += Lang.get_text("some_stats")+"\n"
-		for ab in pj.abs: text += "\n"+Lang.get_text("ab_"+ab+"_name",["TITLE"]) + "\n" + Lang.get_text("ab_"+ab)+"\n"
-		HintManager.set_text(text)
+		text += Lang.get_text("some_stats")+"\nq"
+		for ab in pj.abs: 
+			text += "\n" + Lang.get_text("ab_"+ab+"_name",["TITLE"])
+			text += "\n" + Lang.get_text("ab_"+ab)
+		#HintManager.set_text(text)
+		$CharDataPanel/RichTextLabel.text = text
+		$CharDataPanel.visible = true
 	else: 
 		node.modulate = off_color
-		HintManager.set_text()
+		#HintManager.set_text()
+		$CharDataPanel.visible = false
 
 func _on_click_continue():
 	PartyManager.ITEMS.clear()
@@ -108,6 +114,7 @@ func _on_click_character(ch):
 	if ch in $Party.get_children():
 		selected[ch.get_index()] = null
 		update_selected()
+		$CharDataPanel.visible = false
 		return
 		
 	if ch in $Characters.get_children() && ch in selected: 
@@ -136,3 +143,4 @@ func _on_item_click(item_node):
 	else: 
 		selected_items.append(item_node)
 	update_items_ui()
+	$CharDataPanel.visible = false
