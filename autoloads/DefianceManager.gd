@@ -13,7 +13,7 @@ const DEFIANCES = {
 	"chest":{     "hp":5 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
 		"abs":[ "teasure*1" ] },
 	"arrow_trap":{"hp":5 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
-		"abs":[ "activation*5", "trap_damage*4" ] },
+		"abs":[ "activation*2", "trap_damage*10" ] },
 }
 
 func get_defiance_data(def_code,level=1):
@@ -47,7 +47,7 @@ func get_def_ability_data(ab_code,ab_level):
 	if ab_code=="counterattack": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="aggressive": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="trap_damage": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
-	if ab_code=="activation": ab_data.merge({"count":0,"max_count":max(2,7-ab_level)})
+	if ab_code=="activation": ab_data.merge({"count":0,"max_count":ab_level})
 	if ab_code=="shield": ab_data.merge({"count":ab_level,"max_count":ab_level})
 	return ab_data
 

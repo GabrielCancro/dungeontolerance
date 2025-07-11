@@ -6,6 +6,16 @@ var text_vars = []
 var TEXTS = {
 	"ab_streng_name_es":"FUERZA BRUTA",
 	"ab_streng_es":"Aumenta en +2 un dado de @STR",
+	"ab_subtlety_name_es":"SUTILEZA",
+	"ab_subtlety_es":"Duplica un dado de @DEX",
+	"ab_atletic_name_es":"ATLETISMO",
+	"ab_atletic_es":"Cambia un dado @STR->@DEX o @DEX->@STR y suma +2",
+	"ab_protector_name_es":"PROTECTOR",
+	"ab_protector_es":"Obtienes 3 de escudo.",
+	"ab_bendition_name_es":"BENDICION",
+	"ab_bendition_es":"Aumenta en +1 todos los dados impares.",
+
+	
 	"ab_old_axe_name_es":"VIEJA HACHA",
 	"ab_old_axe_es":"Duplica el valor de un dado de @STR.",
 	

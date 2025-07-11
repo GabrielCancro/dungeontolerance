@@ -54,7 +54,7 @@ func _on_hover(node,val):
 	if node in selected: return
 	if val: 
 		node.modulate = Color(1,1,1,1)
-		var pj = PartyManager.CHARACTERS[0]
+		var pj = PartyManager.CHARACTERS[node.get_index()]
 		var text = pj.name.to_upper() + " <" + Lang.get_text(pj.class) + ">\n"
 		Lang.set_text_vars(pj.stats)
 		text += Lang.get_text("some_stats")+"\nq"
@@ -73,9 +73,10 @@ func _on_click_continue():
 	PartyManager.ITEMS.clear()
 	for it in selected_items: PartyManager.ITEMS.append(it.ab_data.name)
 	PartyManager.PARTY_CHARACTERS.clear()
-	for ch in selected: 
-		print(ch.get_name())
-		PartyManager.PARTY_CHARACTERS.append(int(str(ch.get_name())[-1]))
+	for i in 3: 
+		print(selected[i].get_name())
+		var index = selected[i].get_index()
+		PartyManager.PARTY_CHARACTERS.append(index)
 	GameManager.change_scene("Game")
 
 func _on_click_reset():
@@ -101,12 +102,14 @@ func update_selected():
 	PartyManager.STATS["S"]=0
 	PartyManager.STATS["D"]=0
 	PartyManager.STATS["M"]=0
-	for ch in $Party.get_children():
-		if selected[ch.get_index()]: 
-			var index = int(str(selected[ch.get_index()])[-1])
+	PartyManager.ABILITIES = []
+	for i in 3:
+		if selected[i]: 
+			var index = selected[i].get_index()
 			PartyManager.STATS["S"]+=PartyManager.CHARACTERS[index]["stats"][0]
 			PartyManager.STATS["D"]+=PartyManager.CHARACTERS[index]["stats"][1]
 			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
+			PartyManager.ABILITIES.append(PartyManager.CHARACTERS[index]["abs"])
 	Lang.set_text_vars(PartyManager.get_stats_array())
 	$Stats/RichTextLabel.text = Lang.get_text("some_stats")
 

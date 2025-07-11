@@ -8,6 +8,10 @@ var ITEMS_UNLOCKED = ["old_axe","sword","rope","crossbow","gold_ring","iron_helm
 var PARTY_CHARACTERS = [null,null,null]
 var ABILITIES_DATA = { 
 	"streng":{"req":{"S":2} },
+	"subtlety":{"req":{"D":2} },
+	"atletic":{"req":{"S":1,"D":1} },
+	"protector":{"req":{"S":2} },
+	"bendition":{"req":{"M":2} },
 }
 
 var ITEMS_DATA = { 
@@ -20,13 +24,13 @@ var ITEMS_DATA = {
 }
 
 var CHARACTERS = [
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
-	{"name":"Thor","class":"rogue", "stats":[2,0,0],"abs":["streng"]},
+	{"name":"Thior","class":"explorer", "stats":[1,1,0],"abs":"streng"},
+	{"name":"Samuel","class":"rogue", "stats":[0,1,1],"abs":"-"},
+	{"name":"Ryna","class":"barbarian", "stats":[2,0,0],"abs":"-"},
+	{"name":"Alem","class":"explorer", "stats":[0,1,1],"abs":"atletic"},
+	{"name":"Hanna","class":"sorcerer", "stats":[0,0,2],"abs":"bendition"},
+	{"name":"Brian","class":"rogue", "stats":[0,2,0],"abs":"subtlety"},
+	{"name":"Drum","class":"warrior", "stats":[2,0,0],"abs":"protector"},
 ]
 
 func _on_click_party_ability(ab_data):
@@ -53,6 +57,52 @@ func ab_streng(ab_data):
 	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-35))
 	ab_data.node.resalt()
 	dice.set_value(dice.value + 2)
+	return true
+
+func ab_subtlety(ab_data):
+	#CONDITIONS
+	GameManager.show_target_chosser("dice",["is_D"])
+	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
+	if !dice: return false
+	#EFFECT
+	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-35))
+	ab_data.node.resalt()
+	dice.set_value(dice.value * 2)
+	return true
+
+func ab_atletic(ab_data):
+	#CONDITIONS
+	GameManager.show_target_chosser("dice",["is_S","is_D"])
+	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
+	if !dice: return false
+	if dice.type == "M": return false
+	#EFFECT
+	Effector.float_text("CHOSSED!",dice.global_position+dice.size/2+Vector2(0,-35))
+	ab_data.node.resalt()
+	if dice.type == "S": dice.set_type("D")
+	if dice.type == "D": dice.set_type("S")
+	dice.set_value(dice.value + 2)
+	return true
+
+func ab_protector(ab_data):
+	#CONDITIONS
+	
+	#EFFECT
+	ab_data.node.resalt()
+	PartyManager.add_shield(3)
+	return true
+
+func ab_bendition(ab_data):
+	#CONDITIONS
+	var impars = []
+	for dice in GameManager.DICES_REF.get_children(): if dice.value%2!=0: impars.append(dice)
+	if impars.size()==0: return false
+	#EFFECT
+	ab_data.node.resalt()
+	for dice in impars:
+		await GameManager.timeout(.5)
+		Effector.float_text("+1",dice.global_position+dice.size/2+Vector2(0,-35),DiceManager.COLORS[dice.type])
+		dice.set_value(dice.value +1)
 	return true
 
 func ab_old_axe(ab_data):
