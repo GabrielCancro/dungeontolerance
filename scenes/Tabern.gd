@@ -11,11 +11,12 @@ func _ready() -> void:
 	$ResetData.connect("button_down",_on_click_reset)
 	$AddPrestige.connect("button_down",_on_click_add_prestige)
 	$ExpText/Label.text = "PRESTIGIO "+str(SaveManager.DATA["prestige"])
-	$PR/Label.text = str(floor(SaveManager.DATA["prestige"]))
 	$ExpText/Label.text += "\nEXPEDITION "+str(SaveManager.DATA["expedition"])
+	$PR/Label.text = str(int(SaveManager.DATA["prestige"]))
 	HintManager.init($HintPanel)
 	$CharDataPanel.visible = false
 	update_selected()
+	PartyManager.ITEMS_UNLOCKED = SaveManager.DATA["items_unlocked"]
 	for c in $Characters.get_children():
 		var i = c.get_index()
 		t["t"+str(i)] = (0.01+i%4*0.02)
@@ -34,7 +35,7 @@ func _ready() -> void:
 	for it in $Items.get_children(): 
 		it.connect("on_click_tabern_item",_on_item_click)
 	
-	if SaveManager.DATA["prestige"]==1:
+	if !SaveManager.DATA["ended_tabern_tuto"]:
 		await $Tutorial.show_tuto("tabern1")
 		await $Tutorial.show_tuto("tabern2")
 		await $Tutorial.show_tuto("tabern3")
@@ -42,6 +43,8 @@ func _ready() -> void:
 		await $Tutorial.show_tuto("tabern5")
 		await $Tutorial.show_tuto("tabern6")
 		await $Tutorial.show_tuto("tabern7")
+		SaveManager.DATA["ended_tabern_tuto"] = true
+		SaveManager.save_store_data()
 
 func _process(delta: float) -> void:
 	for c in $Characters.get_children():
@@ -54,13 +57,15 @@ func _on_hover(node,val):
 	if node in selected: return
 	if val: 
 		node.modulate = Color(1,1,1,1)
-		var pj = PartyManager.CHARACTERS[node.get_index()]
+		var ch_index = node.get_index()
+		if node.get_parent()==$Party: ch_index = selected[node.get_index()].get_index()
+		var pj = PartyManager.CHARACTERS[ch_index]
 		var text = pj.name.to_upper() + " <" + Lang.get_text(pj.class) + ">\n"
 		Lang.set_text_vars(pj.stats)
-		text += Lang.get_text("some_stats")+"\nq"
-		for ab in pj.abs: 
-			text += "\n" + Lang.get_text("ab_"+ab+"_name",["TITLE"])
-			text += "\n" + Lang.get_text("ab_"+ab)
+		text += Lang.get_text("some_stats")+"\n"
+		if pj.abs:
+			text += "\n" + Lang.get_text("ab_"+pj.abs+"_name",["TITLE"])
+			text += "\n" + Lang.get_text("ab_"+pj.abs)
 		#HintManager.set_text(text)
 		$CharDataPanel/RichTextLabel.text = text
 		$CharDataPanel.visible = true
@@ -70,13 +75,14 @@ func _on_hover(node,val):
 		$CharDataPanel.visible = false
 
 func _on_click_continue():
-	PartyManager.ITEMS.clear()
-	for it in selected_items: PartyManager.ITEMS.append(it.ab_data.name)
+	PartyManager.ITEMS_EQUIPPED.clear()
+	for it in selected_items: PartyManager.ITEMS_EQUIPPED.append(it.ab_data.name)
 	PartyManager.PARTY_CHARACTERS.clear()
 	for i in 3: 
 		print(selected[i].get_name())
-		var index = selected[i].get_index()
+		var index = selected[i].get_index() + 1
 		PartyManager.PARTY_CHARACTERS.append(index)
+		print("SELECTED PARTY: ",PartyManager.PARTY_CHARACTERS)
 	GameManager.change_scene("Game")
 
 func _on_click_reset():
@@ -109,7 +115,8 @@ func update_selected():
 			PartyManager.STATS["S"]+=PartyManager.CHARACTERS[index]["stats"][0]
 			PartyManager.STATS["D"]+=PartyManager.CHARACTERS[index]["stats"][1]
 			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
-			PartyManager.ABILITIES.append(PartyManager.CHARACTERS[index]["abs"])
+			if PartyManager.CHARACTERS[index]["abs"]:
+				PartyManager.ABILITIES.append(PartyManager.CHARACTERS[index]["abs"])
 	Lang.set_text_vars(PartyManager.get_stats_array())
 	$Stats/RichTextLabel.text = Lang.get_text("some_stats")
 

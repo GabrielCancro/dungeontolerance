@@ -7,6 +7,7 @@ func _ready() -> void:
 
 func show_tuto(code):
 	$HintPanel/RichTextLabel.text = Lang.get_text("tuto_"+code)
+	if code == "dices": $HintPanel/RichTextLabel.text += "\n" + Lang.get_text("some_stats") + "\n"
 	$HintPanel.size.y = 20 + $HintPanel/RichTextLabel.get_content_height()
 	var node = GameManager.PARTY_REF
 	if code == "welcome": node = GameManager.PARTY_REF

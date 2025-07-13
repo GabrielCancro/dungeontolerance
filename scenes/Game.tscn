@@ -273,3 +273,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.572549, 0.572549, 0.572549, 0.560784)
+
+[node name="BtnSkipTutorial" type="Button" parent="CLUI"]
+offset_left = 1022.0
+offset_top = 10.0
+offset_right = 1140.0
+offset_bottom = 48.0
+theme = ExtResource("10_3xj3m")
+text = "SKIP TUTO"

@@ -26,8 +26,13 @@ func show_target_chosser(target_type,condition_tags):
 	
 	#CHECK CONDITIONS
 	var result = []
-	for node in AllNodes: for tag in condition_tags: 
-		if tag=="is_S" && node.type=="S": result.append(node)
+	for node in AllNodes: 
+		if condition_tags.size()==0: result.append(node)
+		for tag in condition_tags: 
+			if tag=="is_S" && node.type=="S": result.append(node)
+			if tag=="is_D" && node.type=="D": result.append(node)
+			if tag=="is_M" && node.type=="M": result.append(node)
+	
 	AllNodes = result
 	
 	if AllNodes.size()>0:

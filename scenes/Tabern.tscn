@@ -126,7 +126,7 @@ offset_left = 60.0
 offset_top = 192.0
 offset_right = 448.0
 offset_bottom = 656.0
-texture = ExtResource("10_fbm2o")
+texture = ExtResource("8_g8xdv")
 expand_mode = 1
 stretch_mode = 4
 
@@ -137,7 +137,7 @@ offset_left = 223.0
 offset_top = 209.0
 offset_right = 557.0
 offset_bottom = 610.0
-texture = ExtResource("8_g8xdv")
+texture = ExtResource("9_6av1h")
 expand_mode = 1
 stretch_mode = 4
 
@@ -148,7 +148,7 @@ offset_left = 639.0
 offset_top = 255.0
 offset_right = 1028.0
 offset_bottom = 675.0
-texture = ExtResource("9_6av1h")
+texture = ExtResource("10_fbm2o")
 expand_mode = 1
 stretch_mode = 4
 

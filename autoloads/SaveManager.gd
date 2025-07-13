@@ -11,6 +11,8 @@ func _set_defaults():
 	DATA["save_date"] = now_date()
 	if !"prestige" in DATA: DATA["prestige"] = 0
 	if !"expedition" in DATA: DATA["expedition"] = 0
+	if !"ended_tabern_tuto" in DATA: DATA["ended_tabern_tuto"] = false
+	if !"items_unlocked" in DATA: DATA["items_unlocked"] = ["dage"]
 
 func save_store_data():
 	_set_defaults()

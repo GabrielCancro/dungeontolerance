@@ -4,6 +4,8 @@ extends Node
 var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice", "on_dead_defiance"]
 var ALL_DEFIANCES = []
 const DEFIANCES = {
+	"tuto_rat":{     "hp":7 , "stats":{"S":2,"D":1,"M":0}, "tags":"", 
+		"abs":[ "aggressive*2" ] },
 	"goblin":{  "hp":8, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
 		"abs":["aggressive*2","counterattack*1"] },
 	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "tags":"B", 
@@ -119,12 +121,11 @@ func drainer_on_end_defiance_attack(ab_data, def_card):
 func teasure_on_dead_defiance(ab_data, def_card):
 	await GameManager.timeout(.7)
 	randomize()
-	var keys = PartyManager.ITEMS_DATA.keys()
-	keys.shuffle()
-	var texture = load("res://assets/abilities/ab_"+keys[0]+".png")
+	var key = PartyManager.get_rnd_item()
+	var texture = load("res://assets/abilities/ab_"+key+".png")
 	Effector.texture_from_to(texture,ab_data.node.global_position+ab_data.node.size/2+Vector2(0,-100),Vector2(25,5),Vector2(1,1),Vector2(.5,.5))
 	await GameManager.timeout(1)
-	PartyManager.add_item(keys[0])
+	PartyManager.add_item(key)
 
 func activation_on_end_turn(ab_data, def_card):
 	await GameManager.timeout(.7)

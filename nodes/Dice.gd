@@ -57,3 +57,6 @@ func set_value(val):
 func set_type(val):
 	type = val
 	update()
+
+func get_color():
+	return DiceManager.COLORS[type]

@@ -13,6 +13,8 @@ func _ready() -> void:
 
 func _on_click():
 	if SaveManager.DATA["prestige"]==0: 
+		PartyManager.PARTY_CHARACTERS = [6,1,0]
+		PartyManager.STATS = {"S":2,"D":1,"M":0}
 		GameManager.change_scene("Game")
 	else:
 		GameManager.change_scene("Tabern")

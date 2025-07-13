@@ -8,7 +8,7 @@ var DUNGEONS = [
 	[], # Level 0 - TUTORIAL
 	["BB","BB"], #Level 1 - rooms 2 - Basic enemies
 	["BT","DESTINE","BB","BBB"], #Level 2
-	["BN","BNB","DESTINE","BB"], #Level 3
+	["BN","BNC","DESTINE","BNB","BNBC"], #Level 3
 ]
 
 func init_dungeon():
@@ -28,7 +28,7 @@ func next_level():
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
 	await Effector.transition_level_off()
 	update_ui()
-	DUNGEONS[level][room_index]="C"
+	#DUNGEONS[level][room_index]="C"
 	if DUNGEONS[level][room_index]=="DESTINE":
 		DestineManager.show_destine()
 	else:
@@ -40,6 +40,7 @@ func next_level():
 	return true
 
 func is_now_in_destine():
+	if room_index < 0: return false
 	if room_index >=DUNGEONS[level].size(): return false
 	print("IS NOW IN DESTINE ",(DUNGEONS[level][room_index]=="DESTINE"))
 	return (DUNGEONS[level][room_index]=="DESTINE")

@@ -5,6 +5,8 @@ func _ready() -> void:
 	$BtnAddDice.connect("button_down",DiceManager.add_random_dice)
 	$BtnEndTurn.connect("button_down",GameManager.on_end_turn)
 	$BtnAddEnemy.connect("button_down",LevelManager._add_defiance.bind("rat"))
+	$CLUI/BtnSkipTutorial.connect("button_down",on_skip_tuto)
+	$CLUI/BtnSkipTutorial.visible = false
 	GameManager.GAME_SCENE_REF = self
 	GameManager.TARGET_CHOSSER_REF = $CLUI/TargetChosser
 	GameManager.DEFIANCES_REF = $Defiances
@@ -16,6 +18,8 @@ func _ready() -> void:
 	GameManager.PARTY_ITEMS_REF = $Items
 	GameManager.DESTINE_REF = $DestinePopup
 	GameManager.BG_IMAGE_REF = $CLBG/TextureRect
+	$CLBG/TextureRect.modulate.a = 0
+	$Dices.modulate.a = 0
 	PartyManager.update_abilities_ui()
 	PartyManager.update_items_ui()
 	PartyManager.restore_hp()
@@ -25,13 +29,16 @@ func _ready() -> void:
 
 func tuto_sequence():
 	$Abilities.visible = false
+	$CLBG/TextureRect.modulate.a = 1
+	$Dices.modulate.a = 1
+	$CLUI/BtnSkipTutorial.visible = true
 	await GameManager.timeout(2)
 	await $CLUI/Tutorial.show_tuto("welcome")
 	await $CLUI/Tutorial.show_tuto("party")
 	await PartyManager.roll_party_dices()
 	await $CLUI/Tutorial.show_tuto("dices")
 	await GameManager.timeout(1)
-	await LevelManager._add_defiance("rat")
+	await LevelManager._add_defiance("tuto_rat")
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("rat1")
 	await $CLUI/Tutorial.show_tuto("rat2")
@@ -52,12 +59,16 @@ func tuto_sequence():
 	await $CLUI/Tutorial.show_tuto("power2")
 	await $CLUI/Tutorial.show_tuto("end")
 	DiceManager.remove_dices()
-	await LevelManager._add_defiance("rat")
-	await LevelManager._add_defiance("rat")
+	await LevelManager._add_defiance("tuto_rat")
+	await LevelManager._add_defiance("tuto_rat")
 	await PartyManager.roll_party_dices()
 	
 func start_sequence():
-	await GameManager.timeout(1)
-	await GameManager.POWERGEM_REF.show_powergem()
-	await GameManager.timeout(1)
-	await GameManager.on_end_turn()
+	GameManager.timeout(1)
+	GameManager.POWERGEM_REF.show_powergem()
+	GameManager.on_end_turn()
+
+func on_skip_tuto():
+	SaveManager.DATA["prestige"] = 1
+	SaveManager.save_store_data()
+	GameManager.change_scene("Tabern")

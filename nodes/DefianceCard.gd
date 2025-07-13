@@ -31,10 +31,9 @@ func update_ui():
 	$HP/Value.text = str(def_data.hp)
 	for statLine in $Stats.get_children():
 		var k = statLine.get_name()
-		statLine.visible = (k in def_data.stats.keys()) && def_data.stats[k]>0
-		if statLine.visible:
-			statLine.text = str(def_data.stats[k])
-			statLine.add_theme_color_override("font_color",DiceManager.COLORS[k])
+		statLine.text = str(def_data.stats[k])
+		if def_data.stats[k]==0: statLine.text = "-"
+		statLine.add_theme_color_override("font_color",DiceManager.COLORS[k])
 
 func _on_click():
 	var dice = DiceManager.get_dice_drag()
