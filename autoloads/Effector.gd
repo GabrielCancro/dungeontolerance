@@ -130,3 +130,20 @@ func texture_from_to(_texture,_start_pos,_end_pos,_start_scale,_end_scale):
 	tw.play()
 	await tw.finished
 	node.queue_free() 
+
+func appear_defiance_shadow(node):
+	var shadow = get_node("/root/Game/DefShadow")
+	shadow.position = node.position + node.size/2 - shadow.size/2 + Vector2(0,30)
+	shadow.modulate.a = 0
+	shadow.visible = true
+	var tw = create_tween()
+	tw.tween_property(shadow,"modulate:a",.7,.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.play()
+
+func hide_defiance_shadow():
+	var shadow = get_node("/root/Game/DefShadow")
+	var tw = create_tween()
+	tw.tween_property(shadow,"modulate:a",0,.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.play()
+	await tw.finished
+	shadow.visible = false

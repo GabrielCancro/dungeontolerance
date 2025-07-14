@@ -7,6 +7,7 @@ var selected_items = []
 
 func _ready() -> void:
 	#SaveManager.DATA["prestige"]=1
+	
 	$Continue.connect("button_down",_on_click_continue)
 	$ResetData.connect("button_down",_on_click_reset)
 	$AddPrestige.connect("button_down",_on_click_add_prestige)
@@ -17,6 +18,15 @@ func _ready() -> void:
 	$CharDataPanel.visible = false
 	update_selected()
 	PartyManager.ITEMS_UNLOCKED = SaveManager.DATA["items_unlocked"]
+	selected_items = []
+	
+	for it_index in SaveManager.DATA["items_preselected"]:
+		$Items.get_child(it_index).set_selected(true)
+		selected_items.append($Items.get_child(it_index))
+	
+	selected = [null,null,null]
+	for s in SaveManager.DATA["characters_preselected"]:
+		_on_click_character($Characters.get_child(s-1))
 	for c in $Characters.get_children():
 		var i = c.get_index()
 		t["t"+str(i)] = (0.01+i%4*0.02)
@@ -60,15 +70,24 @@ func _on_hover(node,val):
 		var ch_index = node.get_index()
 		if node.get_parent()==$Party: ch_index = selected[node.get_index()].get_index()
 		var pj = PartyManager.CHARACTERS[ch_index]
-		var text = pj.name.to_upper() + " <" + Lang.get_text(pj.class) + ">\n"
+		var text = pj.name.to_upper()+" "
+		text += "[color=a0a0a0]" + Lang.get_text(pj.class) + "[/color]\n"
 		Lang.set_text_vars(pj.stats)
-		text += Lang.get_text("some_stats")+"\n"
+		for i in 3:
+			var stat = ["S","D","M"][i]
+			if pj.stats[i]>0:
+				text += "[color="+DiceManager.COLORS[stat]+"]"+Lang.get_text("stat_"+stat)+": +"+str(pj.stats[i])+"[/color]  "
+		text += '\n'
 		if pj.abs:
+			var ab_data = PartyManager.get_ability_data(pj.abs)
 			text += "\n" + Lang.get_text("ab_"+pj.abs+"_name",["TITLE"])
+			text += "  "+Lang.get_req_string(ab_data["req"])
 			text += "\n" + Lang.get_text("ab_"+pj.abs)
 		#HintManager.set_text(text)
 		$CharDataPanel/RichTextLabel.text = text
 		$CharDataPanel.visible = true
+		$CharDataPanel.size.y = 20 + $CharDataPanel/RichTextLabel.get_content_height()
+		$CharDataPanel.position.y = get_viewport_rect().size.y - $CharDataPanel.size.y
 	else: 
 		node.modulate = off_color
 		#HintManager.set_text()
@@ -83,6 +102,10 @@ func _on_click_continue():
 		var index = selected[i].get_index() + 1
 		PartyManager.PARTY_CHARACTERS.append(index)
 		print("SELECTED PARTY: ",PartyManager.PARTY_CHARACTERS)
+	SaveManager.DATA["items_preselected"] = []
+	for it in selected_items: SaveManager.DATA["items_preselected"].append(it.get_index())
+	SaveManager.DATA["characters_preselected"] = PartyManager.PARTY_CHARACTERS
+	SaveManager.save_store_data()
 	GameManager.change_scene("Game")
 
 func _on_click_reset():
@@ -147,10 +170,12 @@ func update_items_ui():
 		$Items.get_child(i).set_selected( $Items.get_child(i) in selected_items )
 
 func _on_item_click(item_node):
-	print("NODE IS ",item_node.name)
+	
 	if item_node in selected_items:
 		selected_items.erase(item_node)
 	else: 
-		selected_items.append(item_node)
+		if selected_items.size()<SaveManager.DATA["prestige"]:
+			selected_items.append(item_node)
+		else: Effector.shake($PR)
 	update_items_ui()
 	$CharDataPanel.visible = false

@@ -4,11 +4,12 @@ var level = 1
 var room_index = 0
 var max_rooms = 0
 
+#B:rat,bat   N:goblin  S:slime,   T:chest   #C:traps
 var DUNGEONS = [
 	[], # Level 0 - TUTORIAL
-	["BB","BB"], #Level 1 - rooms 2 - Basic enemies
-	["BT","DESTINE","BB","BBB"], #Level 2
-	["BN","BNC","DESTINE","BNB","BNBC"], #Level 3
+	["BB","BB","CBB","BBB"], #Level 1 - rooms 4 - Basic enemies
+	["BN","BNBT","DESTINE","BCN","BBB","BNB"], #Level 2
+	["BN","BNC","DESTINE","BNBB","TNBC","BNN","BCBN"], #Level 3
 ]
 
 func init_dungeon():

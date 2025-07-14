@@ -19,8 +19,8 @@ var ITEMS_DATA = {
 	"old_axe":{"ch":1, "chm":1, "req":{"S":2} },
 	"sword":{"ch":1, "chm":1, "req":{} },
 	"rope":{"ch":1, "chm":1, "req":{} },
-	"crossbow":{"ch":1, "chm":1, "req":{} },
-	"gold_ring":{"ch":1, "chm":1, "req":{} },
+	"crossbow":{"ch":1, "chm":1, "req":{"D":1} },
+	"gold_ring":{"ch":1, "chm":1, "req":{"M":1} },
 	"iron_helm":{"ch":1, "chm":1, "req":{} },
 }
 
@@ -102,21 +102,31 @@ func ab_bendition(ab_data):
 	ab_data.node.resalt()
 	dices.shuffle()
 	await GameManager.timeout(.5)
-	dices[0].set_value(dices[0].value +1)
-	Effector.float_text("+1",dices[0].global_position+dices[0].size/2+Vector2(0,-35),dices[0].get_color())
+	dices[0].set_value(dices[0].value + 2)
+	Effector.float_text("+2",dices[0].global_position+dices[0].size/2+Vector2(0,-35),dices[0].get_color())
 	return true
 
 #ITEMS
 func ab_dage(ab_data):
 	#CONDITIONS
-	GameManager.show_target_chosser("defiance",[])
+	GameManager.show_target_chosser("defiance",["is_creature"])
 	var def = await GameManager.TARGET_CHOSSER_REF.on_chosse
 	if !def: return false
 	#EFFECT
 	await GameManager.timeout(.2)
 	def.damage_defiance(1)
 	return true
-	
+
+func ab_crossbow(ab_data):
+	#CONDITIONS
+	GameManager.show_target_chosser("defiance",["is_creature"])
+	var def = await GameManager.TARGET_CHOSSER_REF.on_chosse
+	if !def: return false
+	#EFFECT
+	await GameManager.timeout(.2)
+	def.damage_defiance(2)
+	return true
+
 func ab_old_axe(ab_data):
 	#CONDITIONS
 	GameManager.show_target_chosser("dice",["is_S"])
@@ -127,6 +137,16 @@ func ab_old_axe(ab_data):
 	ab_data.node.resalt()
 	dice.set_value(dice.value * 2)
 	return true
+
+func ab_gold_ring(ab_data):
+	await GameManager.timeout(.2)
+	async_ab_gold_ring()
+	return true
+
+func async_ab_gold_ring():
+	for i in 3:
+		await GameManager.timeout(.5)
+		GameManager.POWERGEM_REF.inc_gems("M",1)
 
 func apply_damage(val,def_data):
 	if DATA.SH>0: 

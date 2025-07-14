@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
 [ext_resource type="PackedScene" uid="uid://br312qnlppkft" path="res://nodes/Party.tscn" id="3_g4kob"]
+[ext_resource type="Texture2D" uid="uid://bttg6i4y5ofd4" path="res://assets/def_shadow.png" id="4_mcffj"]
 [ext_resource type="PackedScene" uid="uid://dcr7x3ojlmaqm" path="res://nodes/DestinePopup.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="10_3xj3m"]
@@ -44,6 +45,22 @@ expand_mode = 1
 
 [node name="Defiances" type="Control" parent="."]
 anchors_preset = 0
+
+[node name="DefShadow" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 0.701961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 187.0
+offset_top = -627.0
+offset_right = 265.0
+offset_bottom = 599.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_mcffj")
+expand_mode = 1
 
 [node name="Party" parent="." instance=ExtResource("3_g4kob")]
 layout_mode = 1

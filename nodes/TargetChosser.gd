@@ -32,6 +32,7 @@ func show_target_chosser(target_type,condition_tags):
 			if tag=="is_S" && node.type=="S": result.append(node)
 			if tag=="is_D" && node.type=="D": result.append(node)
 			if tag=="is_M" && node.type=="M": result.append(node)
+			if tag=="is_creature" && !"T" in node.def_data.tags && !"C" in node.def_data.tags: result.append(node)
 	
 	AllNodes = result
 	

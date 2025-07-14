@@ -29,8 +29,7 @@ func set_item(_name):
 func _on_hover(val):
 	$BGColor.visible = val
 	var name = Lang.get_text("ab_"+ab_data.name+"_name",["TITLE"])
-	var req = ""
-	for k in ab_data["req"].keys(): for i in range(ab_data["req"][k]): req+="[color="+DiceManager.COLORS[k]+"] @ [/color]"
+	var req =  "  "+Lang.get_req_string(ab_data["req"])
 	if val: HintManager.set_text(name+" "+req+"\n"+Lang.get_text("ab_"+ab_data.name))
 	else: HintManager.set_text()
 

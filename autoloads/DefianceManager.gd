@@ -6,21 +6,23 @@ var ALL_DEFIANCES = []
 const DEFIANCES = {
 	"tuto_rat":{     "hp":7 , "stats":{"S":2,"D":1,"M":0}, "tags":"", 
 		"abs":[ "aggressive*2" ] },
-	"goblin":{  "hp":8, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
-		"abs":["aggressive*2","counterattack*1"] },
-	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "tags":"B", 
+	"goblin":{  "hp":15, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
+		"abs":["aggressive*3","counterattack*2"] },
+	"rat":{     "hp":10 , "stats":{"S":2,"D":2,"M":3}, "tags":"B", 
 		"abs":[ "aggressive*2" ] }, #"shield*2",
-	"bat":{     "hp":5 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
+	"bat":{     "hp":8 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
 		"abs":[ "drainer*1","aggressive*2" ] },
-	"chest":{     "hp":5 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
+	"chest":{     "hp":8 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
 		"abs":[ "teasure*1" ] },
-	"arrow_trap":{"hp":5 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
-		"abs":[ "activation*2", "trap_damage*10" ] },
+	"arrow_trap":{"hp":10 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
+		"abs":[ "activation*3", "trap_damage*10" ] },
+	"slime":{"hp":12 , "stats":{"S":4,"D":4,"M":1}, "tags":"S", 
+		"abs":[ "aggressive*3","shield*1" ] },
 }
 
 func get_defiance_data(def_code,level=1):
 	var data = DEFIANCES[def_code].duplicate(true)
-	data.hp = randi_range(data.hp*0.8,data.hp*1.2)
+	data.hp = randi_range(data.hp,data.hp*1.2)
 	data["name"] = def_code
 	
 	#GET ABILITIES DATA
@@ -69,8 +71,10 @@ func launch_trigger(launcher, def_card):
 			if launcher=="on_apply_dice": await GameManager.timeout(1)
 			print("LAUNCHING TRIGGER ",launcher,"->",def_card.name)
 			def_card.node.ligth(true)
+			await GameManager.timeout(0.6)
 			await call(ab.name+"_"+launcher, ab, def_card)
 			def_card.node.ligth(false)
+			await GameManager.timeout(0.3)
 	await GameManager.timeout(0.1)
 
 func counterattack_on_apply_dice(ab_data, def_card):

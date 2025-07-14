@@ -13,19 +13,24 @@ var TEXTS = {
 	"ab_protector_name_es":"PROTECTOR",
 	"ab_protector_es":"Obtienes 3 de escudo.",
 	"ab_bendition_name_es":"BENDICION",
-	"ab_bendition_es":"Aumenta +1 a un dado al azar (debes tener al menos dos dados)",
-
+	"ab_bendition_es":"Aumenta +2 a un dado al azar (debes tener al menos dos dados)",
 	
 	"ab_old_axe_name_es":"VIEJA HACHA",
 	"ab_old_axe_es":"Duplica el valor de un dado de @STR.",
 	"ab_dage_name_es":"DAGA",
 	"ab_dage_es":"Aplica -1HP directo a un enemigo.",
+	"ab_crossbow_name_es":"BALLESTA",
+	"ab_crossbow_es":"Aplica -2HP directo a un enemigo.",
+	"ab_gold_ring_name_es":"ANILLO DORADO",
+	"ab_gold_ring_es":"Otorga 3 de poder magico.",
 	
 	"def_tuto_rat_name_es":"Rata",
 	"def_rat_name_es":"Rata",
 	"def_bat_name_es":"Murcielago",
 	"def_goblin_name_es":"Trasgo",
 	"def_arrow_trap_name_es":"Trampa de Flechas",
+	"def_chest_name_es":"Cofre",
+	"def_slime_name_es":"Slime",
 	
 	"def_ab_aggressive_name_es":"AGRESIVO",
 	"def_ab_aggressive_es":"Te atacara al finalizar el turno causando entre -#1HP y -#2HP.",
@@ -68,7 +73,15 @@ var TEXTS = {
 	"info_dungeon_level_es":"EXPEDICION #0    ROOM #1/#2",
 	"some_stats_es":"[color="+DiceManager.COLORS["S"]+"]@STR:#0[/color]  [color="+DiceManager.COLORS["D"]+"]@DEX:#1[/color]  [color="+DiceManager.COLORS["M"]+"]@MAG:#2[/color]",
 	
-	"rogue_es": "picaro"
+	"rogue_es": "picaro",
+	"sorcerer_es": "hechicero",
+	"explorer_es": "explorador",
+	"barbarian_es": "barbaro",
+	"warrior_es": "guerrero",
+	
+	"stat_S_es":"Fuerza",
+	"stat_D_es":"Destreza",
+	"stat_M_es":"Magia",
 }
 
 var REPLACES = {
@@ -76,12 +89,6 @@ var REPLACES = {
 	"@DEX_es" = "[color="+DiceManager.COLORS["D"]+"]Destreza[/color]",
 	"@MAG_es" = "[color="+DiceManager.COLORS["M"]+"]Magia[/color]",
 	"@HP" = "[color=ff0000]HP[/color]",
-	#"@PARTY_STR_es" = "[color="+DiceManager.COLORS["S"]+"]Fuerza:"+str(PartyManager.STATS["S"])+"[/color]",
-	#"@PARTY_DEX_es" = "[color="+DiceManager.COLORS["D"]+"]Destreza:"+str(PartyManager.STATS["D"])+"[/color]",
-	#"@PARTY_MAG_es" = "[color="+DiceManager.COLORS["M"]+"]Magia:"+str(PartyManager.STATS["M"])+"[/color]",
-	"@REQ_S" = "[color="+DiceManager.COLORS["S"]+"] @ [/color]",
-	"@REQ_D" = "[color="+DiceManager.COLORS["D"]+"] @ [/color]",
-	"@REQ_M" = "[color="+DiceManager.COLORS["M"]+"] @ [/color]",
 }
 
 func set_text_vars(vars):
@@ -99,3 +106,10 @@ func get_text(code,styles=[]):
 	if "UPPER" in styles: text = text.to_upper()
 	if "TITLE" in styles: text = "[color=f0f050]"+text+"[/color]"
 	return text
+
+func get_req_string(req={}):
+	var result = ""
+	for k in req.keys():
+		var c = DiceManager.COLORS[k]
+		if k in req: for i in req[k]: result += "[img=14 color="+c+"]res://assets/full_white_point.png[/img]" 
+	return result

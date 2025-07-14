@@ -2,20 +2,25 @@ extends Node
 
 var fileName = "user://store_app_data.res"
 var DATA = {}
+var default = {
+	"prestige": 0,
+	"expedition": 0,
+	"ended_tabern_tuto": false,
+	"items_unlocked":["dage"],
+	"items_preselected":[],
+	"characters_preselected":[],
+}
 
 func _ready():
 	load_store_data()
 
 func _set_defaults():
-	DATA["language"] = Lang.current_lang
-	DATA["save_date"] = now_date()
-	if !"prestige" in DATA: DATA["prestige"] = 0
-	if !"expedition" in DATA: DATA["expedition"] = 0
-	if !"ended_tabern_tuto" in DATA: DATA["ended_tabern_tuto"] = false
-	if !"items_unlocked" in DATA: DATA["items_unlocked"] = ["dage"]
+	for k in default.keys(): 
+		if !k in DATA: DATA[k] = default[k]
 
 func save_store_data():
 	_set_defaults()
+	for k in default.keys(): if !k in DATA: DATA[k] = default[k]
 	var file := FileAccess.open(fileName, FileAccess.WRITE)
 	if !file: return
 	file.store_string(JSON.stringify(DATA))

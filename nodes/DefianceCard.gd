@@ -94,3 +94,5 @@ func is_dead():
 
 func ligth(val):
 	$Light.visible = val
+	if val: Effector.appear_defiance_shadow(self)
+	else: Effector.hide_defiance_shadow()
