@@ -2,7 +2,7 @@ extends Node
 
 var STATS = {"S":2,"D":1,"M":1}
 var DATA = {"HP":20,"HPM":20, "SH":0}
-var ABILITIES = ["streng"]
+var ABILITIES = []
 var ITEMS_EQUIPPED = []
 var ITEMS_UNLOCKED = []
 var PARTY_CHARACTERS = [null,null,null]
@@ -22,6 +22,7 @@ var ITEMS_DATA = {
 	"crossbow":{"ch":1, "chm":1, "req":{"D":1} },
 	"gold_ring":{"ch":1, "chm":1, "req":{"M":1} },
 	"iron_helm":{"ch":1, "chm":1, "req":{} },
+	"bread":{"uses":3, "ch":1, "chm":1, "req":{} },
 }
 
 var CHARACTERS = [
@@ -44,10 +45,14 @@ func _on_click_party_ability(ab_data):
 			ab_data["node"].dec_charge()
 
 func get_ability_data(code):
-	return ABILITIES_DATA[code].duplicate()
+	var ab_data = ABILITIES_DATA[code].duplicate()
+	ab_data["name"] = code
+	return ab_data
 
 func get_item_data(code):
-	return ITEMS_DATA[code].duplicate()
+	var ab_data = ITEMS_DATA[code].duplicate()
+	ab_data["name"] = code
+	return ab_data
 
 func ab_streng(ab_data):
 	#CONDITIONS
@@ -138,15 +143,26 @@ func ab_old_axe(ab_data):
 	dice.set_value(dice.value * 2)
 	return true
 
-func ab_gold_ring(ab_data):
-	await GameManager.timeout(.2)
-	async_ab_gold_ring()
+func ab_sword(ab_data):
+	DiceManager.add_dice("S")
+	await GameManager.timeout(.5)
 	return true
 
-func async_ab_gold_ring():
+func ab_gold_ring(ab_data):
+	#EFFECT
+	await GameManager.timeout(.2)
+	_async_ab_gold_ring()
+	return true
+
+func _async_ab_gold_ring():
 	for i in 3:
 		await GameManager.timeout(.5)
 		GameManager.POWERGEM_REF.inc_gems("M",1)
+
+func ab_bread(ab_data):
+	PartyManager.apply_heal(3)
+	await GameManager.timeout(1)
+	return true
 
 func apply_damage(val,def_data):
 	if DATA.SH>0: 
@@ -203,7 +219,8 @@ func update_items_ui():
 		GameManager.PARTY_ITEMS_REF.get_child(i).visible = true
 
 func add_item(code):
-	ITEMS_EQUIPPED.append(code)
+	print("CALL ADD ITEM: "+code)
+	ITEMS_EQUIPPED.append(get_item_data(code))
 	update_items_ui()
 	GameManager.PARTY_ITEMS_REF.get_child(ITEMS_EQUIPPED.size()-1).resalt()
 	if not code in ITEMS_UNLOCKED: ITEMS_UNLOCKED.append(code)

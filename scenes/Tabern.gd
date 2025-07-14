@@ -95,7 +95,9 @@ func _on_hover(node,val):
 
 func _on_click_continue():
 	PartyManager.ITEMS_EQUIPPED.clear()
-	for it in selected_items: PartyManager.ITEMS_EQUIPPED.append(it.ab_data.name)
+	for it in selected_items: 
+		var it_data = PartyManager.get_item_data(it.ab_data.name)
+		PartyManager.ITEMS_EQUIPPED.append(it_data)
 	PartyManager.PARTY_CHARACTERS.clear()
 	for i in 3: 
 		print(selected[i].get_name())
@@ -139,7 +141,8 @@ func update_selected():
 			PartyManager.STATS["D"]+=PartyManager.CHARACTERS[index]["stats"][1]
 			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
 			if PartyManager.CHARACTERS[index]["abs"]:
-				PartyManager.ABILITIES.append(PartyManager.CHARACTERS[index]["abs"])
+				var ab_data = PartyManager.get_ability_data(PartyManager.CHARACTERS[index]["abs"])
+				PartyManager.ABILITIES.append(ab_data)
 	Lang.set_text_vars(PartyManager.get_stats_array())
 	$Stats/RichTextLabel.text = Lang.get_text("some_stats")
 
@@ -165,7 +168,9 @@ func update_items_ui():
 		pa.visible = false
 		pa.is_tabern = true
 	for i in PartyManager.ITEMS_UNLOCKED.size():
-		$Items.get_child(i).set_item(PartyManager.ITEMS_UNLOCKED[i])
+		var it_name = PartyManager.ITEMS_UNLOCKED[i]
+		var ab_data = PartyManager.get_item_data(it_name)
+		$Items.get_child(i).set_item(ab_data)
 		$Items.get_child(i).visible = true
 		$Items.get_child(i).set_selected( $Items.get_child(i) in selected_items )
 

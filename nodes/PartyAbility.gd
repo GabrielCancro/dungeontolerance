@@ -10,25 +10,26 @@ func _ready() -> void:
 	$Button.connect("button_down",_on_click)
 	$Button.focus_mode = FOCUS_NONE
 
-func set_ability(_name):
-	ab_data = PartyManager.get_ability_data(_name)
-	ab_data["name"] = _name
+func set_ability(_ab_data):
+	ab_data = _ab_data
 	ab_data["is_item"] = false
 	ab_data["node"] = self
-	$TextureRect.texture = load("res://assets/abilities/ab_"+_name+".png")
+	$TextureRect.texture = load("res://assets/abilities/ab_"+ab_data["name"]+".png")
 	update_reqs()
 
-func set_item(_name):
-	ab_data = PartyManager.get_item_data(_name)
-	ab_data["name"] = _name
+func set_item(_ab_data):
+	ab_data = _ab_data
 	ab_data["is_item"] = true
 	ab_data["node"] = self
-	$TextureRect.texture = load("res://assets/abilities/ab_"+_name+".png")
+	$TextureRect.texture = load("res://assets/abilities/ab_"+ab_data["name"]+".png")
 	update_reqs()
+	$lb_uses.visible = ("uses" in ab_data)
+	if ("uses" in ab_data): $lb_uses.text = "x"+str(ab_data["uses"])
 
 func _on_hover(val):
 	$BGColor.visible = val
 	var name = Lang.get_text("ab_"+ab_data.name+"_name",["TITLE"])
+	if "uses" in ab_data: name += " [color=A0A0A0]x"+str(ab_data["uses"])+"[/color]"
 	var req =  "  "+Lang.get_req_string(ab_data["req"])
 	if val: HintManager.set_text(name+" "+req+"\n"+Lang.get_text("ab_"+ab_data.name))
 	else: HintManager.set_text()
@@ -54,13 +55,17 @@ func update_reqs():
 		$HBox.get_child(index).visible = true
 		$HBox.get_child(index).get_node("color").modulate = DiceManager.COLORS[k]
 		index += 1
-		print("UPDATE!!!!! ", ab_data)
 
 func dec_charge():
-	if !"ch" in ab_data: return
-	ab_data["ch"] = max(0, ab_data["ch"]-1)
-	if ab_data["ch"]<=0: modulate = Color(.5,.5,.5,.7)
-	else:  modulate = Color(1,1,1,1)
+	if "ch" in ab_data:
+		ab_data["ch"] = max(0, ab_data["ch"]-1)
+		if ab_data["ch"]<=0: modulate = Color(.5,.5,.5,.7)
+		else:  modulate = Color(1,1,1,1)
+	if "uses" in ab_data:
+		ab_data["uses"] = max(0, ab_data["uses"]-1)
+		if ab_data["uses"]<=0: 
+			PartyManager.ITEMS_EQUIPPED.remove_at(get_index())
+		PartyManager.update_items_ui()
 
 func restore_charges():
 	if !"ch" in ab_data: return

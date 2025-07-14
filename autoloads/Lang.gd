@@ -17,12 +17,16 @@ var TEXTS = {
 	
 	"ab_old_axe_name_es":"VIEJA HACHA",
 	"ab_old_axe_es":"Duplica el valor de un dado de @STR.",
+	"ab_sword_name_es":"GRAN ESPADA",
+	"ab_sword_es":"Lanza un dado extra de @STR.",
 	"ab_dage_name_es":"DAGA",
 	"ab_dage_es":"Aplica -1HP directo a un enemigo.",
 	"ab_crossbow_name_es":"BALLESTA",
 	"ab_crossbow_es":"Aplica -2HP directo a un enemigo.",
 	"ab_gold_ring_name_es":"ANILLO DORADO",
 	"ab_gold_ring_es":"Otorga 3 de poder magico.",
+	"ab_bread_name_es":"PAN DE VIAJE",
+	"ab_bread_es":"Sana +3HP.",
 	
 	"def_tuto_rat_name_es":"Rata",
 	"def_rat_name_es":"Rata",

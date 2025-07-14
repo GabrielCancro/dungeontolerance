@@ -459,17 +459,14 @@ offset_bottom = 173.0
 theme_override_constants/separation = 8
 
 [node name="PartyAbility1" parent="Items" instance=ExtResource("12_0v3p0")]
-visible = true
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="PartyAbility2" parent="Items" instance=ExtResource("12_0v3p0")]
-visible = true
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="PartyAbility3" parent="Items" instance=ExtResource("12_0v3p0")]
-visible = true
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
