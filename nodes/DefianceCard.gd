@@ -86,6 +86,7 @@ func damage_defiance(dam):
 		emit_signal("on_destroy")
 		Effector.fade_down_and_free(self)
 		LevelManager.reorder_cards()
+		PartyManager.add_sanity(2)
 	return true
 
 func is_dead(): 

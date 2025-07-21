@@ -132,18 +132,37 @@ func texture_from_to(_texture,_start_pos,_end_pos,_start_scale,_end_scale):
 	node.queue_free() 
 
 func appear_defiance_shadow(node):
+	var dices = get_node("/root/Game/Dices")
 	var shadow = get_node("/root/Game/DefShadow")
 	shadow.position = node.position + node.size/2 - shadow.size/2 + Vector2(0,30)
 	shadow.modulate.a = 0
 	shadow.visible = true
 	var tw = create_tween()
 	tw.tween_property(shadow,"modulate:a",.7,.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(dices,"modulate:a",0,.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tw.play()
 
 func hide_defiance_shadow():
+	var dices = get_node("/root/Game/Dices")
 	var shadow = get_node("/root/Game/DefShadow")
 	var tw = create_tween()
 	tw.tween_property(shadow,"modulate:a",0,.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(dices,"modulate:a",1,.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tw.play()
 	await tw.finished
 	shadow.visible = false
+
+#func sanity_fx():
+	#var ref = get_node("/root/Game/CLUI/SanityFx")
+	#var tw = create_tween()
+	#for t in ref.get_children():
+		#if t.get_index()==0: continue
+		#t.modulate.a = 0
+		#t.rotation -= randf_range(0,1)
+		##tw.parallel().tween_property(t,"modulate:a",1,randf_range(.4,.8)).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		##tw.parallel().tween_property(t,"rotation",t.rotation+randf_range(.1,.2),2)
+		##tw.parallel().tween_property(t,"modulate:a",0,randf_range(.4,.8)).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD).set_delay(1)
+	#tw.play()
+	#ref.visible = true
+	#await tw.finished
+	#ref.visible = false

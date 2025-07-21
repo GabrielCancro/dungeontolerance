@@ -17,6 +17,7 @@ func on_chosse(destine,op):
 
 func in_campfire_chosse_op1():
 	#DEC EYES
+	PartyManager.add_sanity(5)
 	await GameManager.timeout(.5)
 
 func in_campfire_chosse_op2():

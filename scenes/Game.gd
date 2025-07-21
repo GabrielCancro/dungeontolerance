@@ -4,7 +4,7 @@ func _ready() -> void:
 	HintManager.init($Hint/HintPanel)
 	$BtnAddDice.connect("button_down",DiceManager.add_random_dice)
 	$BtnEndTurn.connect("button_down",GameManager.on_end_turn)
-	$BtnAddEnemy.connect("button_down",LevelManager._add_defiance.bind("rat"))
+	$BtnAddEnemy.connect("button_down",LevelManager.add_defiance.bind("rat"))
 	$CLUI/BtnSkipTutorial.connect("button_down",on_skip_tuto)
 	$CLUI/BtnSkipTutorial.visible = false
 	GameManager.GAME_SCENE_REF = self
@@ -38,7 +38,7 @@ func tuto_sequence():
 	await PartyManager.roll_party_dices()
 	await $CLUI/Tutorial.show_tuto("dices")
 	await GameManager.timeout(1)
-	await LevelManager._add_defiance("tuto_rat")
+	await LevelManager.add_defiance("tuto_rat")
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("rat1")
 	await $CLUI/Tutorial.show_tuto("rat2")
@@ -59,14 +59,13 @@ func tuto_sequence():
 	await $CLUI/Tutorial.show_tuto("power2")
 	await $CLUI/Tutorial.show_tuto("end")
 	DiceManager.remove_dices()
-	await LevelManager._add_defiance("tuto_rat")
-	await LevelManager._add_defiance("tuto_rat")
+	await LevelManager.add_defiance("tuto_rat")
+	await LevelManager.add_defiance("tuto_rat")
 	await PartyManager.roll_party_dices()
 	
 func start_sequence():
-	GameManager.timeout(1)
+	await GameManager.on_end_turn()
 	GameManager.POWERGEM_REF.show_powergem()
-	GameManager.on_end_turn()
 
 func on_skip_tuto():
 	SaveManager.DATA["prestige"] = 1

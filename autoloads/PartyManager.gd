@@ -1,7 +1,7 @@
 extends Node
 
 var STATS = {"S":2,"D":1,"M":1}
-var DATA = {"HP":20,"HPM":20, "SH":0}
+var DATA = {"HP":20,"HPM":20, "SH":0, "SANITY":1}
 var ABILITIES = []
 var ITEMS_EQUIPPED = []
 var ITEMS_UNLOCKED = []
@@ -15,24 +15,25 @@ var ABILITIES_DATA = {
 }
 
 var ITEMS_DATA = { 
-	"dage":{"ch":1, "chm":1, "req":{} },
-	"old_axe":{"ch":1, "chm":1, "req":{"S":2} },
-	"sword":{"ch":1, "chm":1, "req":{} },
-	"rope":{"ch":1, "chm":1, "req":{} },
-	"crossbow":{"ch":1, "chm":1, "req":{"D":1} },
-	"gold_ring":{"ch":1, "chm":1, "req":{"M":1} },
-	"iron_helm":{"ch":1, "chm":1, "req":{} },
-	"bread":{"uses":3, "ch":1, "chm":1, "req":{} },
+	"dage":{"chm":1, "req":{} },
+	"old_axe":{"chm":1, "req":{"S":2} },
+	"sword":{"chm":1, "req":{} },
+	"rope":{"chm":1, "req":{} },
+	"crossbow":{"chm":1, "req":{"D":1} },
+	"gold_ring":{"chm":1, "req":{"M":1} },
+	"iron_helm":{"chm":1, "req":{} },
+	"bread":{"uses":3, "chm":1, "req":{} },
+	"speed_bots":{"chm":1, "req":{} },
 }
 
 var CHARACTERS = [
-	{"name":"Thior","class":"explorer", "stats":[1,1,0],"abs":null},
-	{"name":"Samuel","class":"rogue", "stats":[0,1,1],"abs":null},
-	{"name":"Ryna","class":"barbarian", "stats":[2,0,0],"abs":null},
-	{"name":"Alem","class":"explorer", "stats":[0,1,0],"abs":"atletic"},
-	{"name":"Hanna","class":"sorcerer", "stats":[0,0,1],"abs":"bendition"},
-	{"name":"Brian","class":"rogue", "stats":[0,1,0],"abs":"subtlety"},
-	{"name":"Drum","class":"warrior", "stats":[1,0,0],"abs":"protector"},
+	{"name":"Thior","class":"explorer", "hp":10, "sanity":4, "stats":[1,1,0],"abs":null},
+	{"name":"Samuel","class":"rogue", "hp":10, "sanity":4, "stats":[0,1,1],"abs":null},
+	{"name":"Ryna","class":"barbarian", "hp":10, "sanity":4, "stats":[2,0,0],"abs":null},
+	{"name":"Alem","class":"explorer", "hp":10, "sanity":4, "stats":[0,1,0],"abs":"atletic"},
+	{"name":"Hanna","class":"sorcerer", "hp":10, "sanity":4, "stats":[0,0,1],"abs":"bendition"},
+	{"name":"Brian","class":"rogue", "hp":10, "sanity":4, "stats":[0,1,0],"abs":"subtlety"},
+	{"name":"Drum","class":"warrior", "hp":10, "sanity":4, "stats":[1,0,0],"abs":"protector"},
 ]
 
 func _on_click_party_ability(ab_data):
@@ -47,11 +48,13 @@ func _on_click_party_ability(ab_data):
 func get_ability_data(code):
 	var ab_data = ABILITIES_DATA[code].duplicate()
 	ab_data["name"] = code
+	if "chm" in ab_data: ab_data["ch"] = ab_data["chm"]
 	return ab_data
 
 func get_item_data(code):
 	var ab_data = ITEMS_DATA[code].duplicate()
 	ab_data["name"] = code
+	if "chm" in ab_data: ab_data["ch"] = ab_data["chm"]
 	return ab_data
 
 func ab_streng(ab_data):
@@ -119,7 +122,7 @@ func ab_dage(ab_data):
 	if !def: return false
 	#EFFECT
 	await GameManager.timeout(.2)
-	def.damage_defiance(1)
+	def.damage_defiance(2)
 	return true
 
 func ab_crossbow(ab_data):
@@ -129,7 +132,7 @@ func ab_crossbow(ab_data):
 	if !def: return false
 	#EFFECT
 	await GameManager.timeout(.2)
-	def.damage_defiance(2)
+	def.damage_defiance(4)
 	return true
 
 func ab_old_axe(ab_data):
@@ -164,6 +167,17 @@ func ab_bread(ab_data):
 	await GameManager.timeout(1)
 	return true
 
+func ab_speed_bots(ab_data):
+	GameManager.timeout(.4)
+	DiceManager.add_dice("D")
+	return true
+
+func ab_rope(ab_data):
+	GameManager.timeout(.4)
+	PartyManager.add_shield(2)
+	return true
+
+#END ITEMS
 func apply_damage(val,def_data):
 	if DATA.SH>0: 
 		Effector.float_text("-"+str(min(DATA.SH,val))+"SH",Vector2(365,420),"SHIELD")
@@ -172,11 +186,21 @@ func apply_damage(val,def_data):
 		await GameManager.timeout(.2)
 		if DATA.SH<0: val = -1*DATA.SH
 		else: val = 0
+		DATA.SH = max(DATA.SH,0)
 	if val>0:
 		DATA.HP = max(0,DATA.HP-val)
 		Effector.float_text("-"+str(val)+"HP",Vector2(320,380),"DAMAGE")
 		GameManager.PARTY_REF.damage_fx()
 		await DefianceManager.launch_trigger("on_end_defiance_attack",def_data)
+	if DATA.HP<=0:
+		GameManager.show_popup("GameOver")
+
+func apply_direct_damage(val,def_data):
+	DATA.HP = max(0,DATA.HP-val)
+	Effector.float_text("-"+str(val)+"HP",Vector2(320,380),"DAMAGE")
+	GameManager.PARTY_REF.damage_fx()
+	await DefianceManager.launch_trigger("on_end_defiance_attack",def_data)
+	if DATA.HP<=0: GameManager.show_popup("GameOver")
 
 func apply_heal(val):
 	DATA.HP = min(DATA.HPM,DATA.HP+val)
@@ -239,3 +263,11 @@ func get_rnd_item():
 	randomize()
 	array.shuffle()
 	return array[0]
+
+func dec_sanity():
+	DATA.SANITY = max(0,DATA.SANITY-1)
+	GameManager.EYE_TRACK_REF.update_ui()
+
+func add_sanity(val):
+	DATA.SANITY = DATA.SANITY+val
+	GameManager.EYE_TRACK_REF.update_ui()

@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://da3o35be5tlls"]
+[gd_scene load_steps=14 format=3 uid="uid://da3o35be5tlls"]
 
 [ext_resource type="Texture2D" uid="uid://cn08dfnwjafyb" path="res://assets/backgrounds/bg1.png" id="1_cpr0p"]
 [ext_resource type="Script" uid="uid://d0lvpiciudhoe" path="res://scenes/Game.gd" id="1_g4kob"]
 [ext_resource type="PackedScene" uid="uid://br312qnlppkft" path="res://nodes/Party.tscn" id="3_g4kob"]
 [ext_resource type="Texture2D" uid="uid://bttg6i4y5ofd4" path="res://assets/def_shadow.png" id="4_mcffj"]
+[ext_resource type="PackedScene" uid="uid://enhbweoc8en4" path="res://nodes/EyeTrack.tscn" id="7_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://dcr7x3ojlmaqm" path="res://nodes/DestinePopup.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://lwpk86seugi6" path="res://nodes/PartyAbility.tscn" id="9_qy1jj"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="10_3xj3m"]
 [ext_resource type="PackedScene" uid="uid://clf3wf8j0jaqv" path="res://nodes/Tutorial.tscn" id="12_2rd6h"]
+[ext_resource type="Texture2D" uid="uid://c1k27h528okjv" path="res://assets/sanity.png" id="12_7ua8r"]
 [ext_resource type="PackedScene" uid="uid://oc1ia3anhg10" path="res://nodes/PowerGem.tscn" id="12_mcffj"]
 [ext_resource type="PackedScene" uid="uid://c4tbv7x06y4rc" path="res://nodes/TargetChosser.tscn" id="13_2rd6h"]
 
@@ -69,10 +71,10 @@ layout_mode = 1
 anchors_preset = 0
 
 [node name="PartyAbility1" parent="Abilities" instance=ExtResource("9_qy1jj")]
-offset_left = 23.0
-offset_top = 397.0
-offset_right = 83.0
-offset_bottom = 457.0
+offset_left = 9.0
+offset_top = 355.0
+offset_right = 69.0
+offset_bottom = 415.0
 
 [node name="PartyAbility2" parent="Abilities" instance=ExtResource("9_qy1jj")]
 offset_left = 82.0
@@ -87,10 +89,10 @@ offset_right = 216.0
 offset_bottom = 352.0
 
 [node name="PartyAbility4" parent="Abilities" instance=ExtResource("9_qy1jj")]
-offset_left = 6.0
-offset_top = 310.0
-offset_right = 66.0
-offset_bottom = 370.0
+offset_left = 7.0
+offset_top = 268.0
+offset_right = 67.0
+offset_bottom = 328.0
 
 [node name="PartyAbility5" parent="Abilities" instance=ExtResource("9_qy1jj")]
 offset_left = 86.0
@@ -104,17 +106,11 @@ offset_top = 219.0
 offset_right = 228.0
 offset_bottom = 279.0
 
-[node name="PartyAbility7" parent="Abilities" instance=ExtResource("9_qy1jj")]
-offset_left = 9.0
-offset_top = 218.0
-offset_right = 69.0
-offset_bottom = 278.0
-
 [node name="Items" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 8.0
+offset_left = 11.0
 offset_top = 16.0
-offset_right = 601.0
+offset_right = 604.0
 offset_bottom = 76.0
 theme_override_constants/separation = 8
 
@@ -157,9 +153,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -270.0
+offset_left = -417.0
 offset_top = 16.0
-offset_right = -8.0
+offset_right = -155.0
 offset_bottom = 44.0
 grow_horizontal = 0
 color = Color(0.2, 0.2, 0.2, 1)
@@ -178,6 +174,17 @@ theme_override_font_sizes/font_size = 18
 text = "EXPEDICION 1      ROOM 1/5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EyeTrack" parent="." instance=ExtResource("7_3xj3m")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1090.0
+offset_top = 152.0
+offset_right = -1090.0
+offset_bottom = 152.0
+grow_horizontal = 0
 
 [node name="BtnAddDice" type="Button" parent="."]
 layout_mode = 0
@@ -208,10 +215,10 @@ text = "ADD RND ENEMY"
 
 [node name="Dices" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 356.0
-offset_top = 379.0
-offset_right = 627.0
-offset_bottom = 533.0
+offset_left = 389.0
+offset_top = 383.0
+offset_right = 641.0
+offset_bottom = 526.0
 color = Color(0.172549, 0.172549, 0.172549, 0.392157)
 
 [node name="DestinePopup" parent="." instance=ExtResource("8_qy1jj")]
@@ -298,3 +305,111 @@ offset_right = 1140.0
 offset_bottom = 48.0
 theme = ExtResource("10_3xj3m")
 text = "SKIP TUTO"
+
+[node name="SanityFx" type="Control" parent="CLUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CLUI/SanityFx"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.105882, 0.411765)
+
+[node name="Tentacles" type="TextureRect" parent="CLUI/SanityFx"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -597.0
+offset_top = 329.0
+offset_right = -432.0
+offset_bottom = 494.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("12_7ua8r")
+expand_mode = 1
+
+[node name="Tentacles2" type="TextureRect" parent="CLUI/SanityFx"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.0
+offset_top = 313.0
+offset_right = -136.0
+offset_bottom = 478.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("12_7ua8r")
+expand_mode = 1
+
+[node name="Tentacles3" type="TextureRect" parent="CLUI/SanityFx"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = 329.0
+offset_right = 147.0
+offset_bottom = 494.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("12_7ua8r")
+expand_mode = 1
+
+[node name="Tentacles4" type="TextureRect" parent="CLUI/SanityFx"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 255.0
+offset_top = 288.0
+offset_right = 420.0
+offset_bottom = 453.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("12_7ua8r")
+expand_mode = 1
+
+[node name="Tentacles5" type="TextureRect" parent="CLUI/SanityFx"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 481.0
+offset_top = 329.0
+offset_right = 646.0
+offset_bottom = 494.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("12_7ua8r")
+expand_mode = 1

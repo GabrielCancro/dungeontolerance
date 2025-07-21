@@ -396,6 +396,62 @@ texture = ExtResource("13_6av1h")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Items" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 113.0
+offset_right = 970.0
+offset_bottom = 173.0
+theme_override_constants/separation = 8
+
+[node name="PartyAbility1" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility2" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility3" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility4" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility5" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility6" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility7" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility8" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility9" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility10" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility11" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility12" parent="Items" instance=ExtResource("12_0v3p0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
 [node name="HintPanel" type="ColorRect" parent="."]
 visible = false
 layout_mode = 0
@@ -450,42 +506,6 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Items" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 113.0
-offset_right = 970.0
-offset_bottom = 173.0
-theme_override_constants/separation = 8
-
-[node name="PartyAbility1" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="PartyAbility2" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="PartyAbility3" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="PartyAbility4" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="PartyAbility5" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="PartyAbility6" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
-[node name="PartyAbility7" parent="Items" instance=ExtResource("12_0v3p0")]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-
 [node name="TutoPoints" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0
@@ -525,9 +545,9 @@ layout_mode = 1
 [node name="Stats" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 85.0
-offset_top = 606.0
+offset_top = 597.0
 offset_right = 408.0
-offset_bottom = 642.0
+offset_bottom = 645.0
 color = Color(0.103744, 0.103744, 0.103744, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Stats"]
@@ -541,10 +561,12 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/line_separation = -6
 theme_override_fonts/normal_font = SubResource("SystemFont_6av1h")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "FUERZA:1   DESTREZA:2   MAGIA:4  "
+text = "FUERZA:1   DESTREZA:2 
+FUERZA:1   DESTREZA:2   MAGIA:4  "
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1

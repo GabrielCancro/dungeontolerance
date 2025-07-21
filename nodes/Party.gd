@@ -4,9 +4,10 @@ var t = [0,.4,.8]
 
 func _ready() -> void:
 	$Button.connect("button_down",set_retraits)
+	$Shield/Button.connect("button_down",on_click_shield)
 	update_ui()
 	update_shield()
-	$Shield.modulate.a = 0
+	#$Shield.modulate.a = 0
 	set_retraits()
 
 func set_retraits():
@@ -40,9 +41,17 @@ func healt_fx():
 	update_ui()
 
 func update_shield():
+	$Shield/block.visible = (PartyManager.DATA.SH==0)
 	if (PartyManager.DATA.SH>0):
-		$Shield.modulate.a = 1
 		$Shield/Label.text = str(PartyManager.DATA.SH)
 		await Effector.boom($Shield)
-	else: 
-		await Effector.fade_down($Shield)
+	else:
+		$Shield/Label.text = "0"
+		await GameManager.timeout(.5)
+
+func on_click_shield():
+	var dice = DiceManager.get_dice_drag()
+	if !dice: return
+	dice.consume_dice()
+	PartyManager.DATA.SH += 1
+	update_shield()

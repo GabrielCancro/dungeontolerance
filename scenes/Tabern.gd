@@ -16,7 +16,6 @@ func _ready() -> void:
 	$PR/Label.text = str(int(SaveManager.DATA["prestige"]))
 	HintManager.init($HintPanel)
 	$CharDataPanel.visible = false
-	update_selected()
 	PartyManager.ITEMS_UNLOCKED = SaveManager.DATA["items_unlocked"]
 	selected_items = []
 	
@@ -27,6 +26,8 @@ func _ready() -> void:
 	selected = [null,null,null]
 	for s in SaveManager.DATA["characters_preselected"]:
 		_on_click_character($Characters.get_child(s-1))
+	
+	#SET CHARACTERS FUNCTIONS
 	for c in $Characters.get_children():
 		var i = c.get_index()
 		t["t"+str(i)] = (0.01+i%4*0.02)
@@ -41,6 +42,7 @@ func _ready() -> void:
 		$PartyButtons.get_child(ch.get_index()).connect("mouse_exited",_on_hover.bind(ch,false))
 		$PartyButtons.get_child(ch.get_index()).connect("button_down",_on_click_character.bind(ch))
 	
+	update_selected()
 	update_items_ui()
 	for it in $Items.get_children(): 
 		it.connect("on_click_tabern_item",_on_item_click)
@@ -78,6 +80,8 @@ func _on_hover(node,val):
 			if pj.stats[i]>0:
 				text += "[color="+DiceManager.COLORS[stat]+"]"+Lang.get_text("stat_"+stat)+": +"+str(pj.stats[i])+"[/color]  "
 		text += '\n'
+		text += "[color=#FFC0C0]"+Lang.get_text("stat_hp")+": +"+str(pj.hp)+"[/color]  "
+		text += "[color=#D0D0F0]"+Lang.get_text("stat_sanity")+": +"+str(pj.sanity)+"[/color]  \n"
 		if pj.abs:
 			var ab_data = PartyManager.get_ability_data(pj.abs)
 			text += "\n" + Lang.get_text("ab_"+pj.abs+"_name",["TITLE"])
@@ -133,18 +137,26 @@ func update_selected():
 	PartyManager.STATS["S"]=0
 	PartyManager.STATS["D"]=0
 	PartyManager.STATS["M"]=0
+	PartyManager.DATA.HP = 0
+	PartyManager.DATA.SANITY = 0
 	PartyManager.ABILITIES = []
 	for i in 3:
 		if selected[i]: 
 			var index = selected[i].get_index()
+			selected[i].modulate = Color(.1,.1,.1,1)
 			PartyManager.STATS["S"]+=PartyManager.CHARACTERS[index]["stats"][0]
 			PartyManager.STATS["D"]+=PartyManager.CHARACTERS[index]["stats"][1]
 			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
+			PartyManager.DATA.HP += PartyManager.CHARACTERS[index].hp
+			PartyManager.DATA.SANITY += PartyManager.CHARACTERS[index].sanity
 			if PartyManager.CHARACTERS[index]["abs"]:
 				var ab_data = PartyManager.get_ability_data(PartyManager.CHARACTERS[index]["abs"])
 				PartyManager.ABILITIES.append(ab_data)
+	PartyManager.DATA.HPM = PartyManager.DATA.HP
+	$Stats/RichTextLabel.text = "[color=#FFC0C0]"+Lang.get_text("stat_hp")+":"+str(PartyManager.DATA.HP)+"[/color]  "
+	$Stats/RichTextLabel.text += "[color=#D0D0F0]"+Lang.get_text("stat_sanity")+":"+str(PartyManager.DATA.SANITY)+"[/color]\n"
 	Lang.set_text_vars(PartyManager.get_stats_array())
-	$Stats/RichTextLabel.text = Lang.get_text("some_stats")
+	$Stats/RichTextLabel.text += Lang.get_text("some_stats")
 
 func _on_click_character(ch):
 	if ch in $Party.get_children():
@@ -158,7 +170,6 @@ func _on_click_character(ch):
 		
 	for i in 3:
 		if !selected[i]:
-			ch.modulate = Color(.1,.1,.1,1)
 			selected[i] = ch
 			update_selected()
 			return

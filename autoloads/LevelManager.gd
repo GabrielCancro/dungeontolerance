@@ -37,7 +37,7 @@ func next_level():
 		for def_tag in DUNGEONS[level][room_index]:
 			var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
 			print("ADDING ",key," by tag ",def_tag)
-			_add_defiance(key)
+			add_defiance(key)
 	return true
 
 func is_now_in_destine():
@@ -46,7 +46,7 @@ func is_now_in_destine():
 	print("IS NOW IN DESTINE ",(DUNGEONS[level][room_index]=="DESTINE"))
 	return (DUNGEONS[level][room_index]=="DESTINE")
 
-func _add_defiance(def_type):
+func add_defiance(def_type):
 	if DefianceManager.ALL_DEFIANCES.size()>=5: 
 		print("MANY DEFIANCES!!!!")
 		return

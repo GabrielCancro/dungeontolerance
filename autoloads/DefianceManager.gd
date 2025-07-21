@@ -6,8 +6,8 @@ var ALL_DEFIANCES = []
 const DEFIANCES = {
 	"tuto_rat":{     "hp":7 , "stats":{"S":2,"D":1,"M":0}, "tags":"", 
 		"abs":[ "aggressive*2" ] },
-	"goblin":{  "hp":15, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
-		"abs":["aggressive*3","counterattack*2"] },
+	"goblin":{  "hp":12, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
+		"abs":["aggressive*2","counterattack*2"] },
 	"rat":{     "hp":10 , "stats":{"S":2,"D":2,"M":3}, "tags":"B", 
 		"abs":[ "aggressive*2" ] }, #"shield*2",
 	"bat":{     "hp":8 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
@@ -18,6 +18,8 @@ const DEFIANCES = {
 		"abs":[ "activation*3", "trap_damage*10" ] },
 	"slime":{"hp":12 , "stats":{"S":4,"D":4,"M":1}, "tags":"S", 
 		"abs":[ "aggressive*3","shield*1" ] },
+	"ghost":{"hp":7 , "stats":{"S":4,"D":4,"M":2}, "tags":"-", 
+		"abs":[ "necrotic*3"] },
 }
 
 func get_defiance_data(def_code,level=1):
@@ -50,6 +52,7 @@ func get_def_ability_data(ab_code,ab_level):
 	var ab_data = {"name":ab_code, "level":ab_level}
 	if ab_code=="counterattack": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="aggressive": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
+	if ab_code=="necrotic": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="trap_damage": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="activation": ab_data.merge({"count":0,"max_count":ab_level})
 	if ab_code=="shield": ab_data.merge({"count":ab_level,"max_count":ab_level})
@@ -114,6 +117,14 @@ func aggressive_on_end_turn(ab_data, def_card):
 	randomize()
 	await PartyManager.apply_damage(randi_range(ab_data.min,ab_data.max),def_card)
 	await GameManager.timeout(.5)
+
+func necrotic_on_end_turn(ab_data, def_card):
+	ab_data.node.resalt()
+	await GameManager.timeout(.5)
+	randomize()
+	await PartyManager.apply_direct_damage(randi_range(ab_data.min,ab_data.max),def_card)
+	await GameManager.timeout(.5)
+
 
 func drainer_on_end_defiance_attack(ab_data, def_card):
 	await GameManager.timeout(.7)

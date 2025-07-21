@@ -11,6 +11,7 @@ var PARTY_ITEMS_REF
 var PARTY_REF
 var DESTINE_REF
 var BG_IMAGE_REF
+var EYE_TRACK_REF
 var block_input_time = 0
 
 func _process(delta: float) -> void:
@@ -24,9 +25,10 @@ func _process(delta: float) -> void:
 func on_end_turn():
 	block_input(1)
 	await DiceManager.clear_dices()
-	await timeout(1)
-	await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
-	await timeout(1)
+	if DefianceManager.ALL_DEFIANCES.size()>=0:
+		await timeout(1)
+		await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
+		await timeout(1)
 	await PartyManager.clear_shield()
 	if DefianceManager.ALL_DEFIANCES.size()<=0:
 		await end_room()
@@ -34,9 +36,17 @@ func on_end_turn():
 		await start_room()
 		if !result: return
 	else:
+		PartyManager.dec_sanity()
+		if PartyManager.DATA.SANITY<=0:
+			await timeout(.5)
+			#await Effector.sanity_fx()
+			await LevelManager.add_defiance("ghost")
+			PartyManager.add_sanity(2)
+		await timeout(.5)
 		await start_turn()
 
 func start_turn():
+	if PartyManager.DATA.HP<=0: return
 	if !LevelManager.is_now_in_destine():
 		await PartyManager.roll_party_dices()
 		await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
