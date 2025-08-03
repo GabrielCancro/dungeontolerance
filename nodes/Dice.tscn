@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://kipaawxbpyvv"]
+[gd_scene load_steps=5 format=3 uid="uid://kipaawxbpyvv"]
 
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="1_xk0hr"]
 [ext_resource type="Script" uid="uid://b34bvctlvf82p" path="res://nodes/Dice.gd" id="1_yqq3n"]
+[ext_resource type="Texture2D" uid="uid://bj0pp5argbhoj" path="res://assets/dice_icon_shadow.png" id="2_rb0yx"]
+[ext_resource type="Texture2D" uid="uid://b2bujdcv6jbwb" path="res://assets/dice_icon.png" id="3_i2jl6"]
 
 [node name="Dice" type="Control"]
 custom_minimum_size = Vector2(50, 50)
@@ -25,7 +27,28 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Shadow" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -8.0
+offset_top = -5.0
+offset_right = 61.0
+offset_bottom = 58.0
+texture = ExtResource("2_rb0yx")
+expand_mode = 1
+
+[node name="DiceImage" type="TextureRect" parent="."]
+modulate = Color(1, 0, 0.333333, 1)
+layout_mode = 0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 57.0
+offset_bottom = 55.0
+texture = ExtResource("3_i2jl6")
+expand_mode = 1
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +58,7 @@ grow_vertical = 2
 color = Color(0.20871, 0.20871, 0.20871, 1)
 
 [node name="Border" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,13 +109,35 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.901961, 0.603922, 1, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("1_xk0hr")
 theme_override_font_sizes/font_size = 35
 text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bonif" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.989825, 1, 0.756121, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_xk0hr")
+theme_override_font_sizes/font_size = 30
+text = "+2"
 horizontal_alignment = 1
 vertical_alignment = 1
 

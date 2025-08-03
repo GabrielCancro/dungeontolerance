@@ -14,6 +14,7 @@ func set_ability(_ab_data):
 	ab_data = _ab_data
 	ab_data["is_item"] = false
 	ab_data["node"] = self
+	$lb_uses.visible = false
 	$TextureRect.texture = load("res://assets/abilities/ab_"+ab_data["name"]+".png")
 	update_reqs()
 

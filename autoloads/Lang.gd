@@ -5,9 +5,9 @@ var text_vars = []
 
 var TEXTS = {
 	"ab_streng_name_es":"FUERZA BRUTA",
-	"ab_streng_es":"Aumenta en +2 un dado de @STR",
+	"ab_streng_es":"Aumenta en +3 un dado de @STR",
 	"ab_subtlety_name_es":"SUTILEZA",
-	"ab_subtlety_es":"Aumenta +2 a un dado de @DEX",
+	"ab_subtlety_es":"Aumenta +3 a un dado de @DEX",
 	"ab_atletic_name_es":"ATLETISMO",
 	"ab_atletic_es":"Cambia un dado @STR->@DEX o @DEX->@STR y suma +2",
 	"ab_protector_name_es":"PROTECTOR",
@@ -16,7 +16,7 @@ var TEXTS = {
 	"ab_bendition_es":"Aumenta +2 a un dado al azar (debes tener al menos dos dados)",
 	
 	"ab_old_axe_name_es":"VIEJA HACHA",
-	"ab_old_axe_es":"Duplica el valor de un dado de @STR.",
+	"ab_old_axe_es":"Bonifica entre 1 y 6 el valor de un dado de @STR.",
 	"ab_sword_name_es":"GRAN ESPADA",
 	"ab_sword_es":"Lanza un dado extra de @STR.",
 	"ab_dage_name_es":"DAGA",
@@ -30,7 +30,9 @@ var TEXTS = {
 	"ab_speed_bots_name_es":"BOTAS DE AGILIDAD",
 	"ab_speed_bots_es":"Otorga un dado de @DEX.",
 	"ab_rope_name_es":"CAPA",
-	"ab_rope_es":"Otorga +2 de escudo.",
+	"ab_rope_es":"Otorga +2 de escudo y +1 a todos tus dados de destreza.",
+	"ab_iron_helm_name_es":"YELMO DE HIERRO",
+	"ab_iron_helm_es":"Otorga +5 de escudo.",
 	
 	"def_tuto_rat_name_es":"Rata",
 	"def_rat_name_es":"Rata",
@@ -40,11 +42,13 @@ var TEXTS = {
 	"def_chest_name_es":"Cofre",
 	"def_slime_name_es":"Slime",
 	"def_ghost_name_es":"Espectro",
+	"def_spider_name_es":"Aracnido",
+	"def_rune_trap_name_es":"Trampa Runica",
 	
 	"def_ab_aggressive_name_es":"AGRESIVO",
 	"def_ab_aggressive_es":"Te atacara al finalizar el turno causando entre -#1HP y -#2HP.",
 	"def_ab_counterattack_name_es":"CONTRATAQUE",
-	"def_ab_counterattack_es":"Cada vez que colocas un dado en esta carta recibes entre -#1HP y -#2HP",
+	"def_ab_counterattack_es":"Una vez por turno, cuando coloques un dado en esta carta recibes entre -#1HP y -#2HP",
 	"def_ab_activation_name_es":"ACTIVACION",
 	"def_ab_activation_es":"Este temporizador avanza cada turno, al completarse se desencadenan sus efectos.",
 	"def_ab_trap_damage_name_es":"DANIO MASIVO",
@@ -57,6 +61,18 @@ var TEXTS = {
 	"def_ab_teasure_es":"Al resolver esta carta obtendras un objeto.",
 	"def_ab_necrotic_name_es":"NECROTICO",
 	"def_ab_necrotic_es":"Te atacara al finalizar el turno ignorando tu escudo entre -#1HP y -#2HP.",
+	"def_ab_poison_name_es":"VENENO",
+	"def_ab_poison_es":"Cada vez que te ataque con exito pierdes un punto de cordura.",
+	"def_ab_absorb_name_es":"ABSORBER",
+	"def_ab_absorb_es":"Absorbe el primer dado que apliques cada turno ignorando su valor.",
+	"def_ab_trap_sanity_name_es":"LOCURA",
+	"def_ab_trap_sanity_es":"Al activarse reduce -#0 tu cordura.",
+	
+	"destine_campfire_title_es":"Campamento",
+	"destine_campfire_desc_es":"Tras explorar pasillos oscuros y sortear trampas oxidadas, tu grupo encuentra un respiro, una pequeña sala iluminada por brasas apagadas y el aroma tenue de hierbas quemadas. Alguien acampó aquí antes... pero ya no están.  Un círculo de piedras guarda las cenizas de una fogata, y un tronco musgoso invita a sentarse. Este es un lugar seguro, al menos por ahora. El aire es más templado, y el silencio no parece hostil.",
+	"destine_campfire_op1_es":"Ganas 5 puntos de cordura.",
+	"destine_campfire_op2_es":"Restaura hasta 7 HP.",
+	"destine_campfire_op3_es":"Obtienes una racion de comida que rastaura 3 HP al final de cada combate durante 3 combates.",
 	
 	"tuto_welcome_es":"Bienvenidos aventureros! Les explicare las cosas basicas que todo aficionado deberia conocer antes de adentrarse en una mazmorra, hay muchos peligros alli.",
 	"tuto_party_es":"En la parte inferior veras las estadisticas de tu grupo. En cada turno lanzas un dado por cada punto de caracteristica que tengas.",
@@ -79,6 +95,8 @@ var TEXTS = {
 	"tuto_tabern5_es":"Combina tu grupo de tres aventureros como mas te convenga, cada personaje aporta sus propios stats y habilidades al grupo.",
 	"tuto_tabern6_es":"Cuendo estes listo, puedes viajar a la ruina por este sendero.",
 	"tuto_tabern7_es":"Muy bien!, Tengo mucho que limpiar alli atras, disfruta tu estadia!",
+	
+	"new_hero_1_es":"Un nuevo aventurero llego a la taberna.\nParece dispuesto a ayudarte en las ruinas.",
 	
 	"tx_end_expedition_es":"Muy bien aventureros! Han completado la expedicion!\nEs hora de volver a la taberna a descansar y contar tus logros!",
 	"tx_game_over_es":"Este lugar es mas peligroso de lo que pensabas.\nReagrupate, descansa y vuelve a intentarlo.",
@@ -107,7 +125,7 @@ var TEXTS = {
 	"stat_M_es":"Magia",
 	"stat_hp_es":"Vitalidad",
 	"stat_sanity_es":"Cordura",
-	
+	"max_power_es":"Carga maxima",
 }
 
 var REPLACES = {

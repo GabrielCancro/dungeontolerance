@@ -88,7 +88,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+[node name="Desc" type="RichTextLabel" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,7 +136,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "[color=F0F0C0]DESCANSAR[/color] - Reduce el alerta de la mazmorra 6 puntos."
+text = "[color=F0F0C0]DESCANSAR[/color] - Ganas 5 puntos de cordura."
 scroll_active = false
 vertical_alignment = 1
 
@@ -211,7 +211,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "[color=F0F0C0]ATENDER HERIDAS[/color] - Restaura hasta 5 HP."
+text = "[color=F0F0C0]ATENDER HERIDAS[/color] - Restaura hasta 7 HP."
 scroll_active = false
 vertical_alignment = 1
 

@@ -21,6 +21,8 @@ func set_data(data):
 	ab_data = data
 	ab_data["node"] = self
 	$Value.text = Lang.get_text("def_ab_"+ab_data.name+"_name")
+	if "active" in ab_data and !ab_data["active"]: $Value.modulate.a = 0.5
+	else: $Value.modulate.a = 1
 	if "count" in ab_data: $Value.text += " "+str(ab_data.count)+"/"+str(ab_data.max_count)
 	else: $Value.text += " "+str(ab_data.level)
 

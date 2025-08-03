@@ -13,6 +13,7 @@ var DESTINE_REF
 var BG_IMAGE_REF
 var EYE_TRACK_REF
 var block_input_time = 0
+var turn_counter = 0
 
 func _process(delta: float) -> void:
 	if !is_instance_valid(INPUT_BLOCKER_REF): return
@@ -21,6 +22,14 @@ func _process(delta: float) -> void:
 	else: 
 		INPUT_BLOCKER_REF.visible = false
 		set_process(false)
+
+func on_start_game():
+	block_input(1)
+	DiceManager.clear_dices()
+	PartyManager.clear_shield()
+	POWERGEM_REF.show_powergem()
+	await LevelManager.next_level()
+	await start_room()
 
 func on_end_turn():
 	block_input(1)
@@ -47,6 +56,7 @@ func on_end_turn():
 
 func start_turn():
 	if PartyManager.DATA.HP<=0: return
+	turn_counter += 1
 	if !LevelManager.is_now_in_destine():
 		await PartyManager.roll_party_dices()
 		await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")

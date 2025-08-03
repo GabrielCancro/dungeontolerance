@@ -16,7 +16,7 @@ var ABILITIES_DATA = {
 
 var ITEMS_DATA = { 
 	"dage":{"chm":1, "req":{} },
-	"old_axe":{"chm":1, "req":{"S":2} },
+	"old_axe":{"chm":1, "req":{"S":1} },
 	"sword":{"chm":1, "req":{} },
 	"rope":{"chm":1, "req":{} },
 	"crossbow":{"chm":1, "req":{"D":1} },
@@ -27,13 +27,13 @@ var ITEMS_DATA = {
 }
 
 var CHARACTERS = [
-	{"name":"Thior","class":"explorer", "hp":10, "sanity":4, "stats":[1,1,0],"abs":null},
-	{"name":"Samuel","class":"rogue", "hp":10, "sanity":4, "stats":[0,1,1],"abs":null},
-	{"name":"Ryna","class":"barbarian", "hp":10, "sanity":4, "stats":[2,0,0],"abs":null},
-	{"name":"Alem","class":"explorer", "hp":10, "sanity":4, "stats":[0,1,0],"abs":"atletic"},
-	{"name":"Hanna","class":"sorcerer", "hp":10, "sanity":4, "stats":[0,0,1],"abs":"bendition"},
-	{"name":"Brian","class":"rogue", "hp":10, "sanity":4, "stats":[0,1,0],"abs":"subtlety"},
-	{"name":"Drum","class":"warrior", "hp":10, "sanity":4, "stats":[1,0,0],"abs":"protector"},
+	{"name":"Thior","class":"explorer", "hp":8, "sanity":2, "stats":[1,1,0],"abs":null},
+	{"name":"Samuel","class":"rogue", "hp":6, "sanity":1, "stats":[0,1,1],"abs":null},
+	{"name":"Ryna","class":"barbarian", "hp":8, "sanity":1, "stats":[2,0,0],"abs":null},
+	{"name":"Alem","class":"explorer", "hp":8, "sanity":2, "stats":[0,1,0],"abs":"atletic"},
+	{"name":"Hanna","class":"sorcerer", "hp":5, "sanity":4, "stats":[0,0,1],"abs":"bendition"},
+	{"name":"Brian","class":"rogue", "hp":6, "sanity":2, "stats":[0,1,0],"abs":"subtlety"},
+	{"name":"Drum","class":"warrior", "hp":10, "sanity":1, "stats":[1,0,0],"abs":"protector"},
 ]
 
 func _on_click_party_ability(ab_data):
@@ -63,9 +63,8 @@ func ab_streng(ab_data):
 	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
 	if !dice: return false
 	#EFFECT
-	Effector.float_text("+2",dice.global_position+dice.size/2+Vector2(0,-35),dice.get_color())
 	ab_data.node.resalt()
-	dice.set_value(dice.value + 2)
+	dice.add_bonif(3)
 	return true
 
 func ab_subtlety(ab_data):
@@ -74,9 +73,8 @@ func ab_subtlety(ab_data):
 	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
 	if !dice: return false
 	#EFFECT
-	Effector.float_text("+2",dice.global_position+dice.size/2+Vector2(0,-35),dice.get_color())
 	ab_data.node.resalt()
-	dice.set_value(dice.value + 2)
+	dice.add_bonif(3)
 	return true
 
 func ab_atletic(ab_data):
@@ -88,9 +86,8 @@ func ab_atletic(ab_data):
 	#EFFECT
 	ab_data.node.resalt()
 	if dice.type == "S": dice.set_type("D")
-	if dice.type == "D": dice.set_type("S")
-	Effector.float_text("+2",dice.global_position+dice.size/2+Vector2(0,-35),dice.get_color())
-	dice.set_value(dice.value + 2)
+	elif dice.type == "D": dice.set_type("S")
+	dice.add_bonif(2)
 	return true
 
 func ab_protector(ab_data):
@@ -110,8 +107,7 @@ func ab_bendition(ab_data):
 	ab_data.node.resalt()
 	dices.shuffle()
 	await GameManager.timeout(.5)
-	dices[0].set_value(dices[0].value + 2)
-	Effector.float_text("+2",dices[0].global_position+dices[0].size/2+Vector2(0,-35),dices[0].get_color())
+	dices[0].add_bonif(2)
 	return true
 
 #ITEMS
@@ -141,9 +137,7 @@ func ab_old_axe(ab_data):
 	var dice = await GameManager.TARGET_CHOSSER_REF.on_chosse
 	if !dice: return false
 	#EFFECT
-	Effector.float_text("+"+str(dice.value),dice.global_position+dice.size/2+Vector2(0,-35),dice.get_color())
-	ab_data.node.resalt()
-	dice.set_value(dice.value * 2)
+	dice.add_bonif(randi_range(1,6))
 	return true
 
 func ab_sword(ab_data):
@@ -175,6 +169,16 @@ func ab_speed_bots(ab_data):
 func ab_rope(ab_data):
 	GameManager.timeout(.4)
 	PartyManager.add_shield(2)
+	await GameManager.timeout(.5)
+	for dice in GameManager.DICES_REF.get_children():
+		if dice.type=="D":
+			await GameManager.timeout(.5)
+			dice.add_bonif(1)
+	return true
+
+func ab_iron_helm(ab_data):
+	GameManager.timeout(.4)
+	PartyManager.add_shield(5)
 	return true
 
 #END ITEMS
@@ -264,10 +268,12 @@ func get_rnd_item():
 	array.shuffle()
 	return array[0]
 
-func dec_sanity():
-	DATA.SANITY = max(0,DATA.SANITY-1)
+func dec_sanity(val=1):
+	DATA.SANITY = max(0,DATA.SANITY-val)
+	Effector.float_text("-"+str(val),Vector2(100,150),"NORMAL")
 	GameManager.EYE_TRACK_REF.update_ui()
 
-func add_sanity(val):
+func add_sanity(val=1):
 	DATA.SANITY = DATA.SANITY+val
+	Effector.float_text("+"+str(val),Vector2(100,150),"NORMAL")
 	GameManager.EYE_TRACK_REF.update_ui()

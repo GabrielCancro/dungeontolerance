@@ -38,11 +38,14 @@ func update_ui():
 func _on_click():
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
+	await dice.roll()
 	if dice.type in def_data.stats.keys(): 
-		Effector.boom_big($Stats.get_node(dice.type))
-		GameManager.block_input(.7)
-		if dice.value-def_data.stats[dice.type]<=0: return
-		dice.set_value(dice.value-def_data.stats[dice.type])
+		await Effector.boom_big($Stats.get_node(dice.type))
+		#if dice.value-def_data.stats[dice.type]<=0: return
+		#Effector.float_text("-"+str(def_data.stats[dice.type]),dice.global_position+Vector2(50,-10),dice.get_color())
+		var damage = max(0,dice.value-def_data.stats[dice.type])
+		await GameManager.timeout(.5)
+		dice.set_value(damage)
 		await GameManager.timeout(.7)
 	await DefianceManager.launch_trigger("on_pre_apply_dice", def_data)
 	dice.consume_dice()
@@ -77,21 +80,30 @@ func damage_defiance(dam):
 	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
 	Effector.boom_big($HP)
 	await Effector.damage(self)
-	if def_data.hp <= 0: 
-		$Light.modulate = Color(1,0,0)
-		await DefianceManager.launch_trigger("on_dead_defiance", def_data)
-		DefianceManager.ALL_DEFIANCES.erase(def_data)
-		print("DefianceManager.ALL_DEFIANCES ",DefianceManager.ALL_DEFIANCES)
-		await GameManager.timeout(.5)
-		emit_signal("on_destroy")
-		Effector.fade_down_and_free(self)
-		LevelManager.reorder_cards()
-		PartyManager.add_sanity(2)
+	if is_dead(): await dead()
 	return true
 
 func is_dead(): 
 	if (def_data.hp <= 0): return true
 	else: return false
+
+func dead():
+	$Light.modulate = Color(1,0,0)
+	await DefianceManager.launch_trigger("on_dead_defiance", def_data)
+	DefianceManager.ALL_DEFIANCES.erase(def_data)
+	PartyManager.add_sanity(1)
+	print("DefianceManager.ALL_DEFIANCES ",DefianceManager.ALL_DEFIANCES)
+	await GameManager.timeout(.5)
+	emit_signal("on_destroy")
+	await Effector.fade_down(self)
+	await LevelManager.reorder_cards()
+	queue_free()
+
+func discard():
+	DefianceManager.ALL_DEFIANCES.erase(def_data)
+	await Effector.fade_down(self)
+	await LevelManager.reorder_cards()
+	queue_free()
 
 func ligth(val):
 	$Light.visible = val

@@ -2,6 +2,8 @@ extends Control
 
 var type = "-"
 var value = 0
+var bonif = 0
+var is_rolled = false
 
 func _ready() -> void:
 	$Button.connect("mouse_entered",_on_hover.bind(true))
@@ -9,8 +11,7 @@ func _ready() -> void:
 	$Button.connect("button_down",DiceManager.set_dice_drag.bind(self))
 	$Button.focus_mode = FOCUS_NONE
 	if type=="-": set_random_type()
-	roll()
-	print(position)
+	update()
 
 func _process(delta: float) -> void:
 	for d in GameManager.DICES_REF.get_children():
@@ -20,7 +21,7 @@ func _process(delta: float) -> void:
 			position -= position.direction_to(d.position)
 
 func _on_hover(val):
-	$BGColor.visible = val
+	$Shadow.visible = val
 	
 func set_random_type():
 	var elem = DiceManager.COLORS.keys()
@@ -29,20 +30,39 @@ func set_random_type():
 	update()
 
 func roll():
+	is_rolled = true
 	for i in range(10):
 		value = randi()%6+1
 		rotation_degrees = randf()*360
-		await get_tree().create_timer(.1).timeout
 		update()
+		await GameManager.timeout(.1)
 	rotation = 0
+	await GameManager.timeout(.7)
+	if bonif!=0:
+		Effector.float_text("+"+str(bonif),global_position+Vector2(30,-10),get_color())
+		await GameManager.timeout(.3)
+		value += bonif
+		update()
+		Effector.boom(self)
+		await GameManager.timeout(.7)
 
 func update():
-	$Border/cr1.color = DiceManager.COLORS[type]
-	$Border/cr2.color = DiceManager.COLORS[type]
-	$Border/cr3.color = DiceManager.COLORS[type]
-	$Border/cr4.color = DiceManager.COLORS[type]
+	$DiceImage.modulate = DiceManager.COLORS[type]
+	if is_rolled: 
+		dark_image()
+		$Value.text = str(value)
+		$Bonif.text = ""
+	else:
+		$Value.text = ""
+		if bonif>0: $Bonif.text = "+"+str(bonif)
+		elif bonif==0: $Bonif.text = ""
+		elif bonif<0: $Bonif.text = str(bonif)
 	$Value.add_theme_color_override("font_color",DiceManager.COLORS[type])
-	$Value.text = str(value)
+
+func dark_image():
+	$DiceImage.modulate.r *= 0.6
+	$DiceImage.modulate.g *= 0.6
+	$DiceImage.modulate.b *= 0.6
 
 func consume_dice():
 	await Effector.fade_down_and_free(self)
@@ -51,6 +71,11 @@ func consume_dice():
 
 func set_value(val):
 	value = val
+	Effector.boom(self)
+	update()
+
+func add_bonif(val):
+	bonif += val
 	Effector.boom(self)
 	update()
 

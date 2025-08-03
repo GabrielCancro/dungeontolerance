@@ -20,6 +20,7 @@ func _ready() -> void:
 	GameManager.BG_IMAGE_REF = $CLBG/TextureRect
 	$CLBG/TextureRect.modulate.a = 0
 	$Dices.modulate.a = 0
+	$DefShadow.modulate.a = 0
 	PartyManager.update_abilities_ui()
 	PartyManager.update_items_ui()
 	PartyManager.restore_hp()
@@ -64,8 +65,7 @@ func tuto_sequence():
 	await PartyManager.roll_party_dices()
 	
 func start_sequence():
-	await GameManager.on_end_turn()
-	GameManager.POWERGEM_REF.show_powergem()
+	await GameManager.on_start_game()
 
 func on_skip_tuto():
 	SaveManager.DATA["prestige"] = 1

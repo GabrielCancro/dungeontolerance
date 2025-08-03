@@ -26,6 +26,8 @@ func _ready() -> void:
 	selected = [null,null,null]
 	for s in SaveManager.DATA["characters_preselected"]:
 		_on_click_character($Characters.get_child(s-1))
+		
+	check_available_characters()
 	
 	#SET CHARACTERS FUNCTIONS
 	for c in $Characters.get_children():
@@ -195,3 +197,16 @@ func _on_item_click(item_node):
 		else: Effector.shake($PR)
 	update_items_ui()
 	$CharDataPanel.visible = false
+
+func check_available_characters():
+	SaveManager.DATA["characters_unlocked"] = [1,2,3,4,5,6,7]
+	if SaveManager.DATA["prestige"]>=3 and !2 in SaveManager.DATA["characters_unlocked"]:
+		await $Tutorial.show_tuto("new_hero")
+		SaveManager.DATA["characters_unlocked"].append(2)
+		SaveManager.save_store_data()
+
+	for c in $Characters.get_children():
+		var ch = c.get_index()+1
+		if !ch in SaveManager.DATA["characters_unlocked"]: 
+			c.visible = false
+			$Buttons.get_child(c.get_index()).visible = false

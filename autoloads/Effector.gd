@@ -135,11 +135,10 @@ func appear_defiance_shadow(node):
 	var dices = get_node("/root/Game/Dices")
 	var shadow = get_node("/root/Game/DefShadow")
 	shadow.position = node.position + node.size/2 - shadow.size/2 + Vector2(0,30)
-	shadow.modulate.a = 0
 	shadow.visible = true
 	var tw = create_tween()
 	tw.tween_property(shadow,"modulate:a",.7,.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(dices,"modulate:a",0,.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(dices,"modulate:a",0,.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tw.play()
 
 func hide_defiance_shadow():
@@ -147,7 +146,7 @@ func hide_defiance_shadow():
 	var shadow = get_node("/root/Game/DefShadow")
 	var tw = create_tween()
 	tw.tween_property(shadow,"modulate:a",0,.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	tw.tween_property(dices,"modulate:a",1,.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.parallel().tween_property(dices,"modulate:a",1,.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tw.play()
 	await tw.finished
 	shadow.visible = false

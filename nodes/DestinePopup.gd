@@ -10,6 +10,11 @@ func _ready() -> void:
 
 func show_destine(code):
 	modulate.a = 0
+	$Panel/Title.text = Lang.get_text("destine_campfire_title",["UPPERCASE","TITLE"])
+	$Panel/Desc.text = Lang.get_text("destine_campfire_desc")
+	$Panel/VBox/L1/RLT.text = Lang.get_text("destine_campfire_op1")
+	$Panel/VBox/L2/RLT.text = Lang.get_text("destine_campfire_op2")
+	$Panel/VBox/L3/RLT.text = Lang.get_text("destine_campfire_op3")
 	await GameManager.timeout(1)
 	Effector.appear_destine(self)
 	visible = true

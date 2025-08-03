@@ -5,6 +5,8 @@ var t = [0,.4,.8]
 func _ready() -> void:
 	$Button.connect("button_down",set_retraits)
 	$Shield/Button.connect("button_down",on_click_shield)
+	$Shield/Button.connect("mouse_entered",_on_hover_shield.bind(true))
+	$Shield/Button.connect("mouse_exited",_on_hover_shield.bind(false))
 	update_ui()
 	update_shield()
 	#$Shield.modulate.a = 0
@@ -25,6 +27,10 @@ func _process(delta: float) -> void:
 	$Character1.rotation_degrees = sin(t[0])*3
 	$Character2.rotation_degrees = sin(t[1])*3
 	$Character3.rotation_degrees = sin(t[2])*3
+
+
+func _on_hover_shield(val):
+	$BGColorShield.visible = val
 
 func update_ui():
 	Lang.set_text_vars(PartyManager.get_stats_array())

@@ -9,6 +9,7 @@ var default = {
 	"items_unlocked":["dage"],
 	"items_preselected":[],
 	"characters_preselected":[],
+	"characters_unlocked":[1,4,5,7]
 }
 
 func _ready():

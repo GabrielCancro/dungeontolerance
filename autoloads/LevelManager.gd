@@ -5,11 +5,36 @@ var room_index = 0
 var max_rooms = 0
 
 #B:rat,bat   N:goblin  S:slime,   T:chest   #C:traps
+#var DUNGEONS = [
+	#[], # Level 0 - TUTORIAL
+	#["BB","BB","CBB","BBB"], #Level 1 - rooms 4 - Basic enemies
+	#["CBN","BNBT","DESTINE","BCN","BBB","BNB"], #Level 2
+	#["BN","BNC","DESTINE","BNBB","TNBC","BNN","BCBN"], #Level 3
+#]
+
 var DUNGEONS = [
-	[], # Level 0 - TUTORIAL
-	["BB","BB","CBB","BBB"], #Level 1 - rooms 4 - Basic enemies
-	["BN","BNBT","DESTINE","BCN","BBB","BNB"], #Level 2
-	["BN","BNC","DESTINE","BNBB","TNBC","BNN","BCBN"], #Level 3
+	# Level 0 - TUTORIAL
+	[], 
+	
+	# Level 1
+	["rat/bat + rat/bat",
+	"rat/bat + rat/bat + chest"],
+	
+	# Level 2
+	["rat/bat + rat/bat + arrow_trap", 
+	"rat/bat + rat/bat + goblin + chest",
+	"rat/bat + goblin"], 
+	
+	# Level 3
+	["rat/bat + goblin + chest + arrow_trap",
+	"rat/bat + rat/bat + arrow_trap",
+	"goblin + goblin + chest"],
+	
+	# Level 4
+	["rat/bat + slime + rune_trap",
+	"rat/bat + slime + arrow_trap + chest",
+	"rat/bat +rat/bat +rat/bat +rat/bat",
+	"slime + chest"],
 ]
 
 func init_dungeon():
@@ -34,9 +59,12 @@ func next_level():
 		DestineManager.show_destine()
 	else:
 		await Effector.transition_level_on()
-		for def_tag in DUNGEONS[level][room_index]:
-			var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
-			print("ADDING ",key," by tag ",def_tag)
+		var room_arr = (DUNGEONS[level][room_index] as String).split(" + ")
+		for def_tags in room_arr:
+			var keys = def_tags.split("/")
+			var key = keys[ randi() % keys.size() ]
+			#var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
+			print("ADDING ",key," by tag ",key)
 			add_defiance(key)
 	return true
 

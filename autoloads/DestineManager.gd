@@ -22,7 +22,7 @@ func in_campfire_chosse_op1():
 
 func in_campfire_chosse_op2():
 	#ADD +5HP
-	PartyManager.apply_heal(5)
+	PartyManager.apply_heal(7)
 	await GameManager.timeout(.5)
 
 func in_campfire_chosse_op3():

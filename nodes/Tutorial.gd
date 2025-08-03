@@ -31,6 +31,8 @@ func show_tuto(code):
 	if code == "tabern5": node = get_node("/root/Tabern/TutoPoints/Party")
 	if code == "tabern6": node = get_node("/root/Tabern/Continue")
 	if code == "tabern7": node = get_node("/root/Tabern/TutoPoints/Table")
+	
+	if code == "new_hero": node = get_node("/root/Tabern/Characters/Character2")
 
 	$Cutter.fit_node(node)
 	var hint_pos = node.global_position + Vector2(node.size.x/2-$HintPanel.size.x/2,-$HintPanel.size.y-30)

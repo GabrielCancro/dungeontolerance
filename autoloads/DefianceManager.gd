@@ -17,11 +17,18 @@ const DEFIANCES = {
 	"arrow_trap":{"hp":10 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
 		"abs":[ "activation*3", "trap_damage*10" ] },
 	"slime":{"hp":12 , "stats":{"S":4,"D":4,"M":1}, "tags":"S", 
-		"abs":[ "aggressive*3","shield*1" ] },
+		"abs":[ "aggressive*3","absorb*1" ] },
 	"ghost":{"hp":7 , "stats":{"S":4,"D":4,"M":2}, "tags":"-", 
 		"abs":[ "necrotic*3"] },
+	"spider":{"hp":10 , "stats":{"S":3,"D":2,"M":3}, "tags":"-", 
+		"abs":[ "aggressive*2","poison*1" ] },
+	"rune_trap":{"hp":10 , "stats":{"S":8,"D":5,"M":1}, "tags":"C", 
+		"abs":[ "activation*1", "trap_sanity*4" ] },
 }
 
+const ignored_trigger_resalt = [
+	"counterattack_on_end_turn"
+]
 func get_defiance_data(def_code,level=1):
 	var data = DEFIANCES[def_code].duplicate(true)
 	data.hp = randi_range(data.hp,data.hp*1.2)
@@ -49,13 +56,15 @@ func get_random_defiance_key_by_tag(def_tag):
 	return null
 
 func get_def_ability_data(ab_code,ab_level):
+	#active..reload on start turn
 	var ab_data = {"name":ab_code, "level":ab_level}
-	if ab_code=="counterattack": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
+	if ab_code=="counterattack": ab_data.merge({"min":floor(ab_level/2),"max":ab_level, "active":true})
 	if ab_code=="aggressive": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="necrotic": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="trap_damage": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="activation": ab_data.merge({"count":0,"max_count":ab_level})
 	if ab_code=="shield": ab_data.merge({"count":ab_level,"max_count":ab_level})
+	if ab_code=="absorb": ab_data.merge({"active":true}) 
 	return ab_data
 
 func launch_trigger_to_all_defiances(launcher):
@@ -68,25 +77,35 @@ func launch_trigger(launcher, def_card):
 	if def_card.node.is_dead() and launcher!="on_dead_defiance": return
 	# on_apply_dice on_pre_appliy_dice
 	for ab in def_card["abs"]:
+		if "active" in ab and ab["active"]==false and launcher=="on_start_turn":
+			ab["active"] = true
+			ab.node.resalt()
+			def_card.node.update_abs()
+			await GameManager.timeout(.5)
 		if has_method(ab.name+"_"+launcher): 
 			if has_method("condition_"+ab.name+"_"+launcher): 
 				if !call("condition_"+ab.name+"_"+launcher, ab, def_card): continue
 			if launcher=="on_apply_dice": await GameManager.timeout(1)
 			print("LAUNCHING TRIGGER ",launcher,"->",def_card.name)
-			def_card.node.ligth(true)
+			if !"active" in ab or ab["active"]:
+				if !ab.name+"_"+launcher in ignored_trigger_resalt:
+					def_card.node.ligth(true)
 			await GameManager.timeout(0.6)
 			await call(ab.name+"_"+launcher, ab, def_card)
-			def_card.node.ligth(false)
+			if is_instance_valid(def_card.node): def_card.node.ligth(false)
+			else: Effector.hide_defiance_shadow()
 			await GameManager.timeout(0.3)
 	await GameManager.timeout(0.1)
 
 func counterattack_on_apply_dice(ab_data, def_card):
+	if !ab_data["active"]: return
+	ab_data["active"] = false
 	ab_data.node.resalt()
 	await GameManager.timeout(.7)
-	#Effector.float_text("COUNTERATTACK",def_card.node.position,"NORMAL")
-	#await GameManager.timeout(.4)
 	randomize()
-	await PartyManager.apply_damage(randi_range(ab_data.min,ab_data.max),def_card)
+	var damage = randi_range(ab_data.min,ab_data.max)
+	await PartyManager.apply_damage(damage,def_card)
+	def_card.node.update_abs()
 	await GameManager.timeout(.5)
 
 func condition_shield_on_pre_apply_dice(ab_data, def_card): 
@@ -125,7 +144,6 @@ func necrotic_on_end_turn(ab_data, def_card):
 	await PartyManager.apply_direct_damage(randi_range(ab_data.min,ab_data.max),def_card)
 	await GameManager.timeout(.5)
 
-
 func drainer_on_end_defiance_attack(ab_data, def_card):
 	await GameManager.timeout(.7)
 	ab_data.node.resalt()
@@ -149,7 +167,9 @@ func activation_on_end_turn(ab_data, def_card):
 	def_card.node.update_abs()
 	await GameManager.timeout(.7)
 	if ab_data.count==ab_data.max_count:
-		launch_trigger("on_activate",def_card)
+		await launch_trigger("on_activate",def_card)
+		await GameManager.timeout(.5)
+		await def_card.node.discard()
 
 func trap_damage_on_activate(ab_data, def_card):
 	ab_data.node.resalt()
@@ -157,3 +177,25 @@ func trap_damage_on_activate(ab_data, def_card):
 	randomize()
 	await PartyManager.apply_damage(randi_range(ab_data.min,ab_data.max),def_card)
 	await GameManager.timeout(.8)
+
+func trap_sanity_on_activate(ab_data, def_card):
+	ab_data.node.resalt()
+	await GameManager.timeout(.5)
+	randomize()
+	await PartyManager.dec_sanity(ab_data.level)
+	await GameManager.timeout(.8)
+
+func poison_on_end_defiance_attack(ab_data, def_card):
+	await GameManager.timeout(.7)
+	ab_data.node.resalt()
+	await GameManager.timeout(.5)
+	PartyManager.dec_sanity()
+	await GameManager.timeout(.5)
+
+func absorb_on_pre_apply_dice(ab_data, def_card):
+	if !ab_data["active"]: return
+	ab_data["active"] = false
+	ab_data.node.resalt()
+	DiceManager.current_dice_drag.set_value(0)
+	def_card.node.update_abs()
+	await GameManager.timeout(.5)
