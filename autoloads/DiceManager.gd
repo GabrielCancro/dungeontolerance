@@ -51,3 +51,4 @@ func add_dice(type):
 	var size = GameManager.DICES_REF.size - dice.size
 	dice.position = Vector2(randf()*size.x,randf()*size.y)
 	GameManager.DICES_REF.add_child(dice)
+	return dice

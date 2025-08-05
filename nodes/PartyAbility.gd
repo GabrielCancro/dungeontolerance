@@ -29,10 +29,11 @@ func set_item(_ab_data):
 
 func _on_hover(val):
 	$BGColor.visible = val
-	var name = Lang.get_text("ab_"+ab_data.name+"_name",["TITLE"])
-	if "uses" in ab_data: name += " [color=A0A0A0]x"+str(ab_data["uses"])+"[/color]"
-	var req =  "  "+Lang.get_req_string(ab_data["req"])
-	if val: HintManager.set_text(name+" "+req+"\n"+Lang.get_text("ab_"+ab_data.name))
+	var text = Lang.get_text("ab_"+ab_data.name+"_name",["TITLE"])
+	if "uses" in ab_data: text += "\n[color=A0A0A0]("+Lang.get_text("ui_uses")+" x"+str(ab_data["uses"])+" )[/color]"
+	if have_any_req(): text += "\n[color=A0A0A0]( "+Lang.get_text("ui_req")+"  "+Lang.get_req_string(ab_data["req"])+"  )[/color]"
+	text += "\n"+Lang.get_text("ab_"+ab_data.name)
+	if val: HintManager.set_text(text)
 	else: HintManager.set_text()
 
 func _on_click():
@@ -78,3 +79,8 @@ func resalt():
 
 func set_selected(val):
 	$BorderSelected.visible = val
+
+func have_any_req():
+	for k in ab_data["req"]:
+		if ab_data["req"][k]>0: return true
+	return false

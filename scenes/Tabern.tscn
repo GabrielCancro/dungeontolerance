@@ -358,14 +358,14 @@ vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="ResetData" type="Button" parent="."]
+[node name="BackMenu" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1006.0
 offset_top = 23.0
 offset_right = 1135.0
 offset_bottom = 61.0
 theme = ExtResource("3_lyctx")
-text = "RESET DATA"
+text = "BACK MENU"
 
 [node name="AddPrestige" type="Button" parent="."]
 layout_mode = 0
@@ -506,6 +506,35 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Stats" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 597.0
+offset_right = 408.0
+offset_bottom = 645.0
+color = Color(0.103744, 0.103744, 0.103744, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/line_separation = -6
+theme_override_fonts/normal_font = SubResource("SystemFont_6av1h")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "FUERZA:1   DESTREZA:2 
+FUERZA:1   DESTREZA:2   MAGIA:4  "
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TutoPoints" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0
@@ -541,32 +570,3 @@ mouse_filter = 2
 [node name="Tutorial" parent="." instance=ExtResource("14_g8xdv")]
 visible = false
 layout_mode = 1
-
-[node name="Stats" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 85.0
-offset_top = 597.0
-offset_right = 408.0
-offset_bottom = 645.0
-color = Color(0.103744, 0.103744, 0.103744, 1)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Stats"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = -4.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/line_separation = -6
-theme_override_fonts/normal_font = SubResource("SystemFont_6av1h")
-theme_override_font_sizes/normal_font_size = 18
-bbcode_enabled = true
-text = "FUERZA:1   DESTREZA:2 
-FUERZA:1   DESTREZA:2   MAGIA:4  "
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1

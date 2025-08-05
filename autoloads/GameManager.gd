@@ -14,6 +14,7 @@ var BG_IMAGE_REF
 var EYE_TRACK_REF
 var block_input_time = 0
 var turn_counter = 0
+var ROLL_DICE_ON_START_TURN = true
 
 func _process(delta: float) -> void:
 	if !is_instance_valid(INPUT_BLOCKER_REF): return

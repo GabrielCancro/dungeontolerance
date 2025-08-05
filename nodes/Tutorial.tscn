@@ -93,3 +93,11 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_eswx1")
 text = "OK"
+
+[node name="BtnSkipTutorial" type="Button" parent="."]
+offset_left = 1022.0
+offset_top = 10.0
+offset_right = 1140.0
+offset_bottom = 48.0
+theme = ExtResource("4_eswx1")
+text = "SKIP TUTO"

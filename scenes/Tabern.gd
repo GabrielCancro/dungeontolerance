@@ -6,13 +6,11 @@ var selected = [null,null,null]
 var selected_items = []
 
 func _ready() -> void:
-	#SaveManager.DATA["prestige"]=1
-	
 	$Continue.connect("button_down",_on_click_continue)
-	$ResetData.connect("button_down",_on_click_reset)
+	$BackMenu.connect("button_down",_on_click_back)
 	$AddPrestige.connect("button_down",_on_click_add_prestige)
-	$ExpText/Label.text = "PRESTIGIO "+str(SaveManager.DATA["prestige"])
-	$ExpText/Label.text += "\nEXPEDITION "+str(SaveManager.DATA["expedition"])
+	$ExpText/Label.text = Lang.get_text("ui_prestige").to_upper()+" "+str(int(SaveManager.DATA["prestige"]))
+	$ExpText/Label.text += "\n"+Lang.get_text("ui_expedition").to_upper()+" "+str(int(SaveManager.DATA["expedition"]))
 	$PR/Label.text = str(int(SaveManager.DATA["prestige"]))
 	HintManager.init($HintPanel)
 	$CharDataPanel.visible = false
@@ -50,6 +48,7 @@ func _ready() -> void:
 		it.connect("on_click_tabern_item",_on_item_click)
 	
 	if !SaveManager.DATA["ended_tabern_tuto"]:
+		await GameManager.timeout(2)
 		await $Tutorial.show_tuto("tabern1")
 		await $Tutorial.show_tuto("tabern2")
 		await $Tutorial.show_tuto("tabern3")
@@ -116,8 +115,8 @@ func _on_click_continue():
 	SaveManager.save_store_data()
 	GameManager.change_scene("Game")
 
-func _on_click_reset():
-	SaveManager.clear_data()
+func _on_click_back():
+	GameManager.change_scene("Menu")
 
 func _on_click_add_prestige():
 	SaveManager.DATA["prestige"] += 1
@@ -199,14 +198,16 @@ func _on_item_click(item_node):
 	$CharDataPanel.visible = false
 
 func check_available_characters():
-	SaveManager.DATA["characters_unlocked"] = [1,2,3,4,5,6,7]
-	if SaveManager.DATA["prestige"]>=3 and !2 in SaveManager.DATA["characters_unlocked"]:
-		await $Tutorial.show_tuto("new_hero")
-		SaveManager.DATA["characters_unlocked"].append(2)
-		SaveManager.save_store_data()
-
-	for c in $Characters.get_children():
-		var ch = c.get_index()+1
-		if !ch in SaveManager.DATA["characters_unlocked"]: 
-			c.visible = false
-			$Buttons.get_child(c.get_index()).visible = false
+	#SaveManager.DATA["characters_unlocked"] = []
+	for ch in $Characters.get_children():
+		var ch_data = PartyManager.CHARACTERS[ch.get_index()]
+		var key = "ch"+str(floor(ch.get_index()+1))
+		if ch_data["lv"]>0:
+			if !key in SaveManager.DATA["characters_unlocked"]:
+				if ch_data["lv"]<=SaveManager.DATA["prestige"]:
+					SaveManager.DATA["characters_unlocked"].append(key)
+					SaveManager.save_store_data()
+					await $Tutorial.show_tuto("new_hero",ch)
+				else:
+					ch.visible = false
+					$Buttons.get_child(ch.get_index()).visible = false

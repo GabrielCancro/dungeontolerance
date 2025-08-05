@@ -38,13 +38,7 @@ func roll():
 		await GameManager.timeout(.1)
 	rotation = 0
 	await GameManager.timeout(.7)
-	if bonif!=0:
-		Effector.float_text("+"+str(bonif),global_position+Vector2(30,-10),get_color())
-		await GameManager.timeout(.3)
-		value += bonif
-		update()
-		Effector.boom(self)
-		await GameManager.timeout(.7)
+	if bonif!=0: _apply_bonif_value()
 
 func update():
 	$DiceImage.modulate = DiceManager.COLORS[type]
@@ -76,8 +70,19 @@ func set_value(val):
 
 func add_bonif(val):
 	bonif += val
-	Effector.boom(self)
+	if !is_rolled:
+		Effector.boom(self)
+		update()
+	else: 
+		_apply_bonif_value()
+
+func _apply_bonif_value():
+	Effector.float_text("+"+str(bonif),global_position+Vector2(30,-10),get_color())
+	await GameManager.timeout(.3)
+	value += bonif
 	update()
+	Effector.boom(self)
+	await GameManager.timeout(.7)
 
 func set_type(val):
 	type = val

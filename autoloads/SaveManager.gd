@@ -9,7 +9,8 @@ var default = {
 	"items_unlocked":["dage"],
 	"items_preselected":[],
 	"characters_preselected":[],
-	"characters_unlocked":[1,4,5,7]
+	"characters_unlocked":[1,4,5,7],
+	"languaje": "en"
 }
 
 func _ready():
@@ -24,6 +25,7 @@ func save_store_data():
 	for k in default.keys(): if !k in DATA: DATA[k] = default[k]
 	var file := FileAccess.open(fileName, FileAccess.WRITE)
 	if !file: return
+	DATA["languaje"] = Lang.current_lang
 	file.store_string(JSON.stringify(DATA))
 	print("SAVE ",DATA)
 
@@ -33,6 +35,7 @@ func load_store_data():
 	var loaded_data = JSON.parse_string(file.get_as_text())
 	if loaded_data: DATA = loaded_data
 	_set_defaults()
+	Lang.current_lang = DATA["languaje"]
 	print("LOAD ",DATA)
 
 func now_date():
@@ -42,4 +45,4 @@ func now_date():
 func clear_data():
 	DATA = {}
 	save_store_data()
-	GameManager.change_scene("Intro")
+	GameManager.change_scene("Menu")

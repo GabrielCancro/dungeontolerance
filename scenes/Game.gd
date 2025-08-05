@@ -5,8 +5,7 @@ func _ready() -> void:
 	$BtnAddDice.connect("button_down",DiceManager.add_random_dice)
 	$BtnEndTurn.connect("button_down",GameManager.on_end_turn)
 	$BtnAddEnemy.connect("button_down",LevelManager.add_defiance.bind("rat"))
-	$CLUI/BtnSkipTutorial.connect("button_down",on_skip_tuto)
-	$CLUI/BtnSkipTutorial.visible = false
+	$CLUI/Tutorial.connect("on_skip_tutorial",on_skip_tuto)
 	GameManager.GAME_SCENE_REF = self
 	GameManager.TARGET_CHOSSER_REF = $CLUI/TargetChosser
 	GameManager.DEFIANCES_REF = $Defiances
@@ -30,38 +29,46 @@ func _ready() -> void:
 
 func tuto_sequence():
 	$Abilities.visible = false
+	$EyeTrack.visible = false
 	$CLBG/TextureRect.modulate.a = 1
 	$Dices.modulate.a = 1
-	$CLUI/BtnSkipTutorial.visible = true
 	await GameManager.timeout(2)
 	await $CLUI/Tutorial.show_tuto("welcome")
 	await $CLUI/Tutorial.show_tuto("party")
+	if !get_tree(): return
 	await PartyManager.roll_party_dices()
 	await $CLUI/Tutorial.show_tuto("dices")
+	if !get_tree(): return
 	await GameManager.timeout(1)
 	await LevelManager.add_defiance("tuto_rat")
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("rat1")
 	await $CLUI/Tutorial.show_tuto("rat2")
 	await $CLUI/Tutorial.show_tuto("rat3")
+	if !get_tree(): return
 	await GameManager.timeout(1)
 	PartyManager.add_shield(1)
 	await $CLUI/Tutorial.show_tuto("shield")
 	await $CLUI/Tutorial.show_tuto("rat4")
+	if !get_tree(): return
 	await DefianceManager.ALL_DEFIANCES[0].node.on_destroy
 	await GameManager.timeout(1.5)
 	await $CLUI/Tutorial.show_tuto("good_work")
+	if !get_tree(): return
 	$Abilities.visible = true
 	await $CLUI/Tutorial.show_tuto("ability1")
 	await $CLUI/Tutorial.show_tuto("power1")
+	if !get_tree(): return
 	await GameManager.timeout(1)
 	await GameManager.POWERGEM_REF.show_powergem()
 	await GameManager.timeout(1)
 	await $CLUI/Tutorial.show_tuto("power2")
 	await $CLUI/Tutorial.show_tuto("end")
+	if !get_tree(): return
 	DiceManager.remove_dices()
 	await LevelManager.add_defiance("tuto_rat")
 	await LevelManager.add_defiance("tuto_rat")
+	if !get_tree(): return
 	await PartyManager.roll_party_dices()
 	
 func start_sequence():

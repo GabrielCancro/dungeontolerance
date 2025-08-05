@@ -1,15 +1,22 @@
 extends Control
 
 signal on_close
+signal on_skip_tutorial
+var skipped = false
 
 func _ready() -> void:
 	$HintPanel/Button.connect("button_down",_on_click)
+	$BtnSkipTutorial.connect("button_down",_on_skip)
 
-func show_tuto(code):
+func show_tuto(code,target_node=null):
+	if skipped:
+		if get_tree(): await get_tree().create_timer(.02).timeout
+		return
 	$HintPanel/RichTextLabel.text = Lang.get_text("tuto_"+code)
 	if code == "dices": $HintPanel/RichTextLabel.text += "\n" + Lang.get_text("some_stats") + "\n"
 	$HintPanel.size.y = 20 + $HintPanel/RichTextLabel.get_content_height()
 	var node = GameManager.PARTY_REF
+	if target_node: node = target_node
 	if code == "welcome": node = GameManager.PARTY_REF
 	if code == "party": node = GameManager.PARTY_REF.get_node("Stats")
 	if code == "dices": node = GameManager.DICES_REF
@@ -31,8 +38,7 @@ func show_tuto(code):
 	if code == "tabern5": node = get_node("/root/Tabern/TutoPoints/Party")
 	if code == "tabern6": node = get_node("/root/Tabern/Continue")
 	if code == "tabern7": node = get_node("/root/Tabern/TutoPoints/Table")
-	
-	if code == "new_hero": node = get_node("/root/Tabern/Characters/Character2")
+	#if code == "new_hero": use target_node by parametter
 
 	$Cutter.fit_node(node)
 	var hint_pos = node.global_position + Vector2(node.size.x/2-$HintPanel.size.x/2,-$HintPanel.size.y-30)
@@ -46,3 +52,8 @@ func show_tuto(code):
 func _on_click():
 	visible = false
 	emit_signal("on_close")
+
+func _on_skip():
+	skipped = true
+	emit_signal("on_skip_tutorial")
+	_on_click()

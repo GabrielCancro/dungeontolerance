@@ -27,13 +27,13 @@ var ITEMS_DATA = {
 }
 
 var CHARACTERS = [
-	{"name":"Thior","class":"explorer", "hp":8, "sanity":2, "stats":[1,1,0],"abs":null},
-	{"name":"Samuel","class":"rogue", "hp":6, "sanity":1, "stats":[0,1,1],"abs":null},
-	{"name":"Ryna","class":"barbarian", "hp":8, "sanity":1, "stats":[2,0,0],"abs":null},
-	{"name":"Alem","class":"explorer", "hp":8, "sanity":2, "stats":[0,1,0],"abs":"atletic"},
-	{"name":"Hanna","class":"sorcerer", "hp":5, "sanity":4, "stats":[0,0,1],"abs":"bendition"},
-	{"name":"Brian","class":"rogue", "hp":6, "sanity":2, "stats":[0,1,0],"abs":"subtlety"},
-	{"name":"Drum","class":"warrior", "hp":10, "sanity":1, "stats":[1,0,0],"abs":"protector"},
+	{"name":"Thior","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[1,1,0],"abs":null},
+	{"name":"Samuel","class":"rogue","lv":4, "hp":6, "sanity":1, "stats":[0,1,1],"abs":null},
+	{"name":"Ryna","class":"barbarian","lv":5, "hp":8, "sanity":1, "stats":[2,0,0],"abs":null},
+	{"name":"Alem","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[0,1,0],"abs":"atletic"},
+	{"name":"Hanna","class":"sorcerer","lv":0, "hp":5, "sanity":4, "stats":[0,0,1],"abs":"bendition"},
+	{"name":"Brian","class":"rogue","lv":0, "hp":6, "sanity":2, "stats":[0,1,0],"abs":"subtlety"},
+	{"name":"Drum","class":"warrior","lv":2, "hp":10, "sanity":1, "stats":[1,0,0],"abs":"protector"},
 ]
 
 func _on_click_party_ability(ab_data):
@@ -228,7 +228,8 @@ func roll_party_dices():
 	print("ROLLING ",STATS)
 	for k in STATS.keys(): 
 		for i in range(STATS[k]): 
-			DiceManager.add_dice(k)
+			var dice = DiceManager.add_dice(k)
+			if GameManager.ROLL_DICE_ON_START_TURN: dice.roll()
 			await GameManager.timeout(.2)
 	await GameManager.timeout(.7)
 
@@ -269,11 +270,13 @@ func get_rnd_item():
 	return array[0]
 
 func dec_sanity(val=1):
+	if !GameManager.EYE_TRACK_REF.visible: return
 	DATA.SANITY = max(0,DATA.SANITY-val)
 	Effector.float_text("-"+str(val),Vector2(100,150),"NORMAL")
 	GameManager.EYE_TRACK_REF.update_ui()
 
 func add_sanity(val=1):
+	if !GameManager.EYE_TRACK_REF.visible: return
 	DATA.SANITY = DATA.SANITY+val
 	Effector.float_text("+"+str(val),Vector2(100,150),"NORMAL")
 	GameManager.EYE_TRACK_REF.update_ui()

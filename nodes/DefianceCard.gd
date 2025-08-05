@@ -38,11 +38,11 @@ func update_ui():
 func _on_click():
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
-	await dice.roll()
+	if !dice.is_rolled: await dice.roll()
 	if dice.type in def_data.stats.keys(): 
 		await Effector.boom_big($Stats.get_node(dice.type))
-		#if dice.value-def_data.stats[dice.type]<=0: return
-		#Effector.float_text("-"+str(def_data.stats[dice.type]),dice.global_position+Vector2(50,-10),dice.get_color())
+		if dice.is_rolled:
+			if dice.value-def_data.stats[dice.type]<=0: return
 		var damage = max(0,dice.value-def_data.stats[dice.type])
 		await GameManager.timeout(.5)
 		dice.set_value(damage)

@@ -3,6 +3,7 @@ extends Control
 func _ready() -> void:
 	$Continue.modulate.a = 0
 	$Continue.connect("button_down",_on_click)
+	$Continue.text = Lang.get_text("ui_continue")
 	set_text()
 	$TextContainer.position.y = get_viewport_rect().size.y + 50
 	var tw = create_tween()
