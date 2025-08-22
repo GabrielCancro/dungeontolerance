@@ -80,6 +80,7 @@ func _apply_bonif_value():
 	Effector.float_text("+"+str(bonif),global_position+Vector2(30,-10),get_color())
 	await GameManager.timeout(.3)
 	value += bonif
+	bonif = 0
 	update()
 	Effector.boom(self)
 	await GameManager.timeout(.7)

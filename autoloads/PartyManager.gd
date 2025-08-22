@@ -1,11 +1,12 @@
 extends Node
 
 var STATS = {"S":2,"D":1,"M":1}
-var DATA = {"HP":20,"HPM":20, "SH":0, "SANITY":1}
+var DATA = {"HP":20,"HPM":20, "SH":0, "SANITY":0, "MAX_SANITY":0}
 var ABILITIES = []
 var ITEMS_EQUIPPED = []
 var ITEMS_UNLOCKED = []
 var PARTY_CHARACTERS = [null,null,null]
+signal forever
 var ABILITIES_DATA = { 
 	"streng":{"req":{"S":2} },
 	"subtlety":{"req":{"D":2} },
@@ -31,7 +32,7 @@ var CHARACTERS = [
 	{"name":"Samuel","class":"rogue","lv":4, "hp":6, "sanity":1, "stats":[0,1,1],"abs":null},
 	{"name":"Ryna","class":"barbarian","lv":5, "hp":8, "sanity":1, "stats":[2,0,0],"abs":null},
 	{"name":"Alem","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[0,1,0],"abs":"atletic"},
-	{"name":"Hanna","class":"sorcerer","lv":0, "hp":5, "sanity":4, "stats":[0,0,1],"abs":"bendition"},
+	{"name":"Hanna","class":"sorcerer","lv":0, "hp":5, "sanity":3, "stats":[0,0,1],"abs":"bendition"},
 	{"name":"Brian","class":"rogue","lv":0, "hp":6, "sanity":2, "stats":[0,1,0],"abs":"subtlety"},
 	{"name":"Drum","class":"warrior","lv":2, "hp":10, "sanity":1, "stats":[1,0,0],"abs":"protector"},
 ]
@@ -95,7 +96,7 @@ func ab_protector(ab_data):
 	
 	#EFFECT
 	ab_data.node.resalt()
-	PartyManager.add_shield(3)
+	PartyManager.add_shield(4)
 	return true
 
 func ab_bendition(ab_data):
@@ -141,7 +142,8 @@ func ab_old_axe(ab_data):
 	return true
 
 func ab_sword(ab_data):
-	DiceManager.add_dice("S")
+	var dice = DiceManager.add_dice("S")
+	dice.roll()
 	await GameManager.timeout(.5)
 	return true
 
@@ -163,7 +165,8 @@ func ab_bread(ab_data):
 
 func ab_speed_bots(ab_data):
 	GameManager.timeout(.4)
-	DiceManager.add_dice("D")
+	var dice = DiceManager.add_dice("D")
+	dice.roll()
 	return true
 
 func ab_rope(ab_data):
@@ -183,6 +186,11 @@ func ab_iron_helm(ab_data):
 
 #END ITEMS
 func apply_damage(val,def_data):
+	randomize()
+	if val<5 and randf()<0.10:
+		Effector.float_text(Lang.get_text("attack_miss"),Vector2(365,375),"NORMAL")
+		await GameManager.timeout(.2)
+		return
 	if DATA.SH>0: 
 		Effector.float_text("-"+str(min(DATA.SH,val))+"SH",Vector2(365,420),"SHIELD")
 		DATA.SH -= val
@@ -192,19 +200,16 @@ func apply_damage(val,def_data):
 		else: val = 0
 		DATA.SH = max(DATA.SH,0)
 	if val>0:
-		DATA.HP = max(0,DATA.HP-val)
-		Effector.float_text("-"+str(val)+"HP",Vector2(320,380),"DAMAGE")
-		GameManager.PARTY_REF.damage_fx()
-		await DefianceManager.launch_trigger("on_end_defiance_attack",def_data)
-	if DATA.HP<=0:
-		GameManager.show_popup("GameOver")
+		await apply_direct_damage(val,def_data)
 
 func apply_direct_damage(val,def_data):
 	DATA.HP = max(0,DATA.HP-val)
 	Effector.float_text("-"+str(val)+"HP",Vector2(320,380),"DAMAGE")
 	GameManager.PARTY_REF.damage_fx()
 	await DefianceManager.launch_trigger("on_end_defiance_attack",def_data)
-	if DATA.HP<=0: GameManager.show_popup("GameOver")
+	if DATA.HP<=0: 
+		DestineManager.show_destine("fail_level")
+		await forever
 
 func apply_heal(val):
 	DATA.HP = min(DATA.HPM,DATA.HP+val)
@@ -244,6 +249,7 @@ func update_items_ui():
 	for pa in GameManager.PARTY_ITEMS_REF.get_children(): 
 		pa.visible = false
 	for i in ITEMS_EQUIPPED.size():
+		if i >= GameManager.PARTY_ITEMS_REF.get_child_count(): break
 		GameManager.PARTY_ITEMS_REF.get_child(i).set_item(ITEMS_EQUIPPED[i])
 		GameManager.PARTY_ITEMS_REF.get_child(i).visible = true
 
@@ -272,11 +278,11 @@ func get_rnd_item():
 func dec_sanity(val=1):
 	if !GameManager.EYE_TRACK_REF.visible: return
 	DATA.SANITY = max(0,DATA.SANITY-val)
-	Effector.float_text("-"+str(val),Vector2(100,150),"NORMAL")
+	if val>1: Effector.float_text("-"+str(val),Vector2(100,150),"NORMAL")
 	GameManager.EYE_TRACK_REF.update_ui()
 
 func add_sanity(val=1):
 	if !GameManager.EYE_TRACK_REF.visible: return
-	DATA.SANITY = DATA.SANITY+val
+	DATA.SANITY += val
 	Effector.float_text("+"+str(val),Vector2(100,150),"NORMAL")
 	GameManager.EYE_TRACK_REF.update_ui()

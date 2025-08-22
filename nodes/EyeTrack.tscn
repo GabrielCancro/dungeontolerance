@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://enhbweoc8en4"]
+[gd_scene load_steps=7 format=3 uid="uid://enhbweoc8en4"]
 
 [ext_resource type="Texture2D" uid="uid://c1k27h528okjv" path="res://assets/sanity.png" id="1_jysdh"]
 [ext_resource type="Script" uid="uid://c1wfhym27we8v" path="res://nodes/EyeTrack.gd" id="1_y4pxd"]
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_y4pxd"]
 [ext_resource type="Texture2D" uid="uid://be7fl7t6dsoqo" path="res://assets/sanity_circle.png" id="3_obc1c"]
+[ext_resource type="Texture2D" uid="uid://bj0pp5argbhoj" path="res://assets/dice_icon_shadow.png" id="4_h5ddq"]
 [ext_resource type="Texture2D" uid="uid://dv8gghhsp0t07" path="res://assets/white_point.png" id="4_qs5eb"]
 
 [node name="EyeTrack" type="Control"]
@@ -18,9 +19,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -86.0
-offset_right = 83.0
+offset_left = -83.0
+offset_top = -84.0
+offset_right = 84.0
 offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -37,14 +38,53 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -29.0
-offset_top = -29.0
-offset_right = 31.0
-offset_bottom = 31.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(83, 86)
 texture = ExtResource("3_obc1c")
 expand_mode = 1
+
+[node name="RedCircle" type="TextureRect" parent="."]
+modulate = Color(1, 0, 0, 0.756863)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -29.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("4_h5ddq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -25.0
+offset_right = 29.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.788235, 0.788235, 0.788235, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_y4pxd")
+theme_override_font_sizes/font_size = 34
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BGColor" type="TextureRect" parent="."]
 visible = false
@@ -56,33 +96,52 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -29.0
-offset_top = -29.0
+offset_top = -31.0
 offset_right = 31.0
-offset_bottom = 31.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(83, 86)
 texture = ExtResource("4_qs5eb")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Circle2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -24.0
-offset_right = 30.0
-offset_bottom = 27.0
+offset_left = -12.0
+offset_top = 17.0
+offset_right = 13.0
+offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.788235, 0.788235, 0.788235, 1)
+pivot_offset = Vector2(83, 86)
+texture = ExtResource("3_obc1c")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = 15.5
+offset_right = 18.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.654232, 0.654232, 0.654232, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("2_y4pxd")
-theme_override_font_sizes/font_size = 34
-text = "15"
+theme_override_font_sizes/font_size = 18
+text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -94,9 +153,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -21.0
-offset_top = -21.0
+offset_top = -20.0
 offset_right = 21.0
-offset_bottom = 21.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0

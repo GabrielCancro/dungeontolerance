@@ -15,6 +15,11 @@ var EYE_TRACK_REF
 var block_input_time = 0
 var turn_counter = 0
 var ROLL_DICE_ON_START_TURN = true
+var TRANSITION_NODE
+
+func _ready():
+	TRANSITION_NODE = preload("res://nodes/Transition.tscn").instantiate()
+	get_node("/root").add_child.call_deferred(TRANSITION_NODE)
 
 func _process(delta: float) -> void:
 	if !is_instance_valid(INPUT_BLOCKER_REF): return
@@ -42,16 +47,17 @@ func on_end_turn():
 	await PartyManager.clear_shield()
 	if DefianceManager.ALL_DEFIANCES.size()<=0:
 		await end_room()
+		if !LevelManager.is_now_in_destine(): PartyManager.add_sanity(3)
+		await timeout(1)
 		var result = await LevelManager.next_level()
 		await start_room()
 		if !result: return
 	else:
-		PartyManager.dec_sanity()
-		if PartyManager.DATA.SANITY<=0:
+		if PartyManager.DATA.SANITY>0:
+			PartyManager.dec_sanity()
+		else:
 			await timeout(.5)
-			#await Effector.sanity_fx()
 			await LevelManager.add_defiance("ghost")
-			PartyManager.add_sanity(2)
 		await timeout(.5)
 		await start_turn()
 
@@ -85,8 +91,6 @@ func block_input(time):
 	set_process(true)
 
 func change_scene(scene_name):
+	await TRANSITION_NODE.fade_in()
 	get_tree().change_scene_to_file("res://scenes/"+scene_name+".tscn")
-
-func show_popup(name_popup):
-	var node = load("res://popups/"+name_popup+".tscn").instantiate()
-	get_node("/root/Game/CLUI").add_child(node)
+	await TRANSITION_NODE.fade_out()

@@ -17,7 +17,13 @@ var DUNGEONS = [
 	[], 
 	
 	# Level 1
-	["rat/bat + rat/bat",
+	[
+	#"skeleton + skeleton + skeleton + skeleton_king",
+	#"DESTINE:old_chest",
+	#"DESTINE:campfire",
+	#"DESTINE:end_level",
+	#"DESTINE:fail_level",
+	"rat/bat + rat/bat",
 	"rat/bat + rat/bat + chest"],
 	
 	# Level 2
@@ -27,14 +33,27 @@ var DUNGEONS = [
 	
 	# Level 3
 	["rat/bat + goblin + chest + arrow_trap",
+	"DESTINE:campfire",
 	"rat/bat + rat/bat + arrow_trap",
 	"goblin + goblin + chest"],
 	
 	# Level 4
 	["rat/bat + slime + rune_trap",
 	"rat/bat + slime + arrow_trap + chest",
-	"rat/bat +rat/bat +rat/bat +rat/bat",
+	"rat/bat + rat/bat + rat/bat + rat/bat",
 	"slime + chest"],
+
+	# Level 5
+	["rat/bat + spider + arrow_trap",
+	"spider + slime + spider + chest",
+	"DESTINE:old_chest",
+	"spider + spider + spider + chest"],
+
+	# Level 6
+	["spider + goblin + arrow_trap",
+	"rat/bat + slime + rune_trap + chest",
+	"DESTINE:campfire",
+	"skeleton + skeleton + skeleton_king"],
 ]
 
 func init_dungeon():
@@ -49,14 +68,15 @@ func next_level():
 		SaveManager.DATA["prestige"] += 1
 		SaveManager.DATA["expedition"] += 1
 		SaveManager.save_store_data()
-		GameManager.show_popup("EndExpedition")
+		DestineManager.show_destine("end_level")
 		return false
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
+	DefianceManager.ALL_DEFIANCES = []
 	await Effector.transition_level_off()
 	update_ui()
 	#DUNGEONS[level][room_index]="C"
-	if DUNGEONS[level][room_index]=="DESTINE":
-		DestineManager.show_destine()
+	if "DESTINE:" in DUNGEONS[level][room_index]:
+		DestineManager.show_destine( DUNGEONS[level][room_index].split(":")[1] )
 	else:
 		await Effector.transition_level_on()
 		var room_arr = (DUNGEONS[level][room_index] as String).split(" + ")
@@ -71,8 +91,8 @@ func next_level():
 func is_now_in_destine():
 	if room_index < 0: return false
 	if room_index >=DUNGEONS[level].size(): return false
-	print("IS NOW IN DESTINE ",(DUNGEONS[level][room_index]=="DESTINE"))
-	return (DUNGEONS[level][room_index]=="DESTINE")
+	print("IS NOW IN DESTINE ",("DESTINE" in DUNGEONS[level][room_index]))
+	return ("DESTINE" in DUNGEONS[level][room_index])
 
 func add_defiance(def_type):
 	if DefianceManager.ALL_DEFIANCES.size()>=5: 

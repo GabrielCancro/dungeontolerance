@@ -4,26 +4,30 @@ extends Node
 var TRIGGERS = ["on_end_turn", "on_start_turn", "on_apply_dice", "on_pre_apply_dice", "on_dead_defiance"]
 var ALL_DEFIANCES = []
 const DEFIANCES = {
-	"tuto_rat":{     "hp":7 , "stats":{"S":2,"D":1,"M":0}, "tags":"", 
-		"abs":[ "aggressive*2" ] },
-	"goblin":{  "hp":12, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
-		"abs":["aggressive*2","counterattack*2"] },
-	"rat":{     "hp":10 , "stats":{"S":2,"D":2,"M":3}, "tags":"B", 
-		"abs":[ "aggressive*2" ] }, #"shield*2",
-	"bat":{     "hp":8 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
-		"abs":[ "drainer*1","aggressive*2" ] },
-	"chest":{     "hp":8 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
+	"tuto_rat":{     "hp":6 , "stats":{"S":2,"D":1,"M":0}, "tags":"", 
+		"abs":[ "aggressive*3" ] },
+	"goblin":{  "hp":9, "stats":{"S":2,"D":3,"M":1}, "tags":"N",
+		"abs":["aggressive*4","counterattack*2"] },
+	"rat":{     "hp":7 , "stats":{"S":2,"D":2,"M":3}, "tags":"B", 
+		"abs":[ "aggressive*3" ] }, #"shield*2",
+	"bat":{     "hp":6 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
+		"abs":[ "drainer*1","aggressive*3" ] },
+	"chest":{     "hp":6 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
 		"abs":[ "teasure*1" ] },
-	"arrow_trap":{"hp":10 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
+	"arrow_trap":{"hp":7 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
 		"abs":[ "activation*3", "trap_damage*10" ] },
-	"slime":{"hp":12 , "stats":{"S":4,"D":4,"M":1}, "tags":"S", 
-		"abs":[ "aggressive*3","absorb*1" ] },
-	"ghost":{"hp":7 , "stats":{"S":4,"D":4,"M":2}, "tags":"-", 
+	"slime":{"hp":8 , "stats":{"S":3,"D":3,"M":1}, "tags":"S", 
+		"abs":[ "aggressive*4","absorb*1" ] },
+	"ghost":{"hp":4 , "stats":{"S":3,"D":2,"M":2}, "tags":"-",
 		"abs":[ "necrotic*3"] },
-	"spider":{"hp":10 , "stats":{"S":3,"D":2,"M":3}, "tags":"-", 
-		"abs":[ "aggressive*2","poison*1" ] },
-	"rune_trap":{"hp":10 , "stats":{"S":8,"D":5,"M":1}, "tags":"C", 
-		"abs":[ "activation*1", "trap_sanity*4" ] },
+	"spider":{"hp":8 , "stats":{"S":3,"D":2,"M":3}, "tags":"-", 
+		"abs":[ "aggressive*3","poison*1" ] },
+	"rune_trap":{"hp":7 , "stats":{"S":8,"D":5,"M":1}, "tags":"C", 
+		"abs":[ "activation*3", "trap_sanity*3" ] },
+	"skeleton":{  "hp":10, "stats":{"S":2,"D":1,"M":1}, "tags":"N",
+		"abs":["aggressive*4"] },
+	"skeleton_king":{  "hp":18, "stats":{"S":2,"D":2,"M":2}, "tags":"N", "boss":true,
+		"abs":["aggressive*4","nigromant*2"] },
 }
 
 const ignored_trigger_resalt = [
@@ -148,7 +152,7 @@ func drainer_on_end_defiance_attack(ab_data, def_card):
 	await GameManager.timeout(.7)
 	ab_data.node.resalt()
 	await GameManager.timeout(.5)
-	def_card.node.heal_defiance(1)
+	def_card.node.heal_defiance(ab_data.level)
 	await GameManager.timeout(.5)
 
 func teasure_on_dead_defiance(ab_data, def_card):
@@ -186,7 +190,6 @@ func trap_sanity_on_activate(ab_data, def_card):
 	await GameManager.timeout(.8)
 
 func poison_on_end_defiance_attack(ab_data, def_card):
-	await GameManager.timeout(.7)
 	ab_data.node.resalt()
 	await GameManager.timeout(.5)
 	PartyManager.dec_sanity()
@@ -198,4 +201,15 @@ func absorb_on_pre_apply_dice(ab_data, def_card):
 	ab_data.node.resalt()
 	DiceManager.current_dice_drag.set_value(0)
 	def_card.node.update_abs()
+	await GameManager.timeout(.5)
+
+func nigromant_on_end_turn(ab_data, def_card):
+	var counter = 0
+	for def in ALL_DEFIANCES:
+		if def["name"] == "skeleton": counter+=1
+	await GameManager.timeout(.55)
+	ab_data.node.resalt()
+	for i in range(counter):
+		await GameManager.timeout(.8)
+		def_card.node.heal_defiance(ab_data["level"])
 	await GameManager.timeout(.5)

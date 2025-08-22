@@ -37,8 +37,8 @@ var TEXTS = {
 	"ab_atletic_en": "Swap one die @STR↔@DEX and add +2",
 	"ab_protector_name_es": "PROTECTOR",
 	"ab_protector_name_en": "PROTECTOR",
-	"ab_protector_es": "Obtienes 3 de escudo.",
-	"ab_protector_en": "Gain 3 shield.",
+	"ab_protector_es": "Obtienes 4 de escudo.",
+	"ab_protector_en": "Gain 4 shield.",
 	"ab_bendition_name_es": "BENDICION",
 	"ab_bendition_name_en": "BLESSING",
 	"ab_bendition_es": "Aumenta +2 a un dado al azar (debes tener al menos dos dados)",
@@ -101,6 +101,10 @@ var TEXTS = {
 	"def_spider_name_en": "Arachnid",
 	"def_rune_trap_name_es": "Trampa Runica",
 	"def_rune_trap_name_en": "Runic Trap",
+	"def_skeleton_name_es": "Esqueleto",
+	"def_skeleton_name_en": "Skeleton",
+	"def_skeleton_king_name_es": "Rey no muerto",
+	"def_skeleton_king_name_en": "Undead king",
 	
 	"def_ab_aggressive_name_es": "AGRESIVO",
 	"def_ab_aggressive_name_en": "AGGRESSIVE",
@@ -114,7 +118,7 @@ var TEXTS = {
 	"def_ab_activation_name_en": "ACTIVATION",
 	"def_ab_activation_es": "Este temporizador avanza cada turno, al completarse se desencadenan sus efectos.",
 	"def_ab_activation_en": "This timer advances each turn; once completed, its effects trigger.",
-	"def_ab_trap_damage_name_es": "DANIO MASIVO",
+	"def_ab_trap_damage_name_es": "DAÑO MASIVO",
 	"def_ab_trap_damage_name_en": "MASSIVE DAMAGE",
 	"def_ab_trap_damage_es": "Al activarse aplica entre -#1HP y -#2HP.",
 	"def_ab_trap_damage_en": "Upon activation, deals between -#1HP and -#2HP.",
@@ -146,18 +150,45 @@ var TEXTS = {
 	"def_ab_trap_sanity_name_en": "MADNESS",
 	"def_ab_trap_sanity_es": "Al activarse reduce -#0 tu cordura.",
 	"def_ab_trap_sanity_en": "Upon activation, reduces your sanity by -#0.",
+	"def_ab_nigromant_name_es": "NIGROMANTE",
+	"def_ab_nigromant_name_en": "NECROMANCER",
+	"def_ab_nigromant_es": "Al final del turno, se cura +#0HP por cada esqueleto que haya en pie.",
+	"def_ab_nigromant_en": "At the end of the turn, heal yourself for +#0HP for each skeleton still standing.",
 
 	"destine_campfire_title_es":"Campamento",
 	"destine_campfire_title_en":"Campfire",
 	"destine_campfire_desc_es":"Tras explorar pasillos oscuros y sortear trampas oxidadas, tu grupo encuentra un respiro, una pequeña sala iluminada por brasas apagadas y el aroma tenue de hierbas quemadas. Alguien acampó aquí antes... pero ya no están.  Un círculo de piedras guarda las cenizas de una fogata, y un tronco musgoso invita a sentarse. Este es un lugar seguro, al menos por ahora. El aire es más templado, y el silencio no parece hostil.",
 	"destine_campfire_desc_en":"After exploring dark corridors and avoiding rusty trapdoors, your group finds respite, a small room lit by dying embers and the faint scent of burning herbs. Someone camped here before... but they're gone now. A circle of stones holds the ashes of a campfire, and a mossy log invites you to sit. This is a safe place, at least for now. The air is milder, and the silence doesn't seem hostile.",
-	"destine_campfire_op1_es":"Ganas 5 puntos de cordura.",
-	"destine_campfire_op1_en":"Ganas 5 puntos de cordura.",
+	"destine_campfire_op1_es":"Ganas 3 puntos de cordura.",
+	"destine_campfire_op1_en":"You gain 3 sanity points.",
 	"destine_campfire_op2_es":"Restaura hasta 7 HP.",
-	"destine_campfire_op2_en":"Restaura hasta 7 HP.",
+	"destine_campfire_op2_en":"Restores up to 7 HP.",
 	"destine_campfire_op3_es":"Obtienes una racion de comida que rastaura 3 HP al final de cada combate durante 3 combates.",
-	"destine_campfire_op3_en":"Obtienes una racion de comida que rastaura 3 HP al final de cada combate durante 3 combates.",
+	"destine_campfire_op3_en":"You gain a food ration that restores 3 HP at the end of each fight for 3 fights.",
 
+	"destine_old_chest_title_es":"El viejo cofre",
+	"destine_old_chest_title_en":"Campfire",
+	"destine_old_chest_desc_es":"Tu y tu grupo entran en una peculiar habitación, la oscuridad parece más intensa, una niebla abrasiva se apodera de la sala y comienzan a escucharse susurros de otros tiempos. Un viejo cofre con insignias yace en la habitación.",
+	"destine_old_chest_desc_en":"You and your party enter a peculiar room. The darkness seems to deepen, a scorching fog takes over, and whispers from another time begin to be heard. An old chest of insignia lies in the room.",
+	"destine_old_chest_op1_es":"Continuar tu camino.",
+	"destine_old_chest_op1_en":"",
+	"destine_old_chest_op2_es":"Abrir el cofre, pierdes 3 puntos de cordura y ganas un objeto.",
+	"destine_old_chest_op2_en":"Opening the chest, you lose 3 sanity points and gain an item.",
+
+	"destine_end_level_title_es":"Expedicion completa",
+	"destine_end_level_title_en":"Finish expedition",
+	"destine_end_level_desc_es":"Muy bien aventureros! Han completado la expedicion!\nEs hora de volver a la taberna a descansar y contar tus logros!",
+	"destine_end_level_desc_en":"All right, adventurers! You've completed the expedition!\nIt's time to head back to the tavern to rest and recount your accomplishments!",
+	"destine_end_level_op1_es":"Vamos a la taberna.",
+	"destine_end_level_op1_en":"Let's go to the tavern.",
+	
+	"destine_fail_level_title_es":"Abatidos",
+	"destine_fail_level_title_en":"Dejected",
+	"destine_fail_level_desc_es":"Este lugar es mas peligroso de lo que pensabas.\nReagrupate, descansa y vuelve a intentarlo.",
+	"destine_fail_level_desc_en":"This place is more dangerous than you thought.\nRegroup, rest, and try again.",
+	"destine_fail_level_op1_es":"Volvamos a la taberna.",
+	"destine_fail_level_op1_en":"Let's go back to the tavern.",
+	
 	"tuto_welcome_es":"Bienvenidos aventureros! Les explicare las cosas basicas que todo aficionado deberia conocer antes de adentrarse en una mazmorra, hay muchos peligros alli.",
 	"tuto_welcome_en":"Welcome, adventurers! I'll explain the basics every fan should know before entering a dungeon. There are many dangers there.",
 	"tuto_party_es":"En la parte inferior veras las estadisticas de tu grupo. En cada turno lanzas un dado por cada punto de caracteristica que tengas.",
@@ -202,11 +233,6 @@ var TEXTS = {
 	
 	"tuto_new_hero_es":"Un nuevo aventurero llego a la taberna.\nParece dispuesto a ayudarte en las ruinas.",
 	"tuto_new_hero_en": "A new adventurer has arrived at the tavern. Seems ready to join your quest.",
-
-	"tx_end_expedition_es":"Muy bien aventureros! Han completado la expedicion!\nEs hora de volver a la taberna a descansar y contar tus logros!",
-	"tx_end_expedition_en":"All right, adventurers! You've completed the expedition!\nIt's time to head back to the tavern to rest and recount your accomplishments!",
-	"tx_game_over_es":"Este lugar es mas peligroso de lo que pensabas.\nReagrupate, descansa y vuelve a intentarlo.",
-	"tx_game_over_en":"This place is more dangerous than you thought.\nRegroup, rest, and try again.",
 	
 	"tx_intro1_es":"Entrada del diario del Explorador Gerran Velmor,",
 	"tx_intro1_en":"Log entry from Explorer Gerran Velmor,",
@@ -221,8 +247,8 @@ var TEXTS = {
 	"tx_intro6_es":"– Gerran Velmor, Explorador de la Orden del Ojo Silente",
 	"tx_intro6_en":"– Gerran Velmor, Scout of the Order of the Silent Eye",
 	
-	"tx_sanity_es":"Tu nivel de cordura bajara en cada turno, cada vez que destruyas un enemigo o completes una habitacion recuperas un poco de ella. Ten cuidado, si llegas a cero los espectros de la ruina vendran por ti!",
-	"tx_sanity_en": "Your sanity decreases each turn, and is slightly restored by defeating enemies or clearing rooms.",
+	"tx_sanity_es":"Tu nivel de cordura baja en cada turno, recuperaras parte de ella al superar cada habitacion. Ten cuidado, si llegas a cero los espectros de la ruina vendran por ti!",
+	"tx_sanity_en": "Your sanity level decreases with each turn, and you'll regain some of it as you clear each room. Be careful, if you reach zero, the specters of ruin will come for you!",
 	
 	"all_party_stats_es":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
 	"all_party_stats_en":"@PARTY_STR  @PARTY_DEX  @PARTY_MAG",
@@ -253,7 +279,9 @@ var TEXTS = {
 	"stat_sanity_es": "Cordura",
 	"stat_sanity_en": "Sanity",
 	"max_power_es": "Carga maxima",
-	"max_power_en": "Max charge"
+	"max_power_en": "Max charge",
+	"attack_miss_es": "Falla",
+	"attack_miss_en": "Miss",
 }
 
 var REPLACES = {
@@ -288,3 +316,7 @@ func get_req_string(req={}):
 		var c = DiceManager.COLORS[k]
 		if k in req: for i in req[k]: result += "[img=14 color="+c+"]res://assets/full_white_point.png[/img]" 
 	return result
+
+func has_key(code):
+	code += "_"+current_lang
+	return (code in TEXTS)

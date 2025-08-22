@@ -142,6 +142,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
+[node name="PartyAbility8" parent="Items" instance=ExtResource("9_qy1jj")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility9" parent="Items" instance=ExtResource("9_qy1jj")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="PartyAbility10" parent="Items" instance=ExtResource("9_qy1jj")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
 [node name="PowerGem" parent="." instance=ExtResource("12_mcffj")]
 offset_left = 350.0
 offset_top = 538.0
@@ -187,6 +199,7 @@ offset_bottom = 152.0
 grow_horizontal = 0
 
 [node name="BtnAddDice" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 495.0
 offset_top = 556.0
@@ -197,14 +210,25 @@ text = "ADD RND DICE"
 
 [node name="BtnEndTurn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 495.0
-offset_top = 603.0
-offset_right = 624.0
-offset_bottom = 641.0
+offset_left = 493.0
+offset_top = 554.0
+offset_right = 622.0
+offset_bottom = 603.0
 theme = ExtResource("10_3xj3m")
 text = "END TURN"
 
+[node name="BtnLeave" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 6.0
+offset_right = 1146.0
+offset_bottom = 55.0
+theme = ExtResource("10_3xj3m")
+text = "Leave
+Ruins"
+
 [node name="BtnAddEnemy" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 639.0
 offset_top = 603.0

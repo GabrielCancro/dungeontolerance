@@ -60,7 +60,7 @@ offset_bottom = 407.0
 grow_horizontal = 0
 color = Color(0.0846899, 0.0846899, 0.0846899, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Panel"]
+[node name="Image" type="TextureRect" parent="Panel"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 13.0

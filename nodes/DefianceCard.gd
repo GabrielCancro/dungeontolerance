@@ -17,6 +17,9 @@ func set_data(_data):
 	def_data["node"] = self
 	$TextureRect.texture = load("res://assets/defiances/"+def_data.name+".png")
 	$Name.text = Lang.get_text("def_"+def_data.name+"_name")
+	if "boss" in def_data: 
+		pivot_offset = size/2
+		scale = Vector2(1.2,1.2)
 
 func _on_hover(val):
 	$BGColor.visible = val
@@ -91,7 +94,7 @@ func dead():
 	$Light.modulate = Color(1,0,0)
 	await DefianceManager.launch_trigger("on_dead_defiance", def_data)
 	DefianceManager.ALL_DEFIANCES.erase(def_data)
-	PartyManager.add_sanity(1)
+	#PartyManager.add_sanity(1)
 	print("DefianceManager.ALL_DEFIANCES ",DefianceManager.ALL_DEFIANCES)
 	await GameManager.timeout(.5)
 	emit_signal("on_destroy")

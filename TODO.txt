@@ -1,3 +1,15 @@
+07/08/2025
+ - Reducir los brazos de pulpo con cordura mayor a 3
+
+OK - Agregar distintos tipos de campamentos
+OK - Implementar opciones del destino old_chest
+OK - Agregar transition a las escenas
+OK - agregar destine dead
+OK - hacer que salgan al finalizar expedicion o ser derrotado.
+OK - agregar espectro si es menor que 0 (ROJO)
+OK - reducir stats espectro
+OK - subir danio y reducir vida de enemigos (pelea mas dinamica)
+
 TODO:
 AGREGAR SELECCION DE PERSONAJES Y AGREGACION DE STATS EN TABERNA
 AGREGAR SELECCION DE OBJETOS

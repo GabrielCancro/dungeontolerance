@@ -12,6 +12,7 @@ func _ready() -> void:
 	$ExpText/Label.text = Lang.get_text("ui_prestige").to_upper()+" "+str(int(SaveManager.DATA["prestige"]))
 	$ExpText/Label.text += "\n"+Lang.get_text("ui_expedition").to_upper()+" "+str(int(SaveManager.DATA["expedition"]))
 	$PR/Label.text = str(int(SaveManager.DATA["prestige"]))
+	$Continue/Label.text = str(int(SaveManager.DATA["prestige"]))+" / "+str(LevelManager.DUNGEONS.size()-1)
 	HintManager.init($HintPanel)
 	$CharDataPanel.visible = false
 	PartyManager.ITEMS_UNLOCKED = SaveManager.DATA["items_unlocked"]
@@ -140,6 +141,7 @@ func update_selected():
 	PartyManager.STATS["M"]=0
 	PartyManager.DATA.HP = 0
 	PartyManager.DATA.SANITY = 0
+	PartyManager.DATA.MAX_SANITY = 0
 	PartyManager.ABILITIES = []
 	for i in 3:
 		if selected[i]: 
@@ -150,6 +152,7 @@ func update_selected():
 			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
 			PartyManager.DATA.HP += PartyManager.CHARACTERS[index].hp
 			PartyManager.DATA.SANITY += PartyManager.CHARACTERS[index].sanity
+			PartyManager.DATA.MAX_SANITY += PartyManager.CHARACTERS[index].sanity
 			if PartyManager.CHARACTERS[index]["abs"]:
 				var ab_data = PartyManager.get_ability_data(PartyManager.CHARACTERS[index]["abs"])
 				PartyManager.ABILITIES.append(ab_data)

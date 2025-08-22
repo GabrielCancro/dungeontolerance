@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4hlyr47mx6q8"]
+
+[ext_resource type="Script" uid="uid://dxv1ix8koebn0" path="res://nodes/Transition.gd" id="1_7vwyd"]
+[ext_resource type="Texture2D" uid="uid://dj5hdcimrbhsv" path="res://assets/backgrounds/bg_intro.jpg" id="2_8omu3"]
+
+[node name="Transition" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_7vwyd")
+
+[node name="BG" type="TextureRect" parent="."]
+modulate = Color(0.0885599, 0.0885599, 0.0885599, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_8omu3")

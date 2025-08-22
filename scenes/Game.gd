@@ -4,6 +4,7 @@ func _ready() -> void:
 	HintManager.init($Hint/HintPanel)
 	$BtnAddDice.connect("button_down",DiceManager.add_random_dice)
 	$BtnEndTurn.connect("button_down",GameManager.on_end_turn)
+	$BtnLeave.connect("button_down",on_leave_ruins)
 	$BtnAddEnemy.connect("button_down",LevelManager.add_defiance.bind("rat"))
 	$CLUI/Tutorial.connect("on_skip_tutorial",on_skip_tuto)
 	GameManager.GAME_SCENE_REF = self
@@ -77,4 +78,7 @@ func start_sequence():
 func on_skip_tuto():
 	SaveManager.DATA["prestige"] = 1
 	SaveManager.save_store_data()
+	GameManager.change_scene("Tabern")
+
+func on_leave_ruins():
 	GameManager.change_scene("Tabern")

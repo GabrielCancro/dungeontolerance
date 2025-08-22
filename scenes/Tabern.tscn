@@ -396,6 +396,27 @@ texture = ExtResource("13_6av1h")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Label" type="Label" parent="Continue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 91.0
+offset_right = -14.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.851769, 0.851769, 0.851769, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("SystemFont_nfy2w")
+theme_override_font_sizes/font_size = 21
+text = "0 / 7"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
 [node name="Items" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 19.0

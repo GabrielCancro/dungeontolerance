@@ -95,6 +95,7 @@ theme = ExtResource("4_eswx1")
 text = "OK"
 
 [node name="BtnSkipTutorial" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1022.0
 offset_top = 10.0
 offset_right = 1140.0

@@ -1,6 +1,6 @@
 extends Control
 
-var destine_code = "campfire"
+var destine_code
 
 func _ready() -> void:
 	for L in $Panel/VBox.get_children():
@@ -10,11 +10,16 @@ func _ready() -> void:
 
 func show_destine(code):
 	modulate.a = 0
-	$Panel/Title.text = Lang.get_text("destine_campfire_title",["UPPERCASE","TITLE"])
-	$Panel/Desc.text = Lang.get_text("destine_campfire_desc")
-	$Panel/VBox/L1/RLT.text = Lang.get_text("destine_campfire_op1")
-	$Panel/VBox/L2/RLT.text = Lang.get_text("destine_campfire_op2")
-	$Panel/VBox/L3/RLT.text = Lang.get_text("destine_campfire_op3")
+	destine_code = code
+	$Panel/Title.text = Lang.get_text("destine_"+code+"_title",["UPPERCASE","TITLE"])
+	$Panel/Desc.text = Lang.get_text("destine_"+code+"_desc")
+	$Panel/Image.texture = load("res://assets/destine/"+code+".png")
+	$Panel/VBox/L1/RLT.text = Lang.get_text("destine_"+code+"_op1")
+	$Panel/VBox/L2/RLT.text = Lang.get_text("destine_"+code+"_op2")
+	$Panel/VBox/L3/RLT.text = Lang.get_text("destine_"+code+"_op3")
+	$Panel/VBox/L1.visible = Lang.has_key("destine_"+code+"_op1")
+	$Panel/VBox/L2.visible = Lang.has_key("destine_"+code+"_op2")
+	$Panel/VBox/L3.visible = Lang.has_key("destine_"+code+"_op3")
 	await GameManager.timeout(1)
 	Effector.appear_destine(self)
 	visible = true
