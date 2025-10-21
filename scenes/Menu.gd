@@ -18,6 +18,7 @@ func start_anim():
 	tw.parallel().tween_property($Tittle,"position:x",$Tittle.position.x-150,.5).set_ease(Tween.EASE_IN_OUT)
 	tw.parallel().tween_property($Container,"position:x",$Container.position.x+150,.5).set_ease(Tween.EASE_IN_OUT)
 	tw.play()
+	Sounds.play_music("ambientcave")
 
 func localizate():
 	$Container/VBox/btn_start.text = Lang.get_text("ui_start")
@@ -26,6 +27,7 @@ func localizate():
 	$Container/VBox/btn_reset/btn_reset_sure.text = Lang.get_text("ui_reset_data_sure")
 
 func on_btn_click(code):
+	Sounds.play_sound("key_pickup")
 	if code=="start":
 		GameManager.change_scene("Intro")
 	elif code=="lang":

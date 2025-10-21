@@ -27,6 +27,7 @@ Effector="*res://autoloads/Effector.gd"
 LevelManager="*res://autoloads/LevelManager.gd"
 SaveManager="*res://autoloads/SaveManager.gd"
 DestineManager="*res://autoloads/DestineManager.gd"
+Sounds="*res://autoloads/Sounds.gd"
 
 [display]
 

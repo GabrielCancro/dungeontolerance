@@ -21,6 +21,7 @@ func _ready() -> void:
 	$CLBG/TextureRect.modulate.a = 0
 	$Dices.modulate.a = 0
 	$DefShadow.modulate.a = 0
+	Sounds.play_music("ambientcave")
 	PartyManager.update_abilities_ui()
 	PartyManager.update_items_ui()
 	PartyManager.restore_hp()
@@ -31,6 +32,11 @@ func _ready() -> void:
 func tuto_sequence():
 	$Abilities.visible = false
 	$EyeTrack.visible = false
+	$BtnLeave.visible = false
+	PartyManager.DATA.SANITY = 9999
+	var ab_data = PartyManager.get_ability_data("streng")
+	PartyManager.ABILITIES = [ab_data]
+	PartyManager.update_abilities_ui()
 	$CLBG/TextureRect.modulate.a = 1
 	$Dices.modulate.a = 1
 	await GameManager.timeout(2)
@@ -56,6 +62,7 @@ func tuto_sequence():
 	await GameManager.timeout(1.5)
 	await $CLUI/Tutorial.show_tuto("good_work")
 	if !get_tree(): return
+	PartyManager.DATA.SANITY
 	$Abilities.visible = true
 	await $CLUI/Tutorial.show_tuto("ability1")
 	await $CLUI/Tutorial.show_tuto("power1")

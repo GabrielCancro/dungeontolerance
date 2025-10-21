@@ -28,7 +28,7 @@ var ITEMS_DATA = {
 }
 
 var CHARACTERS = [
-	{"name":"Thior","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[1,1,0],"abs":null},
+	{"name":"Thior","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[1,1,0],"abs":"streng"},
 	{"name":"Samuel","class":"rogue","lv":4, "hp":6, "sanity":1, "stats":[0,1,1],"abs":null},
 	{"name":"Ryna","class":"barbarian","lv":5, "hp":8, "sanity":1, "stats":[2,0,0],"abs":null},
 	{"name":"Alem","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[0,1,0],"abs":"atletic"},

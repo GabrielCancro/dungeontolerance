@@ -31,6 +31,7 @@ func set_random_type():
 
 func roll():
 	is_rolled = true
+	Sounds.play_sound("roll_dices")
 	for i in range(10):
 		value = randi()%6+1
 		rotation_degrees = randf()*360

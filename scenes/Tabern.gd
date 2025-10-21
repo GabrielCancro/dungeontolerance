@@ -17,6 +17,7 @@ func _ready() -> void:
 	$CharDataPanel.visible = false
 	PartyManager.ITEMS_UNLOCKED = SaveManager.DATA["items_unlocked"]
 	selected_items = []
+	Sounds.play_music("tabern_ambient")
 	
 	for it_index in SaveManager.DATA["items_preselected"]:
 		$Items.get_child(it_index).set_selected(true)
