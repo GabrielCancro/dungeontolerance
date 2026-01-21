@@ -22,6 +22,7 @@ func set_text():
 	$TextContainer/Value.text += Lang.get_text("tx_intro6")
 
 func _on_click():
+	Sounds.play_sound("click_button")
 	if SaveManager.DATA["prestige"]==0: 
 		PartyManager.PARTY_CHARACTERS = [6,1,0]
 		PartyManager.STATS = {"S":2,"D":1,"M":0}

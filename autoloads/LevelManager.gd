@@ -72,6 +72,7 @@ func next_level():
 		return false
 	for def in GameManager.DEFIANCES_REF.get_children(): def.queue_free()
 	DefianceManager.ALL_DEFIANCES = []
+	Sounds.play_sound("boot_steps")
 	await Effector.transition_level_off()
 	update_ui()
 	#DUNGEONS[level][room_index]="C"
@@ -85,7 +86,9 @@ func next_level():
 			var key = keys[ randi() % keys.size() ]
 			#var key = DefianceManager.get_random_defiance_key_by_tag(def_tag)
 			print("ADDING ",key," by tag ",key)
+			await get_tree().create_timer(.5).timeout
 			add_defiance(key)
+		await get_tree().create_timer(.5).timeout
 	return true
 
 func is_now_in_destine():
@@ -104,6 +107,8 @@ func add_defiance(def_type):
 	GameManager.DEFIANCES_REF.add_child(node)
 	node.position = Vector2(1200,150)
 	node.modulate.a = 0
+	Sounds.play_sound("card_move")
+	Effector.appear_less(node)
 	reorder_cards()
 
 func reorder_cards():
@@ -131,7 +136,6 @@ func reorder_cards():
 
 func _move_def(node,pox,posy):
 	Effector.move_to(node, Vector2(pox,posy))
-	Effector.appear_less(node)
 	await GameManager.timeout(.3)
 
 func update_ui():

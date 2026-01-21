@@ -161,6 +161,7 @@ func teasure_on_dead_defiance(ab_data, def_card):
 	var key = PartyManager.get_rnd_item()
 	var texture = load("res://assets/abilities/ab_"+key+".png")
 	Effector.texture_from_to(texture,ab_data.node.global_position+ab_data.node.size/2+Vector2(0,-100),Vector2(25,5),Vector2(1,1),Vector2(.5,.5))
+	Sounds.play_sound("openchest")
 	await GameManager.timeout(1)
 	PartyManager.add_item(key)
 
@@ -168,6 +169,7 @@ func activation_on_end_turn(ab_data, def_card):
 	await GameManager.timeout(.7)
 	ab_data.count = min(ab_data.count+1,ab_data.max_count)
 	ab_data.node.resalt()
+	Sounds.play_sound("timer_tictac")
 	def_card.node.update_abs()
 	await GameManager.timeout(.7)
 	if ab_data.count==ab_data.max_count:

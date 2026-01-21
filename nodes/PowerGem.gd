@@ -49,6 +49,7 @@ func inc_gems(type,val):
 		gems[type].append(_gem)
 		
 	update_colors()
+	Sounds.play_sound("charge_power")
 	return true
 
 func dec_gems(type,val):

@@ -189,9 +189,11 @@ func apply_damage(val,def_data):
 	randomize()
 	if val<5 and randf()<0.10:
 		Effector.float_text(Lang.get_text("attack_miss"),Vector2(365,375),"NORMAL")
+		Sounds.play_sound("evade")
 		await GameManager.timeout(.2)
 		return
 	if DATA.SH>0: 
+		Sounds.play_sound("shield_hit")
 		Effector.float_text("-"+str(min(DATA.SH,val))+"SH",Vector2(365,420),"SHIELD")
 		DATA.SH -= val
 		await GameManager.PARTY_REF.update_shield()
@@ -222,6 +224,7 @@ func restore_hp():
 
 func add_shield(val):
 	DATA.SH += val
+	Sounds.play_sound("shield_add")
 	await GameManager.PARTY_REF.update_shield()
 
 func clear_shield():

@@ -282,6 +282,8 @@ var TEXTS = {
 	"max_power_en": "Max charge",
 	"attack_miss_es": "Falla",
 	"attack_miss_en": "Miss",
+	
+	"prestige_info_es": "PRESTIGIO: es el reconocimiento de tu grupo e indica cuantos objetos puedes llevar a tu próxima expedición."
 }
 
 var REPLACES = {

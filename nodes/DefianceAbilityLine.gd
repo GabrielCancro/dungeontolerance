@@ -27,4 +27,5 @@ func set_data(data):
 	else: $Value.text += " "+str(ab_data.level)
 
 func resalt():
+	Sounds.play_sound("action_turn")
 	Effector.boom_big(self)

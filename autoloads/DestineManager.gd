@@ -5,11 +5,13 @@ var end_game
 
 func show_destine(destine_code):
 	print("SHOW DESTINE ",destine_code)
+	Sounds.play_sound("card_move")
 	end_game = false
 	GameManager.DESTINE_REF.show_destine(destine_code)
 
 func on_chosse(destine,op):
 	print("CHOSSE "+destine+" op"+str(op))
+	Sounds.play_sound("action_turn")
 	await call("on_chosse_"+destine,op)
 	if !end_game:
 		await GameManager.timeout(.5)

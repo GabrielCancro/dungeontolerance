@@ -70,6 +70,15 @@ vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
+[node name="Button" type="Button" parent="PR"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 76.0
+offset_bottom = 89.0
+focus_mode = 0
+flat = true
+
 [node name="Characters" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -368,6 +377,7 @@ theme = ExtResource("3_lyctx")
 text = "BACK MENU"
 
 [node name="AddPrestige" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1006.0
 offset_top = 75.0

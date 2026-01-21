@@ -12,6 +12,7 @@ func set_dice_drag(node):
 	if node:
 		current_dice_drag = node
 		safe_pos_dice_drag = node.position
+		Sounds.play_sound("dice_touch")
 
 func get_dice_drag():
 	return current_dice_drag

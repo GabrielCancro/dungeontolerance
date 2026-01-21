@@ -40,6 +40,7 @@ func on_start_game():
 func on_end_turn():
 	block_input(1)
 	await DiceManager.clear_dices()
+	Sounds.play_sound("end_turn")
 	if DefianceManager.ALL_DEFIANCES.size()>=0:
 		await timeout(1)
 		await DefianceManager.launch_trigger_to_all_defiances("on_end_turn")
@@ -50,14 +51,16 @@ func on_end_turn():
 		if !LevelManager.is_now_in_destine(): PartyManager.add_sanity(3)
 		await timeout(1)
 		var result = await LevelManager.next_level()
-		await start_room()
 		if !result: return
+		await start_room()
 	else:
 		if PartyManager.DATA.SANITY>0:
 			PartyManager.dec_sanity()
+			if PartyManager.DATA.SANITY==0: Sounds.play_sound("spectres")
 		else:
 			await timeout(.5)
 			await LevelManager.add_defiance("ghost")
+			Sounds.play_sound("spectres")
 		await timeout(.5)
 		await start_turn()
 

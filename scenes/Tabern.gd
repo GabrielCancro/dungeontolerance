@@ -9,6 +9,8 @@ func _ready() -> void:
 	$Continue.connect("button_down",_on_click_continue)
 	$BackMenu.connect("button_down",_on_click_back)
 	$AddPrestige.connect("button_down",_on_click_add_prestige)
+	$PR/Button.connect("mouse_entered",_on_hover_prestige.bind(true))
+	$PR/Button.connect("mouse_exited",_on_hover_prestige.bind(false))
 	$ExpText/Label.text = Lang.get_text("ui_prestige").to_upper()+" "+str(int(SaveManager.DATA["prestige"]))
 	$ExpText/Label.text += "\n"+Lang.get_text("ui_expedition").to_upper()+" "+str(int(SaveManager.DATA["expedition"]))
 	$PR/Label.text = str(int(SaveManager.DATA["prestige"]))
@@ -101,6 +103,7 @@ func _on_hover(node,val):
 		$CharDataPanel.visible = false
 
 func _on_click_continue():
+	Sounds.play_sound("enter_ruin")
 	PartyManager.ITEMS_EQUIPPED.clear()
 	for it in selected_items: 
 		var it_data = PartyManager.get_item_data(it.ab_data.name)
@@ -118,6 +121,7 @@ func _on_click_continue():
 	GameManager.change_scene("Game")
 
 func _on_click_back():
+	Sounds.play_sound("click_button")
 	GameManager.change_scene("Menu")
 
 func _on_click_add_prestige():
@@ -168,15 +172,24 @@ func _on_click_character(ch):
 		selected[ch.get_index()] = null
 		update_selected()
 		$CharDataPanel.visible = false
+		Sounds.play_sound("character_select")
 		return
 		
 	if ch in $Characters.get_children() && ch in selected: 
+		Sounds.play_sound("fail")
+		return
+	
+	if ch in $Characters.get_children() && !null in selected: 
+		Sounds.play_sound("fail")
+		Effector.shake($Party)
 		return
 		
 	for i in 3:
 		if !selected[i]:
 			selected[i] = ch
 			update_selected()
+			Sounds.play_sound("character_select")
+			$CharDataPanel.visible = false
 			return
 
 func update_items_ui():
@@ -191,13 +204,16 @@ func update_items_ui():
 		$Items.get_child(i).set_selected( $Items.get_child(i) in selected_items )
 
 func _on_item_click(item_node):
-	
 	if item_node in selected_items:
 		selected_items.erase(item_node)
+		Sounds.play_sound("item_select")
 	else: 
 		if selected_items.size()<SaveManager.DATA["prestige"]:
 			selected_items.append(item_node)
-		else: Effector.shake($PR)
+			Sounds.play_sound("item_select")
+		else: 
+			Effector.shake($PR)
+			Sounds.play_sound("fail")
 	update_items_ui()
 	$CharDataPanel.visible = false
 
@@ -215,3 +231,7 @@ func check_available_characters():
 				else:
 					ch.visible = false
 					$Buttons.get_child(ch.get_index()).visible = false
+
+func _on_hover_prestige(val):
+	if val: HintManager.set_text(Lang.get_text("prestige_info"))
+	else: HintManager.set_text()

@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://xp27cje22yot"]
+[gd_scene load_steps=6 format=3 uid="uid://xp27cje22yot"]
 
 [ext_resource type="Script" uid="uid://by4ki5jcqv35c" path="res://scenes/Menu.gd" id="1_o0tnf"]
 [ext_resource type="Texture2D" uid="uid://dj5hdcimrbhsv" path="res://assets/backgrounds/bg_intro.jpg" id="2_o0tnf"]
 [ext_resource type="Theme" uid="uid://b7cthgu27d0tc" path="res://ThemeUI.tres" id="3_jmdev"]
 [ext_resource type="Texture2D" uid="uid://drp6x4kxnt044" path="res://assets/tittle.png" id="3_o0tnf"]
+
+[sub_resource type="SystemFont" id="SystemFont_o0tnf"]
+subpixel_positioning = 0
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -94,3 +97,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_o0tnf")
 expand_mode = 1
+
+[node name="Early" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 769.0
+offset_top = 583.0
+offset_right = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.691357, 0.691357, 0.691357, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_o0tnf")
+theme_override_font_sizes/font_size = 18
+text = "EARLY VERSION         mole06.itch.io"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true

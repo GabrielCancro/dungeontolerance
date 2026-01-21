@@ -31,7 +31,7 @@ func set_random_type():
 
 func roll():
 	is_rolled = true
-	Sounds.play_sound("roll_dices")
+	Sounds.play_sound("roll_dice_soft")
 	for i in range(10):
 		value = randi()%6+1
 		rotation_degrees = randf()*360
@@ -78,6 +78,7 @@ func add_bonif(val):
 		_apply_bonif_value()
 
 func _apply_bonif_value():
+	Sounds.play_sound("dice_bonif")
 	Effector.float_text("+"+str(bonif),global_position+Vector2(30,-10),get_color())
 	await GameManager.timeout(.3)
 	value += bonif

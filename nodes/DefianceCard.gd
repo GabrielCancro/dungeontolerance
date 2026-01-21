@@ -42,6 +42,7 @@ func _on_click():
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
 	if !dice.is_rolled: await dice.roll()
+	Sounds.play_sound("dice_apply")
 	if dice.type in def_data.stats.keys(): 
 		await Effector.boom_big($Stats.get_node(dice.type))
 		if dice.is_rolled:
@@ -82,6 +83,8 @@ func damage_defiance(dam):
 	GameManager.timeout(.5)
 	Effector.float_text("-"+str(dam),position+Vector2(50,-10),"ff0000")
 	Effector.boom_big($HP)
+	if def_data.tags[0] in ["T","C"]: Sounds.play_sound("mechanic_damage")
+	else: Sounds.play_sound("damage")
 	await Effector.damage(self)
 	if is_dead(): await dead()
 	return true
@@ -96,6 +99,8 @@ func dead():
 	DefianceManager.ALL_DEFIANCES.erase(def_data)
 	#PartyManager.add_sanity(1)
 	print("DefianceManager.ALL_DEFIANCES ",DefianceManager.ALL_DEFIANCES)
+	if def_data.tags[0] in ["T","C"]: Sounds.play_sound("mechanic_dead")
+	else: Sounds.play_sound("creature_dead")
 	await GameManager.timeout(.5)
 	emit_signal("on_destroy")
 	await Effector.fade_down(self)

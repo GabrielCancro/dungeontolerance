@@ -12,7 +12,7 @@ func _ready():
 	music_stream = AudioStreamPlayer.new()
 	music_stream.bus = AudioServer.get_bus_name(BUS.MUSIC)
 	add_child(music_stream)
-	set_master_vol(30)
+	set_master_vol(100)
 	set_sfx_vol(100)
 	set_music_vol(70)
 

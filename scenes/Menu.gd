@@ -3,6 +3,7 @@ extends Control
 func _ready() -> void:
 	localizate()
 	start_anim()
+	$Early.modulate.a = 0
 	$Container/VBox/btn_start.connect("button_down",on_btn_click.bind("start"))
 	$Container/VBox/btn_lang.connect("button_down",on_btn_click.bind("lang"))
 	$Container/VBox/btn_reset.connect("button_down",on_btn_click.bind("reset"))
@@ -17,6 +18,8 @@ func start_anim():
 	tw.tween_property($Container,"modulate:a",1,1).set_ease(Tween.EASE_OUT)
 	tw.parallel().tween_property($Tittle,"position:x",$Tittle.position.x-150,.5).set_ease(Tween.EASE_IN_OUT)
 	tw.parallel().tween_property($Container,"position:x",$Container.position.x+150,.5).set_ease(Tween.EASE_IN_OUT)
+	tw.parallel().tween_property($Early,"modulate:a",1,1).set_ease(Tween.EASE_OUT)
+	
 	tw.play()
 	Sounds.play_music("ambientcave")
 
@@ -27,7 +30,7 @@ func localizate():
 	$Container/VBox/btn_reset/btn_reset_sure.text = Lang.get_text("ui_reset_data_sure")
 
 func on_btn_click(code):
-	Sounds.play_sound("key_pickup")
+	Sounds.play_sound("click_button")
 	if code=="start":
 		GameManager.change_scene("Intro")
 	elif code=="lang":

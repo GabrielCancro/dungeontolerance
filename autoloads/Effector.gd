@@ -1,6 +1,10 @@
 extends Node
 
+var IN_PROGRESS_FX = []
+
 func shake(node):
+	if node.name+"_shake" in IN_PROGRESS_FX: return
+	IN_PROGRESS_FX.append(node.name+"_shake")
 	randomize()
 	var opos = node.position
 	var ocolor = node.modulate
@@ -11,6 +15,7 @@ func shake(node):
 		await get_tree().create_timer(.05).timeout
 	node.position.x = opos.x
 	node.modulate = ocolor
+	IN_PROGRESS_FX.erase(node.name+"_shake")
 
 func float_text(text, pos, style="NORMAL"):
 	var ft = preload("res://nodes/FloatTextFx.tscn").instantiate()

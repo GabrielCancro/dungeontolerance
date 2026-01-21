@@ -40,6 +40,7 @@ func update_ui():
 func damage_fx():
 	Effector.damage($Retraits)
 	Effector.boom_big($HP_UI)
+	Sounds.play_sound("hit"+str(randi()%3))
 	update_ui()
 
 func healt_fx():
@@ -59,5 +60,4 @@ func on_click_shield():
 	var dice = DiceManager.get_dice_drag()
 	if !dice: return
 	dice.consume_dice()
-	PartyManager.DATA.SH += 1
-	update_shield()
+	PartyManager.add_shield(1)

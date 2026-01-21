@@ -39,15 +39,20 @@ func _on_hover(val):
 func _on_click():
 	if is_tabern: 
 		emit_signal("on_click_tabern_item",self)
+		Sounds.play_sound("fail")
 		return
 	#CHECK CHARGE
 	if "ch" in ab_data and ab_data["ch"]<=0: 
 		Effector.shake(get_node("TextureRect"))
+		Sounds.play_sound("fail")
 		return
 	#CHECK REQUISITES
 	for k in ab_data.req.keys():
-		if !GameManager.POWERGEM_REF.has_gems(k,ab_data.req[k]): return false
+		if !GameManager.POWERGEM_REF.has_gems(k,ab_data.req[k]): 
+			Sounds.play_sound("fail")
+			return false
 	#ITS OK!
+	Sounds.play_sound("item_select")
 	PartyManager._on_click_party_ability(ab_data)
 
 func update_reqs():
