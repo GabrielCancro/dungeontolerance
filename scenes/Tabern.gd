@@ -146,7 +146,6 @@ func update_selected():
 	PartyManager.STATS["M"]=0
 	PartyManager.DATA.HP = 0
 	PartyManager.DATA.SANITY = 0
-	PartyManager.DATA.MAX_SANITY = 0
 	PartyManager.ABILITIES = []
 	for i in 3:
 		if selected[i]: 
@@ -156,8 +155,8 @@ func update_selected():
 			PartyManager.STATS["D"]+=PartyManager.CHARACTERS[index]["stats"][1]
 			PartyManager.STATS["M"]+=PartyManager.CHARACTERS[index]["stats"][2]
 			PartyManager.DATA.HP += PartyManager.CHARACTERS[index].hp
-			PartyManager.DATA.SANITY += PartyManager.CHARACTERS[index].sanity
-			PartyManager.DATA.MAX_SANITY += PartyManager.CHARACTERS[index].sanity
+			#PartyManager.DATA.SANITY += PartyManager.CHARACTERS[index].sanity
+			#PartyManager.DATA.MAX_SANITY += PartyManager.CHARACTERS[index].sanity
 			if PartyManager.CHARACTERS[index]["abs"]:
 				var ab_data = PartyManager.get_ability_data(PartyManager.CHARACTERS[index]["abs"])
 				PartyManager.ABILITIES.append(ab_data)

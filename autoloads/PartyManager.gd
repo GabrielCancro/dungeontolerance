@@ -1,7 +1,7 @@
 extends Node
 
 var STATS = {"S":2,"D":1,"M":1}
-var DATA = {"HP":20,"HPM":20, "SH":0, "SANITY":0, "MAX_SANITY":0}
+var DATA = {"HP":20,"HPM":20, "SH":0, "SANITY":0}
 var ABILITIES = []
 var ITEMS_EQUIPPED = []
 var ITEMS_UNLOCKED = []
@@ -288,4 +288,8 @@ func add_sanity(val=1):
 	if !GameManager.EYE_TRACK_REF.visible: return
 	DATA.SANITY += val
 	Effector.float_text("+"+str(val),Vector2(100,150),"NORMAL")
+	GameManager.EYE_TRACK_REF.update_ui()
+
+func restore_sanity():
+	DATA.SANITY = 5
 	GameManager.EYE_TRACK_REF.update_ui()

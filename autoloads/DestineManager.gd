@@ -20,7 +20,8 @@ func on_chosse(destine,op):
 func on_chosse_campfire(op):
 	if op==1:
 		#DEC EYES
-		PartyManager.add_sanity(3)
+		#PartyManager.add_sanity(3)
+		pass
 	elif op==2:
 		#ADD +5HP
 		PartyManager.apply_heal(7)

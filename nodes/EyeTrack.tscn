@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c1wfhym27we8v" path="res://nodes/EyeTrack.gd" id="1_y4pxd"]
 [ext_resource type="FontFile" uid="uid://yl8u0ej6iqi6" path="res://assets/font/Anton-Regular.ttf" id="2_y4pxd"]
 [ext_resource type="Texture2D" uid="uid://be7fl7t6dsoqo" path="res://assets/sanity_circle.png" id="3_obc1c"]
-[ext_resource type="Texture2D" uid="uid://bj0pp5argbhoj" path="res://assets/dice_icon_shadow.png" id="4_h5ddq"]
+[ext_resource type="Texture2D" uid="uid://b6yqqq5qvlyrl" path="res://assets/withe_eye.png" id="4_h5ddq"]
 [ext_resource type="Texture2D" uid="uid://dv8gghhsp0t07" path="res://assets/white_point.png" id="4_qs5eb"]
 
 [node name="EyeTrack" type="Control"]
@@ -13,34 +13,36 @@ anchors_preset = 0
 script = ExtResource("1_y4pxd")
 
 [node name="Tentacles" type="TextureRect" parent="."]
+modulate = Color(1, 0.572549, 1, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -83.0
-offset_top = -84.0
-offset_right = 84.0
-offset_bottom = 79.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-pivot_offset = Vector2(83, 86)
+pivot_offset = Vector2(100, 100)
 texture = ExtResource("1_jysdh")
 expand_mode = 1
 
 [node name="Circle" type="TextureRect" parent="."]
+modulate = Color(0, 1, 1, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = -30.0
-offset_right = 30.0
-offset_bottom = 29.0
+offset_left = -29.5
+offset_top = -29.5
+offset_right = 29.5
+offset_bottom = 29.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(83, 86)
@@ -55,10 +57,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -29.0
-offset_right = 32.0
-offset_bottom = 30.0
+offset_left = -28.0
+offset_top = -17.0
+offset_right = 28.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(83, 86)
@@ -72,16 +74,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -25.0
-offset_right = 29.0
-offset_bottom = 26.0
+offset_left = -28.5
+offset_top = -26.5
+offset_right = 28.5
+offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.788235, 0.788235, 0.788235, 1)
+theme_override_colors/font_color = Color(0.662745, 0.498039, 0.8, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("2_y4pxd")
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 36
 text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -96,9 +98,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -29.0
-offset_top = -31.0
+offset_top = -48.0
 offset_right = 31.0
-offset_bottom = 29.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(83, 86)
@@ -152,10 +154,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -20.0
-offset_right = 21.0
-offset_bottom = 22.0
+offset_left = -37.0
+offset_top = -5.0
+offset_right = 37.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0

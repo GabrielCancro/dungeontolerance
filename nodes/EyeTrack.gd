@@ -12,11 +12,13 @@ func _process(delta: float) -> void:
 
 func update_ui():
 	$Label.text = str(PartyManager.DATA.SANITY)
+	$Label.visible = (PartyManager.DATA.SANITY>0)
 	$RedCircle.visible = (PartyManager.DATA.SANITY==0)
 	#$Label2.text = str(PartyManager.DATA.MAX_SANITY)
-	var sc = 1.0-min(float(PartyManager.DATA.SANITY)*0.1,0.5)
-	print("@@@@ TENTACLES SCALE ",sc)
-	$Tentacles.scale = Vector2(sc,sc)
+	#var sc = 1.0-min(float(PartyManager.DATA.SANITY)*0.1,0.5)
+	#print("@@@@ TENTACLES SCALE ",sc)
+	if $RedCircle.visible: $Tentacles.scale = Vector2(.7,.7)
+	else: $Tentacles.scale = Vector2(.5,.5)
 	Effector.boom(self)
 
 func _on_hover(val):

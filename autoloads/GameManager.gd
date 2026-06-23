@@ -38,6 +38,8 @@ func on_start_game():
 	await start_room()
 
 func on_end_turn():
+	get_node("/root/Game/BtnEndTurn").disabled = true
+	get_node("/root/Game/BtnEndTurn").modulate.a = .3
 	block_input(1)
 	await DiceManager.clear_dices()
 	Sounds.play_sound("end_turn")
@@ -48,7 +50,6 @@ func on_end_turn():
 	await PartyManager.clear_shield()
 	if DefianceManager.ALL_DEFIANCES.size()<=0:
 		await end_room()
-		if !LevelManager.is_now_in_destine(): PartyManager.add_sanity(3)
 		await timeout(1)
 		var result = await LevelManager.next_level()
 		if !result: return
@@ -71,6 +72,8 @@ func start_turn():
 		await PartyManager.roll_party_dices()
 		await DefianceManager.launch_trigger_to_all_defiances("on_start_turn")
 	await timeout(.3)
+	get_node("/root/Game/BtnEndTurn").disabled = false
+	get_node("/root/Game/BtnEndTurn").modulate.a = 1
 
 func start_room():
 	await start_turn()

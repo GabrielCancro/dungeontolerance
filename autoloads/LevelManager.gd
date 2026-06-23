@@ -64,6 +64,7 @@ func init_dungeon():
 
 func next_level():
 	room_index += 1
+	PartyManager.restore_sanity()
 	if room_index>=max_rooms:
 		SaveManager.DATA["prestige"] += 1
 		SaveManager.DATA["expedition"] += 1
