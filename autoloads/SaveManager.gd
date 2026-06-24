@@ -10,6 +10,7 @@ var default = {
 	"items_preselected":[],
 	"characters_preselected":[],
 	"characters_unlocked":[1,4,5,7],
+	"characters_data":null,
 	"languaje": "en"
 }
 
@@ -26,6 +27,7 @@ func save_store_data():
 	var file := FileAccess.open(fileName, FileAccess.WRITE)
 	if !file: return
 	DATA["languaje"] = Lang.current_lang
+	DATA["characters_data"] = PartyManager.CHARACTERS
 	file.store_string(JSON.stringify(DATA))
 	print("SAVE ",DATA)
 
@@ -34,6 +36,7 @@ func load_store_data():
 	var file = FileAccess.open(fileName, FileAccess.READ)
 	var loaded_data = JSON.parse_string(file.get_as_text())
 	if loaded_data: DATA = loaded_data
+	if DATA.get("characters_data",null) != null: PartyManager.CHARACTERS = DATA["characters_data"]
 	_set_defaults()
 	Lang.current_lang = DATA["languaje"]
 	print("LOAD ",DATA)

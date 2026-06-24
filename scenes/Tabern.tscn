@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6hiu6io8aurw"]
+[gd_scene load_steps=19 format=3 uid="uid://b6hiu6io8aurw"]
 
 [ext_resource type="Script" uid="uid://dvbsntqikvrvf" path="res://scenes/Tabern.gd" id="1_lyctx"]
 [ext_resource type="Texture2D" uid="uid://73hs6emblaqu" path="res://assets/backgrounds/bg_tabern.jpg" id="2_nfy2w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b56c4aknscekj" path="res://assets/prestige_ico.png" id="3_oq6e2"]
 [ext_resource type="Texture2D" uid="uid://dl5fh6xa1iwpe" path="res://assets/characters/c1.png" id="4_o1pim"]
 [ext_resource type="Texture2D" uid="uid://dbsnkammcgljy" path="res://assets/characters/c2.png" id="5_e65dq"]
+[ext_resource type="Texture2D" uid="uid://b6yqqq5qvlyrl" path="res://assets/withe_eye.png" id="5_fbm2o"]
 [ext_resource type="Texture2D" uid="uid://y7e30ptvyj3y" path="res://assets/characters/c3.png" id="6_0v3p0"]
 [ext_resource type="Texture2D" uid="uid://u3r2vknjspcd" path="res://assets/characters/c4.png" id="7_oq6e2"]
 [ext_resource type="Texture2D" uid="uid://bgflhp4km36mv" path="res://assets/characters/c5.png" id="8_g8xdv"]
@@ -96,6 +97,19 @@ texture = ExtResource("4_o1pim")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Fatigue" type="TextureRect" parent="Characters/Character1"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_top = 88.0
+offset_right = 26.0
+offset_bottom = 161.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
+
 [node name="Character2" type="TextureRect" parent="Characters"]
 layout_mode = 1
 offset_left = 716.0
@@ -105,6 +119,19 @@ offset_bottom = 396.0
 texture = ExtResource("5_e65dq")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Fatigue" type="TextureRect" parent="Characters/Character2"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_top = 30.0
+offset_right = 35.5
+offset_bottom = 103.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
 
 [node name="Character3" type="TextureRect" parent="Characters"]
 layout_mode = 1
@@ -117,6 +144,19 @@ expand_mode = 1
 stretch_mode = 4
 flip_h = true
 
+[node name="Fatigue" type="TextureRect" parent="Characters/Character3"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.5
+offset_top = 53.0
+offset_right = 18.5
+offset_bottom = 126.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
+
 [node name="Character4" type="TextureRect" parent="Characters"]
 layout_mode = 1
 offset_left = 518.0
@@ -127,6 +167,19 @@ texture = ExtResource("7_oq6e2")
 expand_mode = 1
 stretch_mode = 4
 flip_h = true
+
+[node name="Fatigue" type="TextureRect" parent="Characters/Character4"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 95.0
+offset_right = 20.0
+offset_bottom = 168.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
 
 [node name="Character5" type="TextureRect" parent="Characters"]
 clip_contents = true
@@ -139,6 +192,19 @@ texture = ExtResource("8_g8xdv")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Fatigue" type="TextureRect" parent="Characters/Character5"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 74.0
+offset_right = 27.0
+offset_bottom = 147.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
+
 [node name="Character6" type="TextureRect" parent="Characters"]
 clip_contents = true
 layout_mode = 1
@@ -150,6 +216,19 @@ texture = ExtResource("9_6av1h")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Fatigue" type="TextureRect" parent="Characters/Character6"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_top = 76.0
+offset_right = 36.0
+offset_bottom = 149.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
+
 [node name="Character7" type="TextureRect" parent="Characters"]
 clip_contents = true
 layout_mode = 1
@@ -160,6 +239,19 @@ offset_bottom = 675.0
 texture = ExtResource("10_fbm2o")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Fatigue" type="TextureRect" parent="Characters/Character7"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.5
+offset_top = 90.0
+offset_right = 21.5
+offset_bottom = 163.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
 
 [node name="Buttons" type="Control" parent="."]
 anchors_preset = 0
@@ -266,6 +358,19 @@ texture = ExtResource("4_o1pim")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Fatigue" type="TextureRect" parent="Party/Character1"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_top = 38.0
+offset_right = 35.0
+offset_bottom = 111.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
+
 [node name="Character2" type="TextureRect" parent="Party"]
 layout_mode = 1
 anchors_preset = 2
@@ -280,6 +385,19 @@ texture = ExtResource("5_e65dq")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Fatigue" type="TextureRect" parent="Party/Character2"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_top = 38.0
+offset_right = 35.0
+offset_bottom = 111.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
+
 [node name="Character3" type="TextureRect" parent="Party"]
 layout_mode = 1
 anchors_preset = 2
@@ -293,6 +411,19 @@ grow_vertical = 0
 texture = ExtResource("6_0v3p0")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Fatigue" type="TextureRect" parent="Party/Character3"]
+modulate = Color(0, 0, 0.215686, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_top = 38.0
+offset_right = 35.0
+offset_bottom = 111.0
+grow_horizontal = 2
+texture = ExtResource("5_fbm2o")
 
 [node name="PartyButtons" type="Control" parent="."]
 layout_mode = 1

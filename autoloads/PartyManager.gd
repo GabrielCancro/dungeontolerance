@@ -28,13 +28,13 @@ var ITEMS_DATA = {
 }
 
 var CHARACTERS = [
-	{"name":"Thior","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[1,1,0],"abs":"streng"},
-	{"name":"Samuel","class":"rogue","lv":4, "hp":6, "sanity":1, "stats":[0,1,1],"abs":null},
-	{"name":"Ryna","class":"barbarian","lv":5, "hp":8, "sanity":1, "stats":[2,0,0],"abs":null},
-	{"name":"Alem","class":"explorer","lv":0, "hp":8, "sanity":2, "stats":[0,1,0],"abs":"atletic"},
-	{"name":"Hanna","class":"sorcerer","lv":0, "hp":5, "sanity":3, "stats":[0,0,1],"abs":"bendition"},
-	{"name":"Brian","class":"rogue","lv":0, "hp":6, "sanity":2, "stats":[0,1,0],"abs":"subtlety"},
-	{"name":"Drum","class":"warrior","lv":2, "hp":10, "sanity":1, "stats":[1,0,0],"abs":"protector"},
+	{"name":"Thior","class":"explorer","lv":0, "hp":8, "fatigue":0, "stats":[1,1,0],"abs":"streng"},
+	{"name":"Samuel","class":"rogue","lv":4, "hp":6, "fatigue":0, "stats":[0,1,1],"abs":null},
+	{"name":"Ryna","class":"barbarian","lv":5, "hp":8, "fatigue":0, "stats":[2,0,0],"abs":null},
+	{"name":"Alem","class":"explorer","lv":0, "hp":8, "fatigue":0, "stats":[0,1,0],"abs":"atletic"},
+	{"name":"Hanna","class":"sorcerer","lv":0, "hp":5, "fatigue":0, "stats":[0,0,1],"abs":"bendition"},
+	{"name":"Brian","class":"rogue","lv":0, "hp":6, "fatigue":0, "stats":[0,1,0],"abs":"subtlety"},
+	{"name":"Drum","class":"warrior","lv":2, "hp":10, "fatigue":0, "stats":[1,0,0],"abs":"protector"},
 ]
 
 func _on_click_party_ability(ab_data):
@@ -293,3 +293,9 @@ func add_sanity(val=1):
 func restore_sanity():
 	DATA.SANITY = 5
 	GameManager.EYE_TRACK_REF.update_ui()
+
+func set_new_fatigue():
+	for character in CHARACTERS:
+		character["fatigue"] = 0
+	var i = randi()%3
+	CHARACTERS[PARTY_CHARACTERS[i]-1]["fatigue"] = 1

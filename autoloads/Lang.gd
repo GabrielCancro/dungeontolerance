@@ -116,8 +116,12 @@ var TEXTS = {
 	"def_ab_counterattack_en": "Once per turn, placing a die on this card deals -#1HP to -#2HP to you.",
 	"def_ab_activation_name_es": "ACTIVACION",
 	"def_ab_activation_name_en": "ACTIVATION",
-	"def_ab_activation_es": "Este temporizador avanza cada turno, al completarse se desencadenan sus efectos.",
-	"def_ab_activation_en": "This timer advances each turn; once completed, its effects trigger.",
+	"def_ab_activation_es": "#0% de activartse al final del turno. Si no se activa, aumenta su probabilidad para el próximo turno.",
+	"def_ab_activation_en": "#0% chance of activating at the end of turn. If not activate, its probability increases to next turn.",
+	"def_ab_coveted_name_es": "CODICIADO",
+	"def_ab_coveted_name_en": "COVETED",
+	"def_ab_coveted_es": "#0% de perderse al final del turno. Si no se pierde, aumenta su probabilidad para el próximo turno.",
+	"def_ab_coveted_en": "#0% chance of lost at the end of turn. If not lost, its probability increases to next turn.",	
 	"def_ab_trap_damage_name_es": "DAÑO MASIVO",
 	"def_ab_trap_damage_name_en": "MASSIVE DAMAGE",
 	"def_ab_trap_damage_es": "Al activarse aplica entre -#1HP y -#2HP.",
@@ -282,6 +286,10 @@ var TEXTS = {
 	"max_power_en": "Max charge",
 	"attack_miss_es": "Falla",
 	"attack_miss_en": "Miss",
+	"fatigued_es": "Cansado",
+	"fatigued_en": "Tired",
+	"fatigued_desc_es": "no podrás usar sus habilidades",
+	"fatigued_desc_en": "you won't be able to use their abilities",
 	
 	"prestige_info_es": "PRESTIGIO: es el reconocimiento de tu grupo e indica cuantos objetos puedes llevar a tu próxima expedición."
 }

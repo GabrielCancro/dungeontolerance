@@ -40,6 +40,7 @@ func _ready() -> void:
 		$Buttons.get_child(i).connect("mouse_entered",_on_hover.bind(c,true))
 		$Buttons.get_child(i).connect("mouse_exited",_on_hover.bind(c,false))
 		$Buttons.get_child(i).connect("button_down",_on_click_character.bind(c))
+		c.get_node("Fatigue").visible = (PartyManager.CHARACTERS[i]["fatigue"]>0)
 	for ch in $Party.get_children():
 		ch.modulate = off_color
 		$PartyButtons.get_child(ch.get_index()).connect("mouse_entered",_on_hover.bind(ch,true))
@@ -79,6 +80,9 @@ func _on_hover(node,val):
 		var pj = PartyManager.CHARACTERS[ch_index]
 		var text = pj.name.to_upper()+" "
 		text += "[color=a0a0a0]" + Lang.get_text(pj.class) + "[/color]\n"
+		if pj.fatigue>0: 
+			text += "[color=a0a080]" + Lang.get_text("fatigued").to_upper() + "\n[/color]"
+			text += "[color=a0a0a0](" + Lang.get_text("fatigued_desc") + ")[/color]\n"
 		Lang.set_text_vars(pj.stats)
 		for i in 3:
 			var stat = ["S","D","M"][i]
@@ -86,7 +90,7 @@ func _on_hover(node,val):
 				text += "[color="+DiceManager.COLORS[stat]+"]"+Lang.get_text("stat_"+stat)+": +"+str(pj.stats[i])+"[/color]  "
 		text += '\n'
 		text += "[color=#FFC0C0]"+Lang.get_text("stat_hp")+": +"+str(pj.hp)+"[/color]  "
-		text += "[color=#D0D0F0]"+Lang.get_text("stat_sanity")+": +"+str(pj.sanity)+"[/color]  \n"
+		#text += "[color=#D0D0F0]"+Lang.get_text("stat_sanity")+": +"+str(pj.sanity)+"[/color]  \n"
 		if pj.abs:
 			var ab_data = PartyManager.get_ability_data(pj.abs)
 			text += "\n" + Lang.get_text("ab_"+pj.abs+"_name",["TITLE"])
@@ -137,7 +141,10 @@ func update_selected():
 		$PartyButtons.get_child(ch.get_index()).visible = (selected[ch.get_index()]!=null)
 		if selected[ch.get_index()]: 
 			ch.texture = selected[ch.get_index()].texture
+			var index = selected[ch.get_index()].get_index()
+			ch.get_node("Fatigue").visible = PartyManager.CHARACTERS[index]["fatigue"]>0
 		else: 
+			ch.get_node("Fatigue").visible = false
 			ch.texture = load("res://assets/characters/siluet.png")
 			$Continue.disabled = true
 			$Continue.modulate.a = .6
@@ -158,8 +165,9 @@ func update_selected():
 			#PartyManager.DATA.SANITY += PartyManager.CHARACTERS[index].sanity
 			#PartyManager.DATA.MAX_SANITY += PartyManager.CHARACTERS[index].sanity
 			if PartyManager.CHARACTERS[index]["abs"]:
-				var ab_data = PartyManager.get_ability_data(PartyManager.CHARACTERS[index]["abs"])
-				PartyManager.ABILITIES.append(ab_data)
+				if PartyManager.CHARACTERS[index]["fatigue"]<=0:
+					var ab_data = PartyManager.get_ability_data(PartyManager.CHARACTERS[index]["abs"])
+					PartyManager.ABILITIES.append(ab_data)
 	PartyManager.DATA.HPM = PartyManager.DATA.HP
 	$Stats/RichTextLabel.text = "[color=#FFC0C0]"+Lang.get_text("stat_hp")+":"+str(PartyManager.DATA.HP)+"[/color]  "
 	$Stats/RichTextLabel.text += "[color=#D0D0F0]"+Lang.get_text("stat_sanity")+":"+str(PartyManager.DATA.SANITY)+"[/color]\n"

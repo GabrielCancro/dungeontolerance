@@ -60,6 +60,7 @@ func init_dungeon():
 	level = min(DUNGEONS.size()-1,SaveManager.DATA["prestige"])
 	room_index = -1
 	max_rooms = DUNGEONS[level].size()
+	PartyManager.set_new_fatigue()
 	clean_ui()
 
 func next_level():
@@ -68,6 +69,7 @@ func next_level():
 	if room_index>=max_rooms:
 		SaveManager.DATA["prestige"] += 1
 		SaveManager.DATA["expedition"] += 1
+		PartyManager.set_new_fatigue()
 		SaveManager.save_store_data()
 		DestineManager.show_destine("end_level")
 		return false

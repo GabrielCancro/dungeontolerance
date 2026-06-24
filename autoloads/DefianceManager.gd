@@ -13,9 +13,9 @@ const DEFIANCES = {
 	"bat":{     "hp":6 , "stats":{"S":3,"D":1,"M":3}, "tags":"B", 
 		"abs":[ "drainer*1","aggressive*3" ] },
 	"chest":{     "hp":6 , "stats":{"S":4,"D":2,"M":4}, "tags":"T", 
-		"abs":[ "teasure*1" ] },
+		"abs":[ "coveted*0", "teasure*1" ] },
 	"arrow_trap":{"hp":7 , "stats":{"S":8,"D":1,"M":5}, "tags":"C", 
-		"abs":[ "activation*3", "trap_damage*10" ] },
+		"abs":[ "activation*0", "trap_damage*10" ] },
 	"slime":{"hp":8 , "stats":{"S":3,"D":3,"M":1}, "tags":"S", 
 		"abs":[ "aggressive*4","absorb*1" ] },
 	"ghost":{"hp":4 , "stats":{"S":3,"D":2,"M":2}, "tags":"-",
@@ -23,7 +23,7 @@ const DEFIANCES = {
 	"spider":{"hp":8 , "stats":{"S":3,"D":2,"M":3}, "tags":"-", 
 		"abs":[ "aggressive*3","poison*1" ] },
 	"rune_trap":{"hp":7 , "stats":{"S":8,"D":5,"M":1}, "tags":"C", 
-		"abs":[ "activation*3", "trap_sanity*3" ] },
+		"abs":[ "activation*0", "trap_sanity*3" ] },
 	"skeleton":{  "hp":10, "stats":{"S":2,"D":1,"M":1}, "tags":"N",
 		"abs":["aggressive*4"] },
 	"skeleton_king":{  "hp":18, "stats":{"S":2,"D":2,"M":2}, "tags":"N", "boss":true,
@@ -66,7 +66,7 @@ func get_def_ability_data(ab_code,ab_level):
 	if ab_code=="aggressive": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="necrotic": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
 	if ab_code=="trap_damage": ab_data.merge({"min":floor(ab_level/2),"max":ab_level})
-	if ab_code=="activation": ab_data.merge({"count":0,"max_count":ab_level})
+	#if ab_code=="activation": ab_data.merge({"count":0,"max_count":ab_level})
 	if ab_code=="shield": ab_data.merge({"count":ab_level,"max_count":ab_level})
 	if ab_code=="absorb": ab_data.merge({"active":true}) 
 	return ab_data
@@ -167,15 +167,31 @@ func teasure_on_dead_defiance(ab_data, def_card):
 
 func activation_on_end_turn(ab_data, def_card):
 	await GameManager.timeout(.7)
-	ab_data.count = min(ab_data.count+1,ab_data.max_count)
-	ab_data.node.resalt()
-	Sounds.play_sound("timer_tictac")
-	def_card.node.update_abs()
-	await GameManager.timeout(.7)
-	if ab_data.count==ab_data.max_count:
+	if randi_range(0,100)<ab_data["level"]:
+		Effector.float_text("ACTIVATED!",def_card.node.global_position+Vector2(75,75),"NORMAL")
+		await GameManager.timeout(.7)
 		await launch_trigger("on_activate",def_card)
 		await GameManager.timeout(.5)
 		await def_card.node.discard()
+	else:
+		ab_data.node.resalt()
+		Sounds.play_sound("timer_tictac")
+		ab_data["level"] += 10
+		def_card.node.update_abs()
+		await GameManager.timeout(.7)
+
+func coveted_on_end_turn(ab_data, def_card):
+	await GameManager.timeout(.7)
+	if randi_range(0,100)<ab_data["level"]:
+		Effector.float_text("STOLEN!",def_card.node.global_position+Vector2(75,75),"NORMAL")
+		await GameManager.timeout(.7)
+		await def_card.node.discard()
+	else:
+		ab_data.node.resalt()
+		Sounds.play_sound("timer_tictac")
+		ab_data["level"] += 10
+		def_card.node.update_abs()
+		await GameManager.timeout(.7)
 
 func trap_damage_on_activate(ab_data, def_card):
 	ab_data.node.resalt()

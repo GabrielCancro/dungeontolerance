@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmnn1l13dfn5l"]
+[gd_scene load_steps=4 format=3 uid="uid://dmnn1l13dfn5l"]
 
 [ext_resource type="Script" uid="uid://dpekl5cicd30l" path="res://nodes/DefianceAbilityLine.gd" id="1_gnmdo"]
+[ext_resource type="Texture2D" uid="uid://bpv01s4u0ttm6" path="res://assets/defiance_frame.png" id="2_gnmdo"]
 
 [sub_resource type="SystemFont" id="SystemFont_dt214"]
 subpixel_positioning = 0
@@ -61,3 +62,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gnmdo")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
